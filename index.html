@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - ExploreEase</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="shortcut icon" href="./assets/images/logo.png" type="image/pngs">
+
+    <!-- Google Font (For Font Family) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome (For Icons)-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* Section 1 */
+        .sec1 {
+            background:
+                linear-gradient(to top,
+                    rgba(0, 0, 0, 1) 0%,
+                    rgba(0, 0, 0, 0.2) 40%,
+                    rgba(0, 0, 0, 0) 70%),
+                url(./assets/images/worldmap2.png) center/cover no-repeat;
+            color: white;
+        }
+
+        .sec1-top-left h1 {
+            font-size: 65px;
+        }
+
+        .sec1-text {
+            background-color: var(--button);
+            padding: 10px 20px;
+            border-radius: 30px;
+            color: white;
+            display: inline-block;
+        }
+
+        .sec1-text i {
+            color: white;
+            font-family: "Lucida Handwriting", cursive;
+        }
+
+        .sec1-card img {
+            height: 100%;
+            border: 5px solid white;
+            border-radius: 50px;
+            object-fit: cover;
+        }
+
+        .sec1-form-top {
+            background-color: var(--touch);
+            padding: 10px;
+            border-radius: 30px;
+            display: inline-flex;
+            width: 25%;
+        }
+
+        .sec1-form-bottom {
+            background-color: white;
+            border-radius: 50px;
+            padding: 10px;
+            position: relative;
+        }
+
+        .input-field {
+            background-color: var(--light);
+            border: 1px solid rgb(172, 172, 172);
+            border-radius: 50px;
+            padding: 10px;
+            gap: 5px;
+        }
+
+        .relative {
+            position: relative;
+        }
+
+        .date-special {
+            gap: 5px;
+        }
+
+        .input-field i,
+        .input-field label {
+            color: var(--touch);
+        }
+
+        .input-field-right {
+            gap: 0;
+        }
+
+        .sec1-bottom .flex {
+            gap: 2px;
+        }
+
+        .traveler-wrapper {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .traveler-dropdown {
+            position: absolute;
+            bottom: 103%;
+            left: 0;
+            width: 280px;
+            background: #fff;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            display: none;
+            z-index: 10;
+        }
+
+        .traveler-dropdown span {
+            color: var(--dark);
+        }
+
+        .traveler-dropdown select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 20px;
+            border: 2px solid var(--touch);
+            margin-bottom: 15px;
+        }
+
+        .traveler-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .counter {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .counter button {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: none;
+            background: var(--touch);
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .counter span {
+            min-width: 18px;
+            text-align: center;
+        }
+
+        .done-btn {
+            width: 100%;
+            margin-top: 10px;
+            padding: 8px;
+            border: none;
+            border-radius: 20px;
+            background: var(--touch);
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .sec1-bottom span {
+            font-weight: 800;
+            font-size: 17px;
+            color: rgb(135, 201, 37);
+        }
+
+        .sec1-bottom span i {
+            background-color: rgb(113, 168, 30);
+            padding: 10px 5px;
+            width: 100%;
+        }
+
+        /* Section 2 */
+        .sec2-card-left {
+            background-color: var(--primary);
+            padding: 20px 10px;
+            border-radius: 50%;
+            height: fit-content;
+        }
+
+        .dest {
+            height: 300px;
+            align-items: end;
+            padding: 20px 30px;
+            border-radius: 20px;
+            color: white;
+            --img: none;
+            background:
+                linear-gradient(to top,
+                    rgba(0, 0, 0, 1) 0%,
+                    rgba(0, 0, 0, 0.2) 40%,
+                    rgba(0, 0, 0, 0) 70%),
+                var(--img) center/cover no-repeat;
+        }
+
+        .dest h3 {
+            border-bottom: 2px solid var(--button);
+            font-weight: 100;
+        }
+
+        .dest-1 {
+            --img: url(./assets/images/dest1.jpg);
+        }
+
+        .dest-2 {
+            --img: url(./assets/images/dest2.jpg);
+        }
+
+        .dest-3 {
+            --img: url(./assets/images/dest3.jpg);
+        }
+
+        .dest-4 {
+            --img: url(./assets/images/dest4.jpg);
+        }
+
+        .dest-5 {
+            --img: url(./assets/images/dest5.jpg);
+        }
+
+        .dest-6 {
+            --img: url(./assets/images/dest6.jpg);
+        }
+
+        .input-field input {
+            pointer-events: auto;
+        }
+
+
+        /* Section 3 */
+        .sec3 {
+            background-color: var(--touch);
+            color: white;
+        }
+
+        .sec3-btn {
+            padding: 3px 10px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 400;
+        }
+
+        .sec3-card {
+            position: relative;
+            height: 300px;
+            border-radius: 20px;
+            margin-bottom: 60px;
+        }
+
+        .sec3-card-bottom {
+            position: absolute;
+            bottom: -80px;
+            margin: 20px;
+            border-radius: 20px;
+            background-color: white;
+            color: var(--dark);
+            padding: 20px;
+        }
+
+        .sec3-card-1 {
+            background: url(./assets/images/flight1.jpg) center/cover no-repeat;
+        }
+
+        .sec3-card-2 {
+            background: url(./assets/images/flight2.jpg) center/cover no-repeat;
+        }
+
+        .sec3-card-3 {
+            background: url(./assets/images/flight3.jpg) center/cover no-repeat;
+        }
+
+        .sec3-card-4 {
+            background: url(./assets/images/flight4.jpg) center/cover no-repeat;
+        }
+
+        .sec3-card {
+            position: relative;
+            height: 400px;
+        }
+
+        /* Section 4 */
+        .sec4-main {
+            gap: 70px;
+        }
+
+        .sec4-main-right {
+            background: url(./assets/images/girl.jpg) center/cover no-repeat;
+            border-radius: 20px;
+            box-shadow: 20px 20px 0 var(--primary);
+        }
+
+        /* Section 5 */
+        .sec5-top {
+            background-color: var(--touch);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+        }
+
+        .sec5-card span {
+            background-color: white;
+            padding: 20px 10px;
+            border-radius: 50%;
+        }
+
+        .sec5-card span i {
+            color: var(--touch);
+        }
+
+        .suggestions {
+            position: absolute;
+            top: 100%;
+            /* directly below input */
+            left: 0;
+            width: 213%;
+            background: #fff;
+            border: 1px solid #ddd;
+            max-height: 240px;
+            overflow-y: auto;
+            z-index: 9999;
+            list-style: none;
+            padding: 0;
+            border-radius: 10px;
+            margin-top: 1px;
+            color: var(--dark);
+            /* small spacing only */
+            display: none;
+        }
+
+        .suggestions li {
+            padding: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            border-bottom: 3px solid var(--touch);
+        }
+
+        .suggestions li:hover {
+            background: #f2f2f2;
+        }
+
+
+        @media (max-width: 900px) {
+
+            /* Section 1 */
+            .sec1 {
+                background: white;
+                padding: 10px;
+            }
+
+            .sec1-inner {
+                text-align: center;
+                background-color: var(--primary);
+                border-radius: 20px;
+            }
+
+            .sec1-form {
+                gap: 10px;
+                margin-top: 10px;
+            }
+
+            .sec1-bottom p {
+                font-size: 15px;
+            }
+
+            .sec1-bottom span {
+                flex-direction: row;
+                font-size: 15px;
+            }
+
+            .sec1-bottom span i {
+                font-size: 8px;
+            }
+
+            .sec1-form-bottom {
+                width: 100%;
+                border-radius: 20px;
+                gap: 10px;
+            }
+
+            .sec1-text {
+                padding: 3px 20px;
+            }
+
+            .sec1-text i {
+                font-size: 13px;
+            }
+
+            .sec1-top-left h1 {
+                font-size: 22px;
+                margin-top: 10px;
+            }
+
+            .sec1-form-top {
+                flex-direction: row;
+                width: auto;
+                padding: 10px 20px;
+            }
+
+            .input-field {
+                flex-direction: row;
+                text-align: start;
+                padding: 5px 10px;
+            }
+
+            .date-special {
+                flex-direction: row;
+                width: 50%;
+            }
+
+            .sec1-top-right {
+                display: none;
+            }
+
+            /* Section 2  */
+            .sec2-card {
+                flex-direction: row;
+            }
+
+            .suggestions {
+                width: 100%;
+                display: none;
+            }
+
+            .dests-flex {
+                flex-direction: row;
+                gap: 10px;
+            }
+
+            .sec2-card-right p {
+                font-size: 11px;
+            }
+
+            .dest {
+                height: 150px;
+                padding: 10px;
+                justify-content: end;
+                align-items: start;
+            }
+
+            .dest h3 {
+                font-size: 12px;
+            }
+
+            .dests-grid {
+                margin-top: 10px;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            /* Section 3 */
+            .sec3-cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .sec3-card {
+                height: 200px;
+            }
+
+            .sec3-card-bottom {
+                margin: 10px;
+                padding: 10px;
+                background: rgba(0, 0, 0, 0.4);
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+                color: white;
+            }
+
+            .sec3-card-bottom h3 {
+                font-size: 13px;
+            }
+
+            /* Section 4 */
+            .sec4-main {
+                gap: 20px;
+            }
+
+            .sec4-main-right {
+                min-height: 250px;
+                width: 100%;
+                box-shadow: 0px 10px 0 var(--primary);
+            }
+
+
+
+            /* Section 5 */
+
+            .sec5-top {
+                padding: 30px 20px;
+            }
+
+            .sec5-top h2 {
+                font-size: 16px;
+            }
+
+            .sec5-cards {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="nav flex-center">
+        <div class="flex nav-inner container">
+            <div class="nav-left flex-center">
+                <!-- <a href="/">
+                    <span><i class="fa-solid fa-hand-holding-heart fa-2xl"></i></span>
+                </a> -->
+                <a href="/">
+                    <h2>Explore<span>Ease</span></h2>
+                </a>
+            </div>
+            <div class="nav-center ">
+                <ul class="flex-center">
+                    <li><a href="#">Flights</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">My Bookings</a></li>
+                    <a href="tel:8888113446" class="flex-center">
+                        <div class="nav-center-left">
+                            <i class="fa-solid fa-phone-volume fa-shake"></i>
+                        </div>
+                        <div class="nav-center-right">
+                    </a>
+                    <h2><span>(888) 811-3446</span></h2>
+                    <p class="small">CALL 24/7 FOR OUR BEST DEALS</p>
+                </ul>
+            </div>
+            <div class="nav-end">
+
+                <div class="hamburger-open flex">
+                    <a href="tel:8888113446">
+                        <p class=""><b>(888) 811-3446</b></p>
+                    </a>
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+                <div class="hamburger-close">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            </div>
+        </div>
+        </div>
+
+    </nav>
+
+    <section class="sec1">
+        <div class="sec1-inner container">
+            <div class="sec1-top flex">
+                <div class="sec1-top-left flex-1">
+                    <div class="sec1-text">
+                        <i>Travel Plans In Your Mind</i>
+                    </div>
+                    <h1 class="mt-20">Explore The World Together</h1>
+
+                </div>
+                <div class="sec1-top-right grid-3 flex-1">
+                    <div class="sec1-card">
+                        <img src="./assets/images/travel1.jpg" alt="Travel Image">
+                    </div>
+                    <div class="sec1-card">
+                        <img src="./assets/images/travel2.jpg" alt="Travel Image">
+                    </div>
+                    <div class="sec1-card">
+                        <img src="./assets/images/travel3.jpg" alt="Travel Image">
+                    </div>
+                </div>
+            </div>
+            <div class="sec1-center">
+                <form action="php/handlers/search.php" method="post" class="sec1-form flex-col-center-center mt-30"
+                    id="searchForm">
+                    <div class="sec1-form-top flex-center-center">
+                        <label class="roundtrip" for="roundtrip">
+                            <input type="radio" class="mr-10" name="triptype" id="roundtrip" checked> Round trip
+                        </label>
+                        <label class="oneway" for="oneway">
+                            <input type="radio" class="mr-10" name="triptype" id="oneway"> One way
+                        </label>
+                    </div>
+                    <div class="sec1-form-bottom flex">
+                        <div class="input-field flex-center flex-1 relative">
+                            <div class="input-field-left">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div class="input-field-right flex-col">
+                                <label for="origin" class="small">From</label>
+                                <input type="text" name="origin" id="origin" placeholder="Leaving From" required
+                                    autocomplete="off">
+                                <ul class="suggestions" id="from-suggestions"></ul>
+                            </div>
+                        </div>
+                        <div class="input-field flex-center flex-1 relative">
+                            <div class="input-field-left">
+                                <i class="fa-solid fa-location-dot "></i>
+                            </div>
+                            <div class="input-field-right flex-col">
+                                <label for="destination" class="small">To</label>
+                                <input type="text" name="destination" id="destination" placeholder="Where To" required
+                                    autocomplete="off">
+                                <ul class="suggestions" id="to-suggestions"></ul>
+                            </div>
+                        </div>
+                        <div class="input-field flex-center flex-1">
+                            <div class="flex-center date-special flex-1">
+                                <div class="input-field-left">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                </div>
+                                <div class="input-field-right flex-col">
+                                    <label for="departure_date" class="small">Departure Date</label>
+                                    <input type="date" name="departure_date" id="departure_date"
+                                        placeholder="Departure Date" required>
+                                </div>
+                            </div>
+                            <div class="flex-center date-special  flex-1" id="return-wrapper">
+                                <div class="input-field-left">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                </div>
+                                <div class="input-field-right flex-col">
+                                    <label for="return_date" class="small">Return Date</label>
+                                    <input type="date" name="return_date" id="return_date" placeholder="Return Date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-field flex-center flex-1 traveler-wrapper">
+                            <div class="input-field-left">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+
+                            <div class="input-field-right flex-col">
+                                <label class="small">Traveler(s) & Cabin</label>
+                                <input type="text" id="travelerInput" placeholder="Travelers" readonly>
+                                <input type="hidden" name="passengers" id="travelerCount">
+                                <input type="hidden" name="cabin" id="cabinValue">
+                                <input type="hidden" name="csrf_token" id="csrf_token" value="">
+
+                            </div>
+
+                            <!-- Dropdown -->
+                            <div class="traveler-dropdown">
+                                <!-- Cabin -->
+                                <select id="cabinClass">
+                                    <option>Economy</option>
+                                    <option>Premium Economy</option>
+                                    <option>Business</option>
+                                    <option>First Class</option>
+                                </select>
+
+                                <!-- Counters -->
+                                <div class="traveler-row">
+                                    <span>Adult</span>
+                                    <div class="counter">
+                                        <button type="button" data-type="adult" class="minus">−</button>
+                                        <span id="adultCount">1</span>
+                                        <button type="button" data-type="adult" class="plus">+</button>
+                                    </div>
+                                </div>
+
+                                <div class="traveler-row">
+                                    <span>Child <small>(2–11 yrs)</small></span>
+                                    <div class="counter">
+                                        <button type="button" data-type="child" class="minus">−</button>
+                                        <span id="childCount">0</span>
+                                        <button type="button" data-type="child" class="plus">+</button>
+                                    </div>
+                                </div>
+
+                                <div class="traveler-row">
+                                    <span>Infant (Lap)</span>
+                                    <div class="counter">
+                                        <button type="button" data-type="lap" class="minus">−</button>
+                                        <span id="lapCount">0</span>
+                                        <button type="button" data-type="lap" class="plus">+</button>
+                                    </div>
+                                </div>
+
+                                <div class="traveler-row">
+                                    <span>Infant (Seat)</span>
+                                    <div class="counter">
+                                        <button type="button" data-type="seat" class="minus">−</button>
+                                        <span id="seatCount">0</span>
+                                        <button type="button" data-type="seat" class="plus">+</button>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="done-btn">DONE</button>
+                            </div>
+                        </div>
+
+                        <button class="btn flex-1 input-field" type="submit">
+                            <h2 class="center">Search</h2>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="sec1-bottom center mt-30">
+                <h3>Trusted by 100,000+ customers every year</h3>
+                <p class="mt-10">Excellent <span class="mr-10 ml-10 flex">
+                        <i class="fa-solid fa-star  fa-sm"></i>
+                        <i class="fa-solid fa-star  fa-sm"></i>
+                        <i class="fa-solid fa-star  fa-sm"></i>
+                        <i class="fa-solid fa-star  fa-sm"></i>
+                        <i class="fa-regular fa-star fa-sm"></i>
+                    </span>(4.1) 78 reviews on <span>Trustpilot</span></p>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec2">
+        <div class="sec2-inner container">
+            <div class="sec2-top grid-3">
+                <div class="sec2-card flex">
+                    <div class="sec2-card-left">
+                        <i class="fa-solid fa-headset fa-2xl"></i>
+                    </div>
+                    <div class="sec2-card-right">
+                        <h3>24/7 Customer Support</h3>
+                        <p class="small">Exploreease is Support on demand from anywhere in the world, anytime, via
+                            email or phone.</p>
+                    </div>
+                </div>
+                <div class="sec2-card flex">
+                    <div class="sec2-card-left">
+                        <i class="fa-solid fa-suitcase-rolling fa-2xl"></i>
+                    </div>
+                    <div class="sec2-card-right">
+                        <h3>We're adventurers like you</h3>
+                        <p class="small">Every year 4M+ people travel with us. Your next adventure is
+                            just around the corner.</p>
+                    </div>
+                </div>
+                <div class="sec2-card flex">
+                    <div class="sec2-card-left">
+                        <i class="fa-solid fa-compass fa-2xl"></i>
+                    </div>
+                    <div class="sec2-card-right">
+                        <h3>Travel more for less</h3>
+                        <p class="small">With 650+ airlines partners, we can take you everywhere you want at the best
+                            price.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="sec2-center mt-40">
+                <h1 class="center">Top Flight <span>Destination</span></h1>
+                <div class="flex dests-flex mt-20 w-100">
+                    <div class="flex flex-2 dest dest-1">
+                        <h3>Flights to London</h3>
+                    </div>
+                    <div class="flex flex-1 dest dest-2">
+                        <h3>Flights to Rome</h3>
+                    </div>
+                </div>
+
+                <div class="grid-4 dests-grid mt-20 w-100">
+                    <div class="flex dest dest-3">
+                        <h3>Flights to Dubai</h3>
+                    </div>
+                    <div class="flex dest dest-4">
+                        <h3>Flights to Chicago</h3>
+                    </div>
+                    <div class="flex dest dest-5">
+                        <h3>Flights to Philadelphia</h3>
+                    </div>
+                    <div class="flex dest dest-6">
+                        <h3>Flights to Miami</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec3">
+        <div class="sec3-inner container">
+            <h1 class="center">Travel <span>Deals</span></h1>
+            <div class="sec3-cards grid-4 mt-20">
+                <div class="sec3-card sec3-card-1">
+                    <div class="sec3-card-bottom">
+                        <h3>Last Minute Deals</h3>
+                        <p class="small mt-10">Taking a spontaneous getaway or a last-minute business, travel with our
+                            cheap
+                            last-minute flights.</p>
+                        <button class="btn sec3-btn mt-20">Know More</button>
+                    </div>
+                </div>
+                <div class="sec3-card sec3-card-2">
+                    <div class="sec3-card-bottom">
+                        <h3>Top Airline Deals</h3>
+                        <p class="small mt-10">Choose from an extensive selection of airfare deals curated by our
+                            experts from
+                            top airlines worldwide.</p>
+                        <button class="btn sec3-btn mt-20">Know More</button>
+                    </div>
+                </div>
+                <div class="sec3-card sec3-card-3">
+                    <div class="sec3-card-bottom">
+                        <h3>One Way Flight</h3>
+                        <p class="small mt-10">We have handpicked one-way flights to top destinations across the globe
+                            to suit
+                            every travel need.</p>
+                        <button class="btn sec3-btn mt-20">Know More</button>
+                    </div>
+                </div>
+                <div class="sec3-card sec3-card-4">
+                    <div class="sec3-card-bottom">
+                        <h3>Round Trip Flights</h3>
+                        <p class="small mt-10">Treat yourself to a vacation with our cheap round-trip flight deals.
+                            We've got
+                            deals to domestic and international destinations.</p>
+                        <button class="btn sec3-btn mt-20">Know More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec4">
+        <div class="sec4-inner container">
+            <h1 class="center">About <span>Us</span></h1>
+            <div class="sec4-main flex mt-20">
+                <div class="sec4-main-left flex-2">
+                    <p>Although the virtual tour has become a thing these days, nothing can really replace
+                        visiting a place yourself, soaking in its ambiance, getting acquainted with its culture,
+                        befriending the natives, savoring local cuisines, and making bucketful of memories, isn't
+                        it?
+                        Travel sometimes opens doors that we never knew existed. It gives a new sense of perspective
+                        and
+                        makes us see life in an altogether different way. Paying a visit to foreign lands and
+                        meeting
+                        people from distinct backgrounds help widen our scope.</p>
+                    <p class=" mt-30">Traveling is not just about making your way to the renowned sights a city is
+                        popular for; it extends beyond that. There's a catch though; it doesn't come for free. With
+                        Exploreease , you can plan your entire trip without breaking the bank. We offer competitive
+                        prices on airline tickets as we know that every penny counts. Our efficient team, owing to
+                        its
+                        years of experience and in-depth understanding of the travel industry, digs out economical
+                        airfares of major airlines that fit right in your travel budget. With us, it's not just
+                        about
+                        saving bucks, you get second to none services and all-time assistance throughout your trip.
+                    </p>
+                    <p class=" mt-30">The user-friendly interface of our website makes sure that your booking
+                        process is as easy as pie. You can count on us to lay your hands on incredible travel deals
+                        available nowhere else. You don't have to take our word for it; reach out to our 24/7 at
+                        your
+                        service customer care to snap up the best prices on flight tickets under the sun.</p>
+                </div>
+
+                <div class="sec4-main-right flex-1">
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="sec5">
+        <div class="sec-inner container">
+            <div class="sec5-top flex-col-center-center">
+                <h2>Sign Up For Our Newsletter & Get</h2>
+                <div class="sec5-cards w-full grid-4 mt-40">
+                    <div class="sec5-card center">
+                        <span><i class="fa-solid fa-hands-holding-circle fa-2xl"></i></span>
+                        <p class="mt-30">Members only Fares</p>
+                    </div>
+                    <div class="sec5-card center">
+                        <span><i class="fa-solid fa-suitcase-rolling fa-2xl"></i></span>
+                        <p class="mt-30">Handpicked Travel Deals</p>
+                    </div>
+                    <div class="sec5-card center">
+                        <span><i class="fa-solid fa-percent fa-2xl"></i></span>
+                        <p class="mt-30">Latest Sales & Discounts</p>
+                    </div>
+                    <div class="sec5-card center">
+                        <span><i class="fa-solid fa-ticket fa-2xl"></i></span>
+                        <p class="mt-30">Exclusive Promo Codes</p>
+                    </div>
+                </div>
+                <a href="#"><button class="btn mt-20">Subscribe Now</button></a>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-inner container">
+            <div class="footer-top">
+                <h1 class="center">Subscribe to our <span>Newsletter</span></h1>
+                <h3 class="mt-10 center">Get latest offers from Exploreease</h3>
+                <form class="footer-form mt-20 grid-4">
+                    <input type="text" name="name" id="name" placeholder="Enter Name" required>
+                    <input type="email" name="email" id="email" placeholder="your-email@example.com" required>
+                    <input type="text" name="mobile" id="mobile" placeholder="Mobile Number" required>
+                    <button class="btn">Subscribe</button>
+                </form>
+                <p class="mt-20 center small">I would like to receive SMS and email from exploreease.online with the
+                    latest
+                    offers and
+                    promotions. I have read and agree to the <a href="#"><span>Terms and conditions</span></a> and <a
+                        href="#"><span>privacy policy</span></a> .</p>
+            </div>
+
+            <div class="footer-center grid-4 mt-40">
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul class="mt-20 flex-col">
+                        <a href="#">
+                            <li>About Us</li>
+                        </a>
+                        <a href="#">
+                            <li>Contact Us</li>
+                        </a>
+                        <a href="#">
+                            <li>Taxes & Fees</li>
+                        </a>
+                        <a href="#">
+                            <li>FAQs</li>
+                        </a>
+                        <a href="#">
+                            <li>Sitemap</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Helpful Links</h3>
+                    <ul class="mt-20 flex-col">
+                        <a href="#">
+                            <li>Security</li>
+                        </a>
+                        <a href="#">
+                            <li>Privacy Policy</li>
+                        </a>
+                        <a href="#">
+                            <li>Baggage Fees</li>
+                        </a>
+                        <a href="#">
+                            <li>Terms & Conditions</li>
+                        </a>
+                        <a href="#">
+                            <li>Cancellation Policy</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Travel Deals</h3>
+                    <ul class="mt-20 flex-col">
+                        <a href="#">
+                            <li>Top Airlines Deals</li>
+                        </a>
+                        <a href="#">
+                            <li>Last Minute Flights</li>
+                        </a>
+                        <a href="#">
+                            <li>One Way Flights</li>
+                        </a>
+                        <a href="#">
+                            <li>Round Trip Flights</li>
+                        </a>
+                        <a href="#">
+                            <li>Cheap International Flights</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Top Destinations</h3>
+                    <ul class="mt-20 flex-col">
+                        <a href="#">
+                            <li>Flights to Miami</li>
+                        </a>
+                        <a href="#">
+                            <li>Flights to Las Vegas</li>
+                        </a>
+                        <a href="#">
+                            <li>Flights to Los Angeles</li>
+                        </a>
+                        <a href="#">
+                            <li>Flights to Orlando</li>
+                        </a>
+                        <a href="#">
+                            <li>Flights to New York</li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom mt-40 flex-col-center-center">
+                <div class="footer-certi grid-4">
+                    <div><img src="./assets/images/arc.png" alt="Arc Image"></div>
+                    <div><img src="./assets/images/IATA.webp" alt="IATA Image"></div>
+                    <div><img src="./assets/images/digicert.webp" alt="Digicert Image"></div>
+                    <div><img src="./assets/images/cloudflare.webp" alt="Cloudflare Image"></div>
+                </div>
+                <p class="small center"><b>DISCLAIMER:</b> exploreease.online is an independent travel portal. Its
+                    parent
+                    company is LBF
+                    AMERICAS LLC. The information shown on this website is for general purposes. All necessary measures
+                    have been taken to ensure that the information displayed on the website is accurate and up to date;
+                    However, under no circumstances we do not offer any type of guarantee or representation, whether
+                    implicit or express, regarding the accuracy, completeness or reliability of the information shown on
+                    this website. If you need to answer any questions, you can write to <a
+                        href="mailto:contact@exploreease.online"><span>contact@exploreease.online</span></a></p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="tel:8888113446">
+        <div class="footer-call-button flex w-full">
+            <div class="footer-call-left">
+                <i class="fa-solid fa-phone-volume fa-shake fa-2xl"></i>
+            </div>
+            <div class="footer-call-right">
+                <p>Call & Get Unpublished Flight Deals!</p>
+                <h1>+1-888-811-3446</h1>
+            </div>
+        </div>
+    </a>
+
+    <div class="footer-copyright">
+        <p class="small center">© 2021 - 2026 LBF AMERICAS LLC. All Rights Reserved. Use of this website signifies your
+            agreement to the <a href="#"><span>Terms of Use</span></a></p>
+    </div>
+
+    <script src="assets/js/script.js"></script>
+    <script>
+        const input = document.getElementById("travelerInput");
+        const dropdown = document.querySelector(".traveler-dropdown");
+
+        let counts = {
+            adult: 1,
+            child: 0,
+            lap: 0,
+            seat: 0
+        };
+
+        input.addEventListener("click", () => {
+            dropdown.style.display = "block";
+        });
+
+        document.querySelectorAll(".plus, .minus").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const type = btn.dataset.type;
+                if (btn.classList.contains("plus")) {
+                    counts[type]++;
+                } else if (counts[type] > (type === "adult" ? 1 : 0)) {
+                    counts[type]--;
+                }
+                updateUI();
+            });
+        });
+
+        document.querySelector(".done-btn").addEventListener("click", () => {
+            const total =
+                counts.adult + counts.child + counts.lap + counts.seat;
+
+            const cabin = document.getElementById("cabinClass").value;
+
+            input.value = `${total} Traveler(s), ${cabin}`;
+
+            document.getElementById("travelerCount").value = total;
+            document.getElementById("cabinValue").value = cabin;
+
+            dropdown.style.display = "none";
+        });
+
+
+        function updateUI() {
+            adultCount.textContent = counts.adult;
+            childCount.textContent = counts.child;
+            lapCount.textContent = counts.lap;
+            seatCount.textContent = counts.seat;
+        }
+
+
+        // Scroll Down
+        const trigger = document.querySelector('.sec1-center');
+        const target = document.querySelector('.sec1-top');
+        trigger.addEventListener('click', () => {
+            const y =
+                target.getBoundingClientRect().top +
+                window.pageYOffset;
+            window.scrollTo({
+                top: y,
+                behavior: 'smooth'
+            });
+        });
+
+        /* =========================
+        DATE PICKER OPEN FIX
+        ========================= */
+        document.querySelectorAll('input[type="date"]').forEach(input => {
+            input.addEventListener('click', () => {
+                input.showPicker && input.showPicker();
+            });
+        });
+
+        /* =========================
+        DATE ELEMENTS
+        ========================= */
+        const departInput = document.getElementById('departure_date');
+        const returnInput = document.getElementById('return_date');
+        const returnWrapper = document.getElementById('return-wrapper');
+
+        const roundTrip = document.getElementById('roundtrip');
+        const oneWay = document.getElementById('oneway');
+
+        const form = document.querySelector('.sec1-form');
+
+        /* =========================
+        DATE UTILITIES
+        ========================= */
+        const formatDate = d => d.toISOString().split('T')[0];
+
+        const today = new Date();
+        const defaultReturn = new Date();
+        defaultReturn.setDate(today.getDate() + 5);
+
+        /* =========================
+        INITIAL DEFAULTS
+        ========================= */
+        departInput.value = formatDate(today);
+        returnInput.value = formatDate(defaultReturn);
+
+        departInput.min = formatDate(today);
+        returnInput.min = formatDate(today);
+
+        /* =========================
+        VALIDATION HELPERS
+        ========================= */
+        function isReturnValid() {
+            if (!returnInput.value) return true;
+            return new Date(returnInput.value) >= new Date(departInput.value);
+        }
+
+        /* =========================
+        DEPART DATE CHANGE
+        (restriction only)
+        ========================= */
+        departInput.addEventListener('change', () => {
+            returnInput.min = departInput.value;
+        });
+
+        /* =========================
+        RETURN DATE CHANGE
+        (enforced validation)
+        ========================= */
+        returnInput.addEventListener('change', () => {
+            if (!isReturnValid()) {
+                alert('Return date cannot be earlier than departure date');
+                returnInput.value = departInput.value; // same-day allowed
+            }
+        });
+
+        /* =========================
+        TOGGLE RETURN (ONE WAY)
+        ========================= */
+        function toggleReturn() {
+            if (oneWay.checked) {
+                returnWrapper.style.display = 'none';
+                returnInput.removeAttribute('required');
+            } else {
+                returnWrapper.style.display = 'flex';
+                returnInput.setAttribute('required', 'required');
+
+                // Validate when switching back
+                if (!isReturnValid()) {
+                    returnInput.value = departInput.value;
+                }
+            }
+        }
+
+        roundTrip.addEventListener('change', toggleReturn);
+        oneWay.addEventListener('change', toggleReturn);
+        toggleReturn();
+
+        /* =========================
+        FINAL SUBMIT VALIDATION & AJAX
+        ========================= */
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const travelers = document.getElementById("travelerCount").value;
+            const cabin = document.getElementById("cabinValue").value;
+
+            if (!travelers || travelers < 1 || !cabin) {
+                alert("Please select travelers and cabin class");
+                dropdown.style.display = "block";
+                return;
+            }
+
+            if (roundTrip.checked && !isReturnValid()) {
+                alert('Please select a valid return date');
+                return;
+            }
+
+            // Extract airport codes from input fields
+            const originInput = document.getElementById('origin');
+            const destinationInput = document.getElementById('destination');
+
+            // Get IATA codes from data attributes (set during autocomplete selection)
+            const origin = originInput.dataset.iata || originInput.value.match(/\(([^)]+)\)/)?.[1];
+            const destination = destinationInput.dataset.iata || destinationInput.value.match(/\(([^)]+)\)/)?.[1];
+
+            if (!origin || !destination) {
+                alert('Please select valid airports from the suggestions');
+                return;
+            }
+
+            // Prepare form data
+            const formData = new FormData(form);
+            formData.set('origin', origin);
+            formData.set('destination', destination);
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Store search results and redirect to results page
+                    sessionStorage.setItem('flightResults', JSON.stringify(result.data));
+                    sessionStorage.setItem('searchCriteria', JSON.stringify({
+                        origin: origin,
+                        destination: destination,
+                        departure_date: departInput.value,
+                        return_date: returnInput.value || null,
+                        passengers: travelers
+                    }));
+                    window.location.href = 'pages/results.php';
+                } else {
+                    alert('Search failed: ' + result.message);
+                }
+            } catch (error) {
+                console.error('Search error:', error);
+                alert('An error occurred while searching for flights. Please try again.');
+            }
+        });
+
+
+        /* =========================
+        AIRPORT AUTOCOMPLETE
+        ========================= */
+        let airports = [];
+
+        fetch('/data/airports.json')
+            .then(res => res.json())
+            .then(data => {
+                airports = Object.values(data)
+                    .filter(a => a.iata && a.city && a.name);
+            });
+
+        function setupAutocomplete(inputId, suggestionId) {
+            const input = document.getElementById(inputId);
+            const suggestionBox = document.getElementById(suggestionId);
+
+            input.addEventListener('input', () => {
+                const query = input.value.toLowerCase();
+                suggestionBox.innerHTML = '';
+
+                if (query.length < 2) {
+                    suggestionBox.style.display = 'none';
+                    return;
+                }
+                suggestionBox.style.display = 'block';
+                const
+                    matches = airports.filter(a =>
+                        a.city.toLowerCase().includes(query) ||
+                        a.name.toLowerCase().includes(query) ||
+                        a.iata.toLowerCase().includes(query)
+                    )
+                        .slice(0, 10);
+
+                matches.forEach(a => {
+                    const li = document.createElement('li');
+                    li.textContent = `${a.city} – ${a.name} (${a.iata})`;
+
+                    li.onclick = () => {
+                        input.value = `${a.city} (${a.iata})`;
+                        input.dataset.iata = a.iata;
+                        suggestionBox.innerHTML = '';
+                        suggestionBox.style.display = 'none';
+                    };
+
+                    suggestionBox.appendChild(li);
+                });
+            });
+
+            document.addEventListener('click', e => {
+                if (!suggestionBox.contains(e.target) && e.target !== input) {
+                    suggestionBox.style.display = 'none';
+                    suggestionBox.innerHTML = '';
+                }
+            });
+        }
+
+        setupAutocomplete('origin', 'from-suggestions');
+        setupAutocomplete('destination', 'to-suggestions');
+
+        // Fetch and set CSRF token on page load
+        fetch('php/handlers/get-csrf-token.php')
+            .then(res => res.json())
+            .then(data => {
+                if (data.success && data.csrf_token) {
+                    document.getElementById('csrf_token').value = data.csrf_token;
+                }
+            })
+            .catch(err => console.log('CSRF token fetch note:', err.message));
+    </script>
+
+</body>
+
+</html>
