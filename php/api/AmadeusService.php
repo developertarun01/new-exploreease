@@ -103,7 +103,7 @@ class AmadeusService
                 'departureDate' => $departureDate,
                 'adults' => $passengers,
                 'currencyCode' => 'USD',
-                'max' => 250 // Get top 10 results
+                'max' => 1000 // Get top 10 results
             ];
 
             // Add return date if round trip

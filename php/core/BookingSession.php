@@ -14,13 +14,19 @@ class BookingSession
         // Start session if not already started
         if (session_status() !== PHP_SESSION_ACTIVE) {
             // Set secure cookie parameters
+            $domain = '';
+            if (isset($_SERVER['HTTP_HOST'])) {
+                // Remove port from domain for proper session cookie handling
+                $domain = parse_url('http://' . $_SERVER['HTTP_HOST'], PHP_URL_HOST) ?? '';
+            }
+            
             session_set_cookie_params([
                 'lifetime' => 1800, // 30 minutes
                 'path' => '/',
-                'domain' => $_SERVER['HTTP_HOST'] ?? '',
+                'domain' => $domain,
                 'secure' => isset($_SERVER['HTTPS']), // Only HTTPS
                 'httponly' => true, // Not accessible via JavaScript
-                'samesite' => 'Strict' // CSRF protection
+                'samesite' => 'Lax' // Changed to Lax to allow AJAX requests with cookies
             ]);
 
             session_start();
