@@ -19,7 +19,7 @@ class BookingSession
                 // Remove port from domain for proper session cookie handling
                 $domain = parse_url('http://' . $_SERVER['HTTP_HOST'], PHP_URL_HOST) ?? '';
             }
-            
+
             session_set_cookie_params([
                 'lifetime' => 1800, // 30 minutes
                 'path' => '/',
