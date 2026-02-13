@@ -246,7 +246,8 @@ $csrfToken = Security::generateCSRFToken();
                 // Convert to URL-encoded format (POST data)
                 const response = await fetch('../php/handlers/search.php', {
                     method: 'POST',
-                    body: formData
+                    body: formData,
+                    credentials: 'include'
                 });
 
                 const result = await response.json();

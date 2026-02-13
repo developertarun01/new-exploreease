@@ -39,8 +39,13 @@ try {
     }
 
     // Get flight data from request
-    $flightData = json_decode(file_get_contents('php://input'), true)
-        ?? json_decode(http_build_query($_POST), true);
+    $flightData = $_POST; // FormData will be in $_POST
+
+    if (!$flightData) {
+        http_response_code(400);
+        echo json_encode(['success' => false, 'message' => 'No flight data provided']);
+        exit;
+    }
 
     if (!$flightData) {
         http_response_code(400);

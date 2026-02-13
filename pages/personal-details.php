@@ -222,7 +222,8 @@ $csrfToken = Security::generateCSRFToken();
             try {
                 const response = await fetch('../php/handlers/personal-details.php', {
                     method: 'POST',
-                    body: formData
+                    body: formData,
+                    credentials: 'include'
                 });
 
                 const result = await response.json();

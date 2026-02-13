@@ -895,7 +895,7 @@ if ($useModernVersion) {
         }
 
         // Replace the existing form submit handler with this:
-        document.getElementById('selectionForm').addEventListener('submit', function(e) {
+        document.getElementById('selectionForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
             if (selectedFlightId === null && selectedFlightIndex === null) {
@@ -903,17 +903,40 @@ if ($useModernVersion) {
                 return;
             }
 
-            // Get the selected flight from the hidden inputs or from sessionStorage
+            // Get the selected flight from sessionStorage
             const selectedFlight = JSON.parse(sessionStorage.getItem('selectedFlight'));
 
-            if (selectedFlight) {
-                // Store in sessionStorage for the next page
-                sessionStorage.setItem('booking_selected_flight', JSON.stringify(selectedFlight));
-
-                // Direct redirect to personal-details.php
-                window.location.href = 'personal-details.php';
-            } else {
+            if (!selectedFlight) {
                 showAlert('danger', 'Flight data not found. Please select again.');
+                return;
+            }
+
+            // Prepare form data with flight information
+            const form = document.getElementById('selectionForm');
+            const formData = new FormData(form);
+
+            try {
+                // Send flight selection to server to store in session
+                const response = await fetch('../php/handlers/select-flight.php', {
+                    method: 'POST',
+                    body: formData,
+                    credentials: 'include'
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Store in sessionStorage for reference
+                    sessionStorage.setItem('booking_selected_flight', JSON.stringify(selectedFlight));
+
+                    // Redirect to personal details page
+                    window.location.href = 'personal-details.php';
+                } else {
+                    showAlert('danger', result.message || 'Failed to save flight selection. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showAlert('danger', 'An error occurred. Please try again.');
             }
         });
 

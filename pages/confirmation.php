@@ -416,7 +416,8 @@ $bookingSummary = BookingSession::getBookingSummary();
 
                 const response = await fetch('../php/handlers/confirm-booking.php', {
                     method: 'POST',
-                    body: formData
+                    body: formData,
+                    credentials: 'include'
                 });
 
                 const result = await response.json();
