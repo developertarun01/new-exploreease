@@ -632,13 +632,13 @@ if ($useModernVersion) {
 <body>
     <div class="booking-container">
         <!-- Step Indicator -->
-        <div class="step-indicator">
+        <!-- <div class="step-indicator">
             <div class="step completed">1. Search</div>
             <div class="step active">2. Select Flight</div>
             <div class="step">3. Personal Info</div>
             <div class="step">4. Payment</div>
             <div class="step">5. Confirm</div>
-        </div>
+        </div> -->
 
         <h1>Select Your Flight</h1>
 

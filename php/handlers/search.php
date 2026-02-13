@@ -102,13 +102,23 @@ try {
         ]
     ]);
 } catch (Exception $e) {
-    // Log error (in production)
-    error_log('Search handler error: ' . $e->getMessage());
+    // Log error details for debugging
+    $errorMsg = $e->getMessage();
+    error_log('Search handler error: ' . $errorMsg);
 
-    http_response_code(500);
+    // Determine HTTP code based on error type
+    $httpCode = 500;
+    if (strpos($errorMsg, 'Configuration') !== false || strpos($errorMsg, '.env') !== false) {
+        $httpCode = 503; // Service unavailable
+    } elseif (strpos($errorMsg, 'Validation') !== false) {
+        $httpCode = 400;
+    }
+
+    http_response_code($httpCode);
     echo json_encode([
         'success' => false,
-        'message' => 'An error occurred while searching for flights: ' . $e->getMessage()
+        'message' => 'An error occurred while searching for flights: ' . $errorMsg,
+        'error_code' => $httpCode
     ]);
 
     exit;

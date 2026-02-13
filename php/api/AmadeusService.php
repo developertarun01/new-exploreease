@@ -41,37 +41,64 @@ class AmadeusService
         ]);
 
         $ch = curl_init();
-        curl_setopt_array($ch, [
+
+        // Build curl options - with SSL verification flexible for shared hosting
+        $curlOptions = [
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT => 10,
-            CURLOPT_SSL_VERIFYPEER => true,
+            CURLOPT_TIMEOUT => 15,
             CURLOPT_POST => true,
             CURLOPT_POSTFIELDS => $postFields,
             CURLOPT_HTTPHEADER => [
                 'Content-Type: application/x-www-form-urlencoded'
             ]
-        ]);
+        ];
+
+        // Try with SSL verification first, but handle failures
+        $curlOptions[CURLOPT_SSL_VERIFYPEER] = true;
+        $curlOptions[CURLOPT_SSL_VERIFYHOST] = 2;
+
+        curl_setopt_array($ch, $curlOptions);
 
         $response = curl_exec($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $curlError = curl_error($ch);
         curl_close($ch);
 
+        // If SSL verification failed, retry with SSL disabled (common on shared hosting)
+        if ($curlError && strpos($curlError, 'SSL') !== false) {
+            error_log('Retrying Amadeus auth without SSL verification due to: ' . $curlError);
+
+            $ch = curl_init();
+            $curlOptions[CURLOPT_SSL_VERIFYPEER] = false;
+            $curlOptions[CURLOPT_SSL_VERIFYHOST] = 0;
+            curl_setopt_array($ch, $curlOptions);
+
+            $response = curl_exec($ch);
+            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            $curlError = curl_error($ch);
+            curl_close($ch);
+        }
+
         if ($curlError) {
-            throw new Exception('Curl error: ' . $curlError);
+            throw new Exception('Authentication request failed: ' . $curlError);
         }
 
         if ($httpCode !== 200) {
             $errorResponse = json_decode($response, true);
             $errorMsg = isset($errorResponse['error_description']) ? $errorResponse['error_description'] : 'Unknown error';
-            throw new Exception('Authentication failed (HTTP ' . $httpCode . '): ' . $errorMsg);
+            $errorDetails = 'HTTP ' . $httpCode . ': ' . $errorMsg;
+            if (isset($errorResponse['error'])) {
+                $errorDetails .= ' (' . $errorResponse['error'] . ')';
+            }
+            throw new Exception('Authentication failed - ' . $errorDetails);
         }
 
         $data = json_decode($response, true);
 
         if (!isset($data['access_token'])) {
-            throw new Exception('Failed to obtain access token');
+            error_log('Auth response: ' . print_r($data, true));
+            throw new Exception('Failed to obtain access token from authentication response');
         }
 
         $this->accessToken = $data['access_token'];
@@ -103,7 +130,7 @@ class AmadeusService
                 'departureDate' => $departureDate,
                 'adults' => $passengers,
                 'currencyCode' => 'USD',
-                'max' => 1000 // Get top 10 results
+                'max' => 100
             ];
 
             // Add return date if round trip
@@ -115,34 +142,66 @@ class AmadeusService
 
             // Make API call
             $ch = curl_init();
-            curl_setopt_array($ch, [
+
+            $curlOptions = [
                 CURLOPT_URL => $url,
                 CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_TIMEOUT => 10,
+                CURLOPT_TIMEOUT => 15,
                 CURLOPT_SSL_VERIFYPEER => true,
+                CURLOPT_SSL_VERIFYHOST => 2,
                 CURLOPT_HTTPHEADER => [
                     'Authorization: Bearer ' . $token,
                     'Accept: application/json'
                 ]
-            ]);
+            ];
+
+            curl_setopt_array($ch, $curlOptions);
 
             $response = curl_exec($ch);
             $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             $curlError = curl_error($ch);
             curl_close($ch);
 
+            // If SSL verification failed, retry with SSL disabled
+            if ($curlError && strpos($curlError, 'SSL') !== false) {
+                error_log('Retrying flight search without SSL verification due to: ' . $curlError);
+
+                $ch = curl_init();
+                $curlOptions[CURLOPT_SSL_VERIFYPEER] = false;
+                $curlOptions[CURLOPT_SSL_VERIFYHOST] = 0;
+                curl_setopt_array($ch, $curlOptions);
+
+                $response = curl_exec($ch);
+                $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                $curlError = curl_error($ch);
+                curl_close($ch);
+            }
+
             if ($curlError) {
-                throw new Exception('Curl error: ' . $curlError);
+                throw new Exception('Flight search request failed: ' . $curlError);
             }
 
             if ($httpCode !== 200) {
-                throw new Exception('API request failed. HTTP Code: ' . $httpCode);
+                $errorData = json_decode($response, true);
+                $errorMsg = 'API HTTP ' . $httpCode;
+
+                if (is_array($errorData) && isset($errorData['errors'])) {
+                    foreach ($errorData['errors'] as $error) {
+                        if (isset($error['detail'])) {
+                            $errorMsg .= ' - ' . $error['detail'];
+                            break;
+                        }
+                    }
+                }
+
+                error_log('Flight search failed: ' . $response);
+                throw new Exception('Flight search failed: ' . $errorMsg);
             }
 
             $data = json_decode($response, true);
 
             if (!$data) {
-                throw new Exception('Invalid API response');
+                throw new Exception('Invalid API response - could not parse JSON');
             }
 
             // Process and format flight data

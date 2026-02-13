@@ -327,6 +327,7 @@
             width: 213%;
             background: #fff;
             border: 1px solid #ddd;
+            border: 2px solid var(--touch);
             max-height: 240px;
             overflow-y: auto;
             z-index: 9999;
@@ -343,7 +344,7 @@
             padding: 10px;
             cursor: pointer;
             font-size: 14px;
-            border-bottom: 3px solid var(--touch);
+            border-bottom: 1px solid var(--touch);
         }
 
         .suggestions li:hover {
@@ -755,25 +756,25 @@
                 <h1 class="center">Top Flight <span>Destination</span></h1>
                 <div class="flex dests-flex mt-20 w-100">
                     <div class="flex flex-2 dest dest-1">
-                        <h3>Flights to London</h3>
+                        <h3><b>Flights to London</b></h3>
                     </div>
                     <div class="flex flex-1 dest dest-2">
-                        <h3>Flights to Rome</h3>
+                        <h3><b>Flights to Rome</b></h3>
                     </div>
                 </div>
 
                 <div class="grid-4 dests-grid mt-20 w-100">
                     <div class="flex dest dest-3">
-                        <h3>Flights to Dubai</h3>
+                        <h3><b>Flights to Dubai</b></h3>
                     </div>
                     <div class="flex dest dest-4">
-                        <h3>Flights to Chicago</h3>
+                        <h3><b>Flights to Chicago</b></h3>
                     </div>
                     <div class="flex dest dest-5">
-                        <h3>Flights to Philadelphia</h3>
+                        <h3><b>Flights to Philadelphia</b></h3>
                     </div>
                     <div class="flex dest dest-6">
-                        <h3>Flights to Miami</h3>
+                        <h3><b>Flights to Miami</b></h3>
                     </div>
                 </div>
             </div>
@@ -1253,7 +1254,7 @@
         ========================= */
         let airports = [];
 
-        fetch('/data/airports.json')
+        fetch('./data/airports.json')
             .then(res => res.json())
             .then(data => {
                 airports = Object.values(data)
