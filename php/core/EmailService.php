@@ -1,106 +1,105 @@
 <?php
 
-/**
- * Email Class - Handles email sending using PHPMailer
- */
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
 
 class EmailService
 {
     private $mail;
-    private $adminEmail = 'tarunbusinessmail@gmail.com'; // Change to actual admin email
-    private $fromEmail = 'tarunbusinessmail@gmail.com'; // Change to actual from email
+    private $adminEmail = 'tarunbusinessmail@gmail.com';
+    private $fromEmail = 'tarunbusinessmail@gmail.com';
     private $fromName = 'Exploreease Bookings';
 
     public function __construct()
     {
-        // Initialize PHPMailer
         $this->mail = new PHPMailer(true);
 
         try {
-            // SMTP configuration
+            // Server settings
+            $this->mail->SMTPDebug = SMTP::DEBUG_OFF; // Set to DEBUG_SERVER for debugging
             $this->mail->isSMTP();
-            $this->mail->Host = getenv('SMTP_HOST') ?? 'smtp.gmail.com'; // Change to your SMTP host
+            $this->mail->Host = 'smtp.gmail.com';
             $this->mail->SMTPAuth = true;
-            $this->mail->Username = getenv('SMTP_USER') ?? 'tarunbusinessmail@gmail.com'; // Change to your email
-            $this->mail->Password = getenv('SMTP_PASSWORD') ?? 'nfwocwqfsthgwbes'; // Change to your app password
+            $this->mail->Username = 'tarunbusinessmail@gmail.com';
+            $this->mail->Password = 'nfwocwqfsthgwbes';
             $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $this->mail->Port = 587;
 
-            // Set default from address
-            $this->mail->setFrom($this->fromEmail, $this->fromName);
+            // Timeout settings
+            $this->mail->Timeout = 30;
+            $this->mail->SMTPKeepAlive = true;
 
-            // Charset
+            // SSL options for local/testing environments
+            $this->mail->SMTPOptions = array(
+                'ssl' => array(
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true
+                )
+            );
+
+            // From address
+            $this->mail->setFrom($this->fromEmail, $this->fromName);
             $this->mail->CharSet = PHPMailer::CHARSET_UTF8;
         } catch (Exception $e) {
-            throw new Exception('PHPMailer initialization failed: ' . $e->getMessage());
+            error_log("PHPMailer init error: " . $e->getMessage());
+            throw new Exception('Email service initialization failed: ' . $e->getMessage());
         }
     }
 
-    /**
-     * Send booking confirmation email to customer
-     */
     public function sendCustomerConfirmation($bookingSummary)
     {
         try {
-            // Reset previous settings if sending multiple emails
             $this->mail->clearAddresses();
             $this->mail->clearAttachments();
 
-            // Recipient
-            $this->mail->addAddress($bookingSummary['personal']['email']);
+            // Validate email
+            $customerEmail = filter_var($bookingSummary['personal']['email'] ?? '', FILTER_VALIDATE_EMAIL);
+            if (!$customerEmail) {
+                throw new Exception('Invalid customer email address');
+            }
 
-            // Subject
+            $this->mail->addAddress($customerEmail);
             $this->mail->Subject = 'Your Flight Booking Confirmation - Exploreease';
-
-            // Build email body
-            $emailBody = $this->buildCustomerEmailBody($bookingSummary);
-
-            // HTML body
             $this->mail->isHTML(true);
-            $this->mail->Body = $emailBody;
+            $this->mail->Body = $this->buildCustomerEmailBody($bookingSummary);
+            $this->mail->AltBody = strip_tags($this->buildCustomerEmailBody($bookingSummary));
 
-            // Plain text alternative
-            $this->mail->AltBody = strip_tags($emailBody);
+            $result = $this->mail->send();
 
-            // Send
-            return $this->mail->send();
+            if ($result) {
+                error_log("Email sent successfully to: $customerEmail");
+            }
+
+            return $result;
         } catch (Exception $e) {
+            error_log("Customer email failed: " . $e->getMessage());
             throw new Exception('Customer email failed: ' . $e->getMessage());
         }
     }
 
-    /**
-     * Send booking details to admin/support team
-     */
     public function sendAdminNotification($bookingSummary, $customerEmail)
     {
         try {
-            // Reset previous settings
             $this->mail->clearAddresses();
             $this->mail->clearAttachments();
 
-            // Admin recipient
             $this->mail->addAddress($this->adminEmail);
-
-            // Subject
-            $this->mail->Subject = 'New Flight Booking - ' . $bookingSummary['personal']['name'];
-
-            // Build email body
-            $emailBody = $this->buildAdminEmailBody($bookingSummary, $customerEmail);
-
-            // HTML body
+            $this->mail->Subject = 'New Flight Booking - ' . ($bookingSummary['personal']['name'] ?? 'Unknown');
             $this->mail->isHTML(true);
-            $this->mail->Body = $emailBody;
+            $this->mail->Body = $this->buildAdminEmailBody($bookingSummary, $customerEmail);
+            $this->mail->AltBody = strip_tags($this->buildAdminEmailBody($bookingSummary, $customerEmail));
 
-            // Plain text alternative
-            $this->mail->AltBody = strip_tags($emailBody);
+            $result = $this->mail->send();
 
-            // Send
-            return $this->mail->send();
+            if ($result) {
+                error_log("Admin notification sent successfully");
+            }
+
+            return $result;
         } catch (Exception $e) {
+            error_log("Admin email failed: " . $e->getMessage());
             throw new Exception('Admin email failed: ' . $e->getMessage());
         }
     }
@@ -668,24 +667,6 @@ HTML;
             <div class="highlight">
                 <strong>💡 Note:</strong> Payment verification required. No amount has been charged yet.
             </div>
-        </div>
-        
-        <div class="section">
-            <h2>⚡ Quick Actions</h2>
-            <table width="100%" cellpadding="10" cellspacing="0">
-                <tr>
-                    <td align="center">
-                        <a href="https://admin.exploreease.com/bookings/{$bookingId}/verify" 
-                           style="display: inline-block; background-color: #27ae60; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; margin: 0 5px; font-weight: bold;">
-                            ✅ Verify Booking
-                        </a>
-                        <a href="https://admin.exploreease.com/bookings/{$bookingId}/process" 
-                           style="display: inline-block; background-color: #3498db; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; margin: 0 5px; font-weight: bold;">
-                            🔄 Process Payment
-                        </a>
-                    </td>
-                </tr>
-            </table>
         </div>
         
         <div class="admin-note">
