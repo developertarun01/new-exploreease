@@ -26,800 +26,258 @@ if ($useModernVersion) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Select Flight - Exploreease</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
     <style>
-        /* Consolidated and deduplicated CSS */
-        :root {
-            --primary: #3498db;
-            --success: #27ae60;
-            --danger: #e74c3c;
-            --warning: #f39c12;
-            --dark: #2c3e50;
-            --gray: #7f8c8d;
-            --light: #ecf0f1;
-            --white: #ffffff;
+        /* Minimal custom CSS - only what Bootstrap doesn't provide */
+        .flight-card {
+            transition: all 0.3s;
+            cursor: pointer;
         }
 
-        .booking-container,
-        .results-container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 30px;
-            background: var(--white);
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        .flight-card:hover {
+            border-color: #0d6efd !important;
+            box-shadow: 0 4px 12px rgba(13, 110, 253, 0.2);
         }
 
-        /* Step Indicator */
-        .step-indicator {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 30px;
-            font-size: 14px;
+        .flight-card.selected {
+            border-color: #198754 !important;
+            background-color: #f0fdf4;
         }
 
-        .step {
-            flex: 1;
-            padding: 10px;
-            background: #f5f5f5;
-            border-radius: 4px;
-            text-align: center;
-            margin: 0 5px;
-            font-weight: bold;
-            transition: background 0.3s;
-        }
-
-        .step.active {
-            background: var(--primary);
-            color: white;
-        }
-
-        .step.completed {
-            background: var(--success);
-            color: white;
-        }
-
-        /* Layout */
-        .results-layout {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 30px;
-            margin-top: 20px;
-        }
-
-        @media (max-width: 768px) {
-            .results-layout {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Filters Sidebar */
         .filters-sidebar {
-            background: var(--white);
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 20px;
-            height: fit-content;
             position: sticky;
             top: 20px;
         }
 
-        .filters-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid var(--light);
-        }
-
-        .filters-header h3 {
-            margin: 0;
-            color: var(--dark);
-            font-size: 18px;
-        }
-
-        .clear-filters {
-            color: var(--primary);
-            background: none;
-            border: none;
-            padding: 5px 10px;
-            font-size: 13px;
-            cursor: pointer;
-            text-decoration: underline;
-        }
-
-        .filter-section {
-            margin-bottom: 25px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .filter-section:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .filter-title {
-            font-weight: 600;
-            color: var(--dark);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .filter-options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .filter-checkbox,
-        .filter-radio {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            font-size: 14px;
-            color: #555;
-        }
-
-        .filter-checkbox:hover,
-        .filter-radio:hover {
-            color: var(--primary);
-        }
-
-        .filter-checkbox input,
-        .filter-radio input {
-            cursor: pointer;
-            width: 16px;
-            height: 16px;
-        }
-
-        .filter-count {
-            color: var(--gray);
-            font-size: 12px;
-            margin-left: auto;
-        }
-
-        /* Price Range Slider */
-        .price-range {
-            padding: 10px 0;
-        }
-
-        .price-inputs {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .price-input {
-            flex: 1;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 14px;
-        }
-
-        .price-values {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-            font-size: 13px;
-            color: var(--gray);
-        }
-
-        /* Active Filters */
-        .active-filters {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 20px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 8px;
-        }
-
-        .filter-tag {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 12px;
-            background: var(--white);
-            border: 1px solid var(--primary);
-            border-radius: 20px;
-            font-size: 13px;
-            color: var(--dark);
-        }
-
-        .filter-tag i {
-            color: var(--gray);
-            cursor: pointer;
-            font-size: 12px;
-        }
-
         .filter-tag i:hover {
-            color: var(--danger);
-        }
-
-        /* Results Header */
-        .results-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .results-count {
-            font-size: 15px;
-            color: var(--gray);
-        }
-
-        .results-count strong {
-            color: var(--dark);
-            font-size: 18px;
-        }
-
-        .sort-select {
-            padding: 8px 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 14px;
-            background: var(--white);
-            cursor: pointer;
-        }
-
-        /* Search Criteria */
-        .search-criteria,
-        .search-summary {
-            background: var(--light);
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            font-size: 14px;
-        }
-
-        .search-criteria {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .criteria-item {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .criteria-label,
-        .detail-label {
-            font-size: 12px;
-            color: #666;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .criteria-value {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--dark);
-        }
-
-        /* Flight Cards */
-        .flights-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .flight-card {
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 20px;
-            background: var(--white);
-            transition: all 0.3s;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            position: relative;
-        }
-
-        .flight-card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
-        }
-
-        .flight-card.selected {
-            border-color: var(--success);
-            background: #f0fdf4;
-        }
-
-        .duplicate-badge {
-            position: absolute;
-            top: -10px;
-            right: 20px;
-            background: var(--warning);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            z-index: 1;
+            color: #dc3545;
         }
 
         .identical-flight-badge {
-            position: absolute;
             top: -10px;
             right: 20px;
-            background: var(--gray);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             z-index: 1;
         }
 
         .best-deal-badge {
-            position: absolute;
             top: -10px;
             left: 20px;
-            background: var(--success);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             z-index: 1;
         }
 
-        .flight-info {
-            flex: 1;
-        }
-
-        .flight-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 15px;
-            width: 100%;
-        }
-
-        .flight-airline {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-
-        .airline-code {
-            font-weight: 700;
-            font-size: 18px;
-            color: var(--primary);
-            min-width: 50px;
-        }
-
-        .flight-meta {
-            font-size: 12px;
-            color: var(--gray);
-        }
-
-        .flight-route {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            gap: 20px;
-            align-items: center;
-            margin: 15px 0;
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--dark);
-        }
-
-        .time-section {
-            text-align: center;
-        }
-
-        .time-large {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--dark);
-        }
-
-        .airport-code {
-            font-size: 12px;
-            color: var(--gray);
-            margin-top: 5px;
-        }
-
-        .journey-icon {
-            color: #95a5a6;
-            font-size: 18px;
-        }
-
-        .details-row,
-        .flight-details {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            font-size: 13px;
-            color: #666;
-            margin-top: 10px;
-        }
-
-        .detail-item,
-        .flight-detail-item {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .flight-price-section,
-        .flight-price {
-            text-align: right;
-            margin-left: 20px;
-        }
-
-        .flight-price,
-        .price {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--success);
-        }
-
-        .currency {
-            font-size: 14px;
-            color: var(--gray);
-        }
-
-        /* No Results */
-        .no-results {
-            text-align: center;
-            padding: 60px 20px;
-            color: #666;
-        }
-
-        .no-results-icon {
-            font-size: 64px;
-            color: #bdc3c7;
-            margin-bottom: 15px;
-        }
-
-        /* Loading */
-        .loading {
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--gray);
-        }
-
-        /* Alerts */
-        .error-message,
-        .alert {
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 4px;
-        }
-
-        .error-message,
-        .alert-error {
-            background: #ffe6e6;
-            color: #c0392b;
-            border: 1px solid var(--danger);
-        }
-
-        .alert-success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .alert-info {
-            background: #d1ecf1;
-            color: #0c5460;
-            border: 1px solid #bee5eb;
-        }
-
-        /* Buttons */
-        .button-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 30px;
-        }
-
-        .btn,
-        button {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .btn-continue {
-            background: var(--success);
-            color: white;
-        }
-
-        .btn-continue:hover:not(:disabled) {
-            background: #229954;
-        }
-
-        .btn-back {
-            background: #95a5a6;
-            color: white;
-        }
-
-        .btn-back:hover {
-            background: var(--gray);
-        }
-
-        .btn:disabled,
-        button:disabled {
-            background: #bdc3c7;
-            cursor: not-allowed;
-            opacity: 0.6;
-        }
-
-        .btn-apply {
-            background: var(--primary);
-            color: white;
-            padding: 10px;
-            margin-top: 10px;
-        }
-
-        .btn-apply:hover {
-            background: #2980b9;
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
-            .flight-route {
-                grid-template-columns: 1fr;
-            }
-
-            .search-criteria {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .details-row,
-            .flight-details {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .flight-card {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .flight-price-section,
-            .flight-price {
-                text-align: left;
-                margin-left: 0;
-                margin-top: 10px;
-                width: 100%;
-            }
-
-            .results-layout {
-                grid-template-columns: 1fr;
-            }
-
             .filters-sidebar {
                 position: static;
-                margin-bottom: 20px;
             }
         }
     </style>
 </head>
 
-<body>
-    <div class="booking-container">
-        <!-- Step Indicator -->
-        <!-- <div class="step-indicator">
-            <div class="step completed">1. Search</div>
-            <div class="step active">2. Select Flight</div>
-            <div class="step">3. Personal Info</div>
-            <div class="step">4. Payment</div>
-            <div class="step">5. Confirm</div>
-        </div> -->
-
-        <h1>Select Your Flight</h1>
-
-        <!-- Error/Alert Container -->
-        <div id="errorContainer"></div>
-        <div id="alertContainer"></div>
-
-        <!-- Loading Container -->
-        <div id="loadingContainer" class="loading">
-            <i class="fas fa-spinner fa-spin" style="font-size: 48px; margin-bottom: 20px;"></i>
-            <p>Loading your flights...</p>
-        </div>
-
-        <!-- Main Content Container -->
-        <div id="contentContainer" style="display: none;">
-            <!-- Search Criteria/Summary -->
-            <div id="searchCriteria" class="search-criteria"></div>
-            <div id="searchSummary" class="search-summary" style="display: none;"></div>
-
-            <!-- Active Filters -->
-            <div id="activeFilters" class="active-filters" style="display: none;"></div>
-
-            <div class="results-layout">
-                <!-- Filters Sidebar -->
-                <div class="filters-sidebar">
-                    <div class="filters-header">
-                        <h3><i class="fas fa-filter" style="margin-right: 8px;"></i> Filters</h3>
-                        <button id="clearAllFilters" class="clear-filters">Clear all</button>
-                    </div>
-
-                    <!-- Stops Filter -->
-                    <div class="filter-section">
-                        <div class="filter-title">
-                            <i class="fas fa-plane"></i> Stops
-                        </div>
-                        <div class="filter-options" id="stopsFilter">
-                            <label class="filter-checkbox">
-                                <input type="checkbox" name="stops" value="0" id="filterNonStop">
-                                <span>Non-stop</span>
-                                <span class="filter-count" id="nonStopCount">0</span>
-                            </label>
-                            <label class="filter-checkbox">
-                                <input type="checkbox" name="stops" value="1" id="filter1Stop">
-                                <span>1 Stop</span>
-                                <span class="filter-count" id="oneStopCount">0</span>
-                            </label>
-                            <label class="filter-checkbox">
-                                <input type="checkbox" name="stops" value="2" id="filter2PlusStops">
-                                <span>2+ Stops</span>
-                                <span class="filter-count" id="twoPlusStopCount">0</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Airlines Filter -->
-                    <div class="filter-section">
-                        <div class="filter-title">
-                            <i class="fas fa-building"></i> Airlines
-                        </div>
-                        <div class="filter-options" id="airlinesFilter">
-                            <!-- Dynamically populated -->
-                        </div>
-                    </div>
-
-                    <!-- Price Range Filter -->
-                    <div class="filter-section">
-                        <div class="filter-title">
-                            <i class="fas fa-dollar-sign"></i> Price Range
-                        </div>
-                        <div class="price-range">
-                            <div id="priceSlider" style="margin: 10px 0;"></div>
-                            <div class="price-inputs">
-                                <input type="number" id="minPrice" class="price-input" placeholder="Min" step="10">
-                                <input type="number" id="maxPrice" class="price-input" placeholder="Max" step="10">
-                            </div>
-                            <button id="applyPriceFilter" class="btn btn-apply">Apply Price</button>
-                        </div>
-                    </div>
-
-                    <!-- Departure Time Filter -->
-                    <div class="filter-section">
-                        <div class="filter-title">
-                            <i class="fas fa-clock"></i> Departure Time
-                        </div>
-                        <div class="filter-options">
-                            <label class="filter-checkbox">
-                                <input type="checkbox" name="departure_time" value="morning" id="filterMorning">
-                                <span>Morning (6AM - 12PM)</span>
-                            </label>
-                            <label class="filter-checkbox">
-                                <input type="checkbox" name="departure_time" value="afternoon" id="filterAfternoon">
-                                <span>Afternoon (12PM - 6PM)</span>
-                            </label>
-                            <label class="filter-checkbox">
-                                <input type="checkbox" name="departure_time" value="evening" id="filterEvening">
-                                <span>Evening (6PM - 12AM)</span>
-                            </label>
-                            <label class="filter-checkbox">
-                                <input type="checkbox" name="departure_time" value="night" id="filterNight">
-                                <span>Night (12AM - 6AM)</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Seat Class Filter -->
-                    <div class="filter-section">
-                        <div class="filter-title">
-                            <i class="fas fa-chair"></i> Cabin Class
-                        </div>
-                        <div class="filter-options">
-                            <label class="filter-checkbox">
-                                <input type="checkbox" name="seat_class" value="ECONOMY" id="filterEconomy">
-                                <span>Economy</span>
-                            </label>
-                            <label class="filter-checkbox">
-                                <input type="checkbox" name="seat_class" value="PREMIUM_ECONOMY" id="filterPremiumEconomy">
-                                <span>Premium Economy</span>
-                            </label>
-                            <label class="filter-checkbox">
-                                <input type="checkbox" name="seat_class" value="BUSINESS" id="filterBusiness">
-                                <span>Business</span>
-                            </label>
-                            <label class="filter-checkbox">
-                                <input type="checkbox" name="seat_class" value="FIRST" id="filterFirst">
-                                <span>First Class</span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Results Area -->
-                <div>
-                    <!-- Results Header -->
-                    <div class="results-header">
-                        <div class="results-count">
-                            <strong id="displayedFlightsCount">0</strong> <span id="totalFlightsCount"></span>
-                        </div>
-                        <select id="sortBy" class="sort-select">
-                            <option value="price_low">Price: Low to High</option>
-                            <option value="price_high">Price: High to Low</option>
-                            <option value="duration">Duration</option>
-                            <option value="departure">Earliest Departure</option>
-                            <option value="arrival">Earliest Arrival</option>
-                            <option value="stops">Least Stops</option>
-                        </select>
-                    </div>
-
-                    <!-- Flights List -->
-                    <div id="flightsList" class="flights-list"></div>
-                    <div id="flightsContainer" style="display: none;"></div>
-
-                    <!-- No Results -->
-                    <div id="noResults" class="no-results" style="display: none;">
-                        <div class="no-results-icon">
-                            <i class="fas fa-inbox"></i>
-                        </div>
-                        <h3>No flights found</h3>
-                        <p>Try adjusting your filters or search criteria</p>
-                        <button class="btn btn-back" onclick="window.location.href='/';" style="max-width: 300px; margin: 20px auto 0;">New Search</button>
-                    </div>
-                </div>
+<body class="bg-light">
+    <div class="container my-5">
+        <div class="bg-white rounded-3 shadow-sm p-4">
+            <!-- Step Indicator (Bootstrap progress steps) -->
+            <div class="d-flex justify-content-between mb-4">
+                <div class="flex-fill text-center p-2 bg-success text-white rounded-2 me-1 fw-bold">1. Search</div>
+                <div class="flex-fill text-center p-2 bg-primary text-white rounded-2 me-1 fw-bold">2. Select Flight</div>
+                <div class="flex-fill text-center p-2 bg-light text-dark rounded-2 me-1">3. Personal Info</div>
+                <div class="flex-fill text-center p-2 bg-light text-dark rounded-2 me-1">4. Payment</div>
+                <div class="flex-fill text-center p-2 bg-light text-dark rounded-2">5. Confirm</div>
             </div>
 
-            <!-- Selection Form -->
-            <form id="selectionForm" style="display: none;">
-                <?php if (isset($csrfToken)): ?>
-                    <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrfToken); ?>">
-                <?php endif; ?>
-                <div id="selectedFlightInputs"></div>
-                <div id="selectedFlightInput" style="display: none;"></div>
+            <h1 class="h2 mb-4">Select Your Flight</h1>
 
-                <div class="button-group">
-                    <button type="button" class="btn btn-back" onclick="goBack()">New Search</button>
-                    <button type="submit" class="btn btn-continue" id="continueBtn" disabled>Continue to Personal Details</button>
+            <!-- Error/Alert Container -->
+            <div id="errorContainer"></div>
+            <div id="alertContainer"></div>
+
+            <!-- Loading Container -->
+            <div id="loadingContainer" class="text-center py-5">
+                <i class="fas fa-spinner fa-spin fa-3x text-secondary mb-3"></i>
+                <p class="text-muted">Loading your flights...</p>
+            </div>
+
+            <!-- Main Content Container -->
+            <div id="contentContainer" style="display: none;">
+                <!-- Search Criteria/Summary -->
+                <div id="searchCriteria" class="bg-light p-4 rounded-3 mb-4 d-flex flex-wrap gap-4 align-items-center justify-content-between"></div>
+                <div id="searchSummary" class="bg-light p-3 rounded-3 mb-4 small" style="display: none;"></div>
+
+                <!-- Active Filters -->
+                <div id="activeFilters" class="d-flex flex-wrap gap-2 mb-4 p-3 bg-light rounded-3" style="display: none !important;"></div>
+
+                <div class="row g-4">
+                    <!-- Filters Sidebar -->
+                    <div class="col-lg-3 col-md-4">
+                        <div class="filters-sidebar bg-white border rounded-3 p-4">
+                            <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+                                <h3 class="h5 mb-0 text-dark">
+                                    <i class="fas fa-filter me-2 text-primary"></i> Filters
+                                </h3>
+                                <button id="clearAllFilters" class="btn btn-link text-primary p-0 text-decoration-none small">Clear all</button>
+                            </div>
+
+                            <!-- Stops Filter -->
+                            <div class="mb-4 pb-2 border-bottom">
+                                <div class="fw-semibold text-dark mb-3">
+                                    <i class="fas fa-plane me-2 text-secondary"></i> Stops
+                                </div>
+                                <div class="d-flex flex-column gap-2" id="stopsFilter">
+                                    <label class="d-flex align-items-center gap-2 small">
+                                        <input type="checkbox" name="stops" value="0" class="form-check-input">
+                                        <span>Non-stop</span>
+                                        <span class="text-secondary ms-auto" id="nonStopCount">0</span>
+                                    </label>
+                                    <label class="d-flex align-items-center gap-2 small">
+                                        <input type="checkbox" name="stops" value="1" class="form-check-input">
+                                        <span>1 Stop</span>
+                                        <span class="text-secondary ms-auto" id="oneStopCount">0</span>
+                                    </label>
+                                    <label class="d-flex align-items-center gap-2 small">
+                                        <input type="checkbox" name="stops" value="2" class="form-check-input">
+                                        <span>2+ Stops</span>
+                                        <span class="text-secondary ms-auto" id="twoPlusStopCount">0</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Airlines Filter -->
+                            <div class="mb-4 pb-2 border-bottom">
+                                <div class="fw-semibold text-dark mb-3">
+                                    <i class="fas fa-building me-2 text-secondary"></i> Airlines
+                                </div>
+                                <div class="d-flex flex-column gap-2" id="airlinesFilter">
+                                    <!-- Dynamically populated -->
+                                </div>
+                            </div>
+
+                            <!-- Price Range Filter -->
+                            <div class="mb-4 pb-2 border-bottom">
+                                <div class="fw-semibold text-dark mb-3">
+                                    <i class="fas fa-dollar-sign me-2 text-secondary"></i> Price Range
+                                </div>
+                                <div class="price-range">
+                                    <div id="priceSlider" class="my-2"></div>
+                                    <div class="d-flex gap-2">
+                                        <input type="number" id="minPrice" class="form-control form-control-sm" placeholder="Min" step="10">
+                                        <input type="number" id="maxPrice" class="form-control form-control-sm" placeholder="Max" step="10">
+                                    </div>
+                                    <button id="applyPriceFilter" class="btn btn-primary btn-sm w-100 mt-3">Apply Price</button>
+                                </div>
+                            </div>
+
+                            <!-- Departure Time Filter -->
+                            <div class="mb-4 pb-2 border-bottom">
+                                <div class="fw-semibold text-dark mb-3">
+                                    <i class="fas fa-clock me-2 text-secondary"></i> Departure Time
+                                </div>
+                                <div class="d-flex flex-column gap-2">
+                                    <label class="d-flex align-items-center gap-2 small">
+                                        <input type="checkbox" name="departure_time" value="morning" class="form-check-input">
+                                        <span>Morning (6AM - 12PM)</span>
+                                    </label>
+                                    <label class="d-flex align-items-center gap-2 small">
+                                        <input type="checkbox" name="departure_time" value="afternoon" class="form-check-input">
+                                        <span>Afternoon (12PM - 6PM)</span>
+                                    </label>
+                                    <label class="d-flex align-items-center gap-2 small">
+                                        <input type="checkbox" name="departure_time" value="evening" class="form-check-input">
+                                        <span>Evening (6PM - 12AM)</span>
+                                    </label>
+                                    <label class="d-flex align-items-center gap-2 small">
+                                        <input type="checkbox" name="departure_time" value="night" class="form-check-input">
+                                        <span>Night (12AM - 6AM)</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Seat Class Filter -->
+                            <div class="mb-4">
+                                <div class="fw-semibold text-dark mb-3">
+                                    <i class="fas fa-chair me-2 text-secondary"></i> Cabin Class
+                                </div>
+                                <div class="d-flex flex-column gap-2">
+                                    <label class="d-flex align-items-center gap-2 small">
+                                        <input type="checkbox" name="seat_class" value="ECONOMY" class="form-check-input">
+                                        <span>Economy</span>
+                                    </label>
+                                    <label class="d-flex align-items-center gap-2 small">
+                                        <input type="checkbox" name="seat_class" value="PREMIUM_ECONOMY" class="form-check-input">
+                                        <span>Premium Economy</span>
+                                    </label>
+                                    <label class="d-flex align-items-center gap-2 small">
+                                        <input type="checkbox" name="seat_class" value="BUSINESS" class="form-check-input">
+                                        <span>Business</span>
+                                    </label>
+                                    <label class="d-flex align-items-center gap-2 small">
+                                        <input type="checkbox" name="seat_class" value="FIRST" class="form-check-input">
+                                        <span>First Class</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Results Area -->
+                    <div class="col-lg-9 col-md-8">
+                        <!-- Results Header -->
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div class="text-secondary">
+                                <strong id="displayedFlightsCount" class="fs-5 text-dark">0</strong> <span id="totalFlightsCount"></span>
+                            </div>
+                            <select id="sortBy" class="form-select w-auto">
+                                <option value="price_low">Price: Low to High</option>
+                                <option value="price_high">Price: High to Low</option>
+                                <option value="duration">Duration</option>
+                                <option value="departure">Earliest Departure</option>
+                                <option value="arrival">Earliest Arrival</option>
+                                <option value="stops">Least Stops</option>
+                            </select>
+                        </div>
+
+                        <!-- Flights List -->
+                        <div id="flightsList" class="d-flex flex-column gap-3"></div>
+                        <div id="flightsContainer" style="display: none;"></div>
+
+                        <!-- No Results -->
+                        <div id="noResults" class="text-center py-5" style="display: none;">
+                            <div class="text-secondary mb-3">
+                                <i class="fas fa-inbox fa-4x"></i>
+                            </div>
+                            <h3 class="h5">No flights found</h3>
+                            <p class="text-muted">Try adjusting your filters or search criteria</p>
+                            <button class="btn btn-secondary" onclick="window.location.href='/';" style="max-width: 300px;">New Search</button>
+                        </div>
+                    </div>
                 </div>
-            </form>
+
+                <!-- Selection Form -->
+                <form id="selectionForm" style="display: none;">
+                    <?php if (isset($csrfToken)): ?>
+                        <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($csrfToken); ?>">
+                    <?php endif; ?>
+                    <div id="selectedFlightInputs"></div>
+                    <div id="selectedFlightInput" style="display: none;"></div>
+
+                    <div class="d-flex gap-2 mt-4 pt-3 border-top">
+                        <button type="button" class="btn btn-secondary" onclick="goBack()">New Search</button>
+                        <button type="submit" class="btn btn-success" id="continueBtn" disabled>Continue to Personal Details</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
-        // Consolidated JavaScript
+        // Consolidated JavaScript (unchanged functionality, only styling classes updated)
         let flights = [];
         let originalFlights = [];
         let filteredFlights = [];
@@ -843,29 +301,20 @@ if ($useModernVersion) {
             } else {
                 initializeLegacy();
             }
-
-            // Initialize filter listeners
             initFilterListeners();
         });
 
         // Initialize filter event listeners
         function initFilterListeners() {
-            // Stops filter
             document.querySelectorAll('input[name="stops"]').forEach(checkbox => {
                 checkbox.addEventListener('change', applyFilters);
             });
-
-            // Airlines filter (will be populated later)
             document.getElementById('clearAllFilters').addEventListener('click', clearAllFilters);
             document.getElementById('applyPriceFilter').addEventListener('click', applyPriceFilter);
             document.getElementById('sortBy').addEventListener('change', applySort);
-
-            // Departure time filters
             document.querySelectorAll('input[name="departure_time"]').forEach(checkbox => {
                 checkbox.addEventListener('change', applyFilters);
             });
-
-            // Seat class filters
             document.querySelectorAll('input[name="seat_class"]').forEach(checkbox => {
                 checkbox.addEventListener('change', applyFilters);
             });
@@ -873,27 +322,22 @@ if ($useModernVersion) {
 
         /**
          * FIXED: Only remove EXACT duplicate flights (same flight number, same times, same route)
-         * This preserves different flights that happen to share flight numbers
          */
         function removeExactDuplicateFlights(flightsArray) {
             const uniqueFlights = new Map();
             const duplicateGroups = new Map();
 
-            // First pass: identify exact duplicates (same airline, same flight number, same times, same route)
             flightsArray.forEach(flight => {
-                // Create a key that includes ALL identifying information
                 const key = `${flight.airline || ''}|${flight.flight_number || ''}|${flight.departure_airport}|${flight.arrival_airport}|${flight.departure_time}|${flight.arrival_time}|${flight.seat_class || 'ECONOMY'}`;
 
                 if (!uniqueFlights.has(key)) {
                     uniqueFlights.set(key, flight);
                     duplicateGroups.set(key, [flight]);
                 } else {
-                    // This is an exact duplicate - add to group for counting
                     duplicateGroups.get(key).push(flight);
                 }
             });
 
-            // Convert map to array and add duplicate count
             const result = Array.from(uniqueFlights.values()).map(flight => {
                 const key = `${flight.airline || ''}|${flight.flight_number || ''}|${flight.departure_airport}|${flight.arrival_airport}|${flight.departure_time}|${flight.arrival_time}|${flight.seat_class || 'ECONOMY'}`;
                 const group = duplicateGroups.get(key) || [flight];
@@ -923,10 +367,7 @@ if ($useModernVersion) {
                 const searchData = searchDataJson ? JSON.parse(searchDataJson) : null;
 
                 originalFlights = flightData.flights || [];
-
-                // FIXED: Only remove EXACT duplicates
                 originalFlights = removeExactDuplicateFlights(originalFlights);
-
                 flights = [...originalFlights];
                 filteredFlights = [...originalFlights];
 
@@ -958,7 +399,7 @@ if ($useModernVersion) {
             const searchData = sessionStorage.getItem('searchCriteria');
 
             if (!flightsData || !searchData) {
-                showAlert('error', 'No flights found. Please search again.');
+                showAlert('danger', 'No flights found. Please search again.');
                 setTimeout(() => window.location.href = '/', 2000);
                 return;
             }
@@ -966,10 +407,7 @@ if ($useModernVersion) {
             try {
                 let parsedData = JSON.parse(flightsData);
                 originalFlights = Array.isArray(parsedData) ? parsedData : (parsedData.flights || []);
-
-                // FIXED: Only remove EXACT duplicates
                 originalFlights = removeExactDuplicateFlights(originalFlights);
-
                 flights = [...originalFlights];
                 filteredFlights = [...originalFlights];
             } catch (e) {
@@ -992,25 +430,22 @@ if ($useModernVersion) {
                 initializeFilters();
                 displayFlightsModern();
                 document.getElementById('selectionForm').style.display = 'block';
-                document.getElementById('flightsList').style.display = 'block';
+                document.getElementById('flightsList').style.display = 'flex';
                 document.getElementById('flightsContainer').style.display = 'none';
             } else {
                 document.getElementById('flightsList').innerHTML =
-                    '<p style="text-align: center; color: #e74c3c;">No flights found. Please search again.</p>';
+                    '<p class="text-center text-danger">No flights found. Please search again.</p>';
                 document.getElementById('noResults').style.display = 'block';
             }
         }
 
-        // Initialize filter options based on available flights
         function initializeFilters() {
-            // Update filter counts and options
             updateFilterCounts();
             populateAirlinesFilter();
             updatePriceRange();
             updateResultsCount();
         }
 
-        // Update filter counts
         function updateFilterCounts() {
             const nonStopCount = originalFlights.filter(f => f.stops === 0).length;
             const oneStopCount = originalFlights.filter(f => f.stops === 1).length;
@@ -1021,7 +456,6 @@ if ($useModernVersion) {
             document.getElementById('twoPlusStopCount').textContent = `(${twoPlusStopCount})`;
         }
 
-        // Populate airlines filter
         function populateAirlinesFilter() {
             const airlines = {};
             originalFlights.forEach(flight => {
@@ -1033,21 +467,19 @@ if ($useModernVersion) {
 
             Object.keys(airlines).sort().forEach(airline => {
                 const label = document.createElement('label');
-                label.className = 'filter-checkbox';
+                label.className = 'd-flex align-items-center gap-2 small';
                 label.innerHTML = `
-                    <input type="checkbox" name="airline" value="${escapeHtml(airline)}">
+                    <input type="checkbox" name="airline" value="${escapeHtml(airline)}" class="form-check-input">
                     <span>${escapeHtml(airline)}</span>
-                    <span class="filter-count">(${airlines[airline]})</span>
+                    <span class="text-secondary ms-auto">(${airlines[airline]})</span>
                 `;
 
                 const checkbox = label.querySelector('input');
                 checkbox.addEventListener('change', applyFilters);
-
                 container.appendChild(label);
             });
         }
 
-        // Update price range display
         function updatePriceRange() {
             if (originalFlights.length === 0) return;
 
@@ -1059,7 +491,6 @@ if ($useModernVersion) {
             document.getElementById('maxPrice').placeholder = `Max $${Math.ceil(maxPrice)}`;
         }
 
-        // Apply price filter
         function applyPriceFilter() {
             const minPrice = parseFloat(document.getElementById('minPrice').value);
             const maxPrice = parseFloat(document.getElementById('maxPrice').value);
@@ -1070,17 +501,13 @@ if ($useModernVersion) {
             applyFilters();
         }
 
-        // Apply all active filters
         function applyFilters() {
-            // Update active filters
             activeFilters.stops = Array.from(document.querySelectorAll('input[name="stops"]:checked')).map(cb => cb.value);
             activeFilters.airlines = Array.from(document.querySelectorAll('input[name="airline"]:checked')).map(cb => cb.value);
             activeFilters.departureTimes = Array.from(document.querySelectorAll('input[name="departure_time"]:checked')).map(cb => cb.value);
             activeFilters.seatClasses = Array.from(document.querySelectorAll('input[name="seat_class"]:checked')).map(cb => cb.value);
 
-            // Apply filters
             filteredFlights = originalFlights.filter(flight => {
-                // Stops filter
                 if (activeFilters.stops.length > 0) {
                     const flightStops = flight.stops >= 2 ? '2' : flight.stops.toString();
                     if (!activeFilters.stops.includes(flightStops) &&
@@ -1089,17 +516,14 @@ if ($useModernVersion) {
                     }
                 }
 
-                // Airlines filter
                 if (activeFilters.airlines.length > 0 && !activeFilters.airlines.includes(flight.airline)) {
                     return false;
                 }
 
-                // Price filter
                 const price = parseFloat(flight.price);
                 if (activeFilters.minPrice !== null && price < activeFilters.minPrice) return false;
                 if (activeFilters.maxPrice !== null && price > activeFilters.maxPrice) return false;
 
-                // Departure time filter
                 if (activeFilters.departureTimes.length > 0) {
                     const hour = parseInt(flight.departure_time.split(':')[0]);
                     let timeSlot;
@@ -1111,7 +535,6 @@ if ($useModernVersion) {
                     if (!activeFilters.departureTimes.includes(timeSlot)) return false;
                 }
 
-                // Seat class filter
                 if (activeFilters.seatClasses.length > 0) {
                     const seatClass = (flight.seat_class || 'ECONOMY').toUpperCase();
                     if (!activeFilters.seatClasses.includes(seatClass)) return false;
@@ -1120,17 +543,11 @@ if ($useModernVersion) {
                 return true;
             });
 
-            // Apply sorting
             applySort();
-
-            // Update active filters display
             updateActiveFiltersDisplay();
-
-            // Update results
             displayFilteredResults();
         }
 
-        // Apply sorting
         function applySort() {
             const sortBy = document.getElementById('sortBy').value;
 
@@ -1162,7 +579,6 @@ if ($useModernVersion) {
             displayFilteredResults();
         }
 
-        // Parse duration string to minutes
         function parseDuration(duration) {
             if (!duration) return 0;
             const match = duration.match(/PT(?:(\d+)H)?(?:(\d+)M)?/);
@@ -1171,7 +587,6 @@ if ($useModernVersion) {
             return hours * 60 + minutes;
         }
 
-        // Update active filters display
         function updateActiveFiltersDisplay() {
             const container = document.getElementById('activeFilters');
             let filtersHtml = [];
@@ -1208,14 +623,13 @@ if ($useModernVersion) {
 
         function createFilterTag(label, value, filterType) {
             return `
-                <div class="filter-tag">
+                <div class="filter-tag d-inline-flex align-items-center gap-2 px-3 py-1 bg-white border border-primary rounded-pill small text-dark">
                     <span><strong>${label}:</strong> ${value}</span>
-                    <i class="fas fa-times" onclick="removeFilter('${filterType}')"></i>
+                    <i class="fas fa-times text-secondary" style="cursor: pointer;" onclick="removeFilter('${filterType}')"></i>
                 </div>
             `;
         }
 
-        // Remove specific filter
         function removeFilter(filterType) {
             switch (filterType) {
                 case 'stops':
@@ -1244,7 +658,6 @@ if ($useModernVersion) {
             applyFilters();
         }
 
-        // Clear all filters
         function clearAllFilters() {
             document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
             document.getElementById('minPrice').value = '';
@@ -1262,7 +675,6 @@ if ($useModernVersion) {
             applyFilters();
         }
 
-        // Display filtered results
         function displayFilteredResults() {
             const container = document.getElementById('flightsList');
             container.innerHTML = '';
@@ -1275,19 +687,18 @@ if ($useModernVersion) {
             }
 
             document.getElementById('noResults').style.display = 'none';
-            document.getElementById('flightsList').style.display = 'block';
+            document.getElementById('flightsList').style.display = 'flex';
 
-            // Display all filtered flights (no grouping - show all unique flights)
             filteredFlights.forEach((flight, index) => {
                 const isModern = document.getElementById('searchSummary').style.display === 'block';
                 const card = createFlightCard(flight, index, isModern);
 
-                // Add badge for exact duplicates only (same flight, same time, same route)
                 if (flight.hasExactDuplicates) {
                     const badge = document.createElement('div');
-                    badge.className = 'identical-flight-badge';
-                    badge.innerHTML = `<i class="fas fa-copy"></i> ${flight.exactDuplicateCount} identical options`;
+                    badge.className = 'identical-flight-badge position-absolute bg-warning text-white px-3 py-1 rounded-pill small fw-semibold';
+                    badge.innerHTML = `<i class="fas fa-copy me-1"></i> ${flight.exactDuplicateCount} identical options`;
                     card.appendChild(badge);
+                    card.classList.add('position-relative');
                 }
 
                 container.appendChild(card);
@@ -1296,30 +707,29 @@ if ($useModernVersion) {
             updateResultsCount();
         }
 
-        // Display Functions
         function displaySearchCriteria(data) {
             const html = `
                 <div class="criteria-item">
-                    <div class="criteria-label">From</div>
-                    <div class="criteria-value">${escapeHtml(data.origin)}</div>
+                    <div class="small text-secondary fw-semibold text-uppercase">From</div>
+                    <div class="fw-bold fs-6 text-dark">${escapeHtml(data.origin)}</div>
                 </div>
                 <div class="criteria-item">
-                    <div class="criteria-label">To</div>
-                    <div class="criteria-value">${escapeHtml(data.destination)}</div>
+                    <div class="small text-secondary fw-semibold text-uppercase">To</div>
+                    <div class="fw-bold fs-6 text-dark">${escapeHtml(data.destination)}</div>
                 </div>
                 <div class="criteria-item">
-                    <div class="criteria-label">Depart</div>
-                    <div class="criteria-value">${formatDate(data.departure_date)}</div>
+                    <div class="small text-secondary fw-semibold text-uppercase">Depart</div>
+                    <div class="fw-bold fs-6 text-dark">${formatDate(data.departure_date)}</div>
                 </div>
                 ${data.return_date ? `
                     <div class="criteria-item">
-                        <div class="criteria-label">Return</div>
-                        <div class="criteria-value">${formatDate(data.return_date)}</div>
+                        <div class="small text-secondary fw-semibold text-uppercase">Return</div>
+                        <div class="fw-bold fs-6 text-dark">${formatDate(data.return_date)}</div>
                     </div>
                 ` : ''}
                 <div class="criteria-item">
-                    <div class="criteria-label">Passengers</div>
-                    <div class="criteria-value">${data.passengers || data.passenger_count || 1}</div>
+                    <div class="small text-secondary fw-semibold text-uppercase">Passengers</div>
+                    <div class="fw-bold fs-6 text-dark">${data.passengers || data.passenger_count || 1}</div>
                 </div>
             `;
             document.getElementById('searchCriteria').innerHTML = html;
@@ -1328,9 +738,9 @@ if ($useModernVersion) {
         function displaySearchSummary(criteria) {
             const summary = document.getElementById('searchSummary');
             summary.innerHTML = `
-                <strong>${criteria.origin || 'N/A'} → ${criteria.destination || 'N/A'}</strong> - 
+                <strong class="text-dark">${criteria.origin || 'N/A'} → ${criteria.destination || 'N/A'}</strong> - 
                 ${formatDate(criteria.departure_date)} (${criteria.passengers || criteria.passenger_count || 1} passenger${(criteria.passengers || criteria.passenger_count || 1) > 1 ? 's' : ''})
-                ${criteria.return_date ? `• Return: ${formatDate(criteria.return_date)}` : '• One-way'}
+                ${criteria.return_date ? `<span class="ms-2">• Return: ${formatDate(criteria.return_date)}</span>` : '<span class="ms-2">• One-way</span>'}
             `;
             summary.style.display = 'block';
         }
@@ -1357,7 +767,7 @@ if ($useModernVersion) {
 
         function createFlightCard(flight, index, isModern = false) {
             const card = document.createElement('div');
-            card.className = 'flight-card';
+            card.className = 'flight-card border rounded-3 p-3 bg-white';
             card.dataset.index = index;
             card.dataset.flightId = flight.id || `flight-${index}`;
 
@@ -1368,71 +778,73 @@ if ($useModernVersion) {
 
             if (isModern) {
                 card.innerHTML = `
-                    <div class="flight-info">
-                        <div class="flight-route">${escapeHtml(flight.departure_airport)} → ${escapeHtml(flight.arrival_airport)}</div>
-                        <div class="flight-details">
-                            <div class="flight-detail-item">
-                                <span class="detail-label">Depart:</span>
-                                <span>${escapeHtml(flight.departure_time)}</span>
+                    <div class="d-flex justify-content-between align-items-start flex-wrap">
+                        <div class="flex-grow-1">
+                            <div class="fw-bold fs-5 mb-2">${escapeHtml(flight.departure_airport)} → ${escapeHtml(flight.arrival_airport)}</div>
+                            <div class="row g-3 small mb-2">
+                                <div class="col-6 col-md-3">
+                                    <span class="text-secondary fw-semibold">Depart:</span>
+                                    <span class="text-dark">${escapeHtml(flight.departure_time)}</span>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <span class="text-secondary fw-semibold">Arrive:</span>
+                                    <span class="text-dark">${escapeHtml(flight.arrival_time)}</span>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <span class="text-secondary fw-semibold">Duration:</span>
+                                    <span class="text-dark">${duration}</span>
+                                </div>
+                                <div class="col-6 col-md-3">
+                                    <span class="text-secondary fw-semibold">Stops:</span>
+                                    <span class="text-dark">${stopsText}</span>
+                                </div>
                             </div>
-                            <div class="flight-detail-item">
-                                <span class="detail-label">Arrive:</span>
-                                <span>${escapeHtml(flight.arrival_time)}</span>
-                            </div>
-                            <div class="flight-detail-item">
-                                <span class="detail-label">Duration:</span>
-                                <span>${duration}</span>
-                            </div>
-                            <div class="flight-detail-item">
-                                <span class="detail-label">Stops:</span>
-                                <span>${stopsText}</span>
+                            <div class="small text-secondary">
+                                ${escapeHtml(flight.airline)} • ${escapeHtml(flight.seat_class || 'ECONOMY')} • Flight ${escapeHtml(flight.flight_number)}
                             </div>
                         </div>
-                        <div style="font-size: 12px; color: #7f8c8d; margin-top: 8px;">
-                            ${escapeHtml(flight.airline)} • ${escapeHtml(flight.seat_class || 'ECONOMY')} • Flight ${escapeHtml(flight.flight_number)}
+                        <div class="text-end ms-3">
+                            <div class="text-success fs-3 fw-bold">${currency} ${price}</div>
+                            <div class="small text-secondary">${currency}</div>
                         </div>
-                    </div>
-                    <div class="flight-price">
-                        <div class="price">${currency} ${price}</div>
-                        <div class="currency">${currency}</div>
                     </div>
                 `;
             } else {
                 card.innerHTML = `
-                    <div class="flight-header">
-                        <div class="flight-airline">
-                            <div class="airline-code">${escapeHtml(flight.airline)}</div>
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div class="d-flex gap-3">
+                            <div class="fw-bold text-primary fs-5">${escapeHtml(flight.airline)}</div>
                             <div>
-                                <div style="font-weight: 600;">#${escapeHtml(flight.flight_number)}</div>
-                                <div class="flight-meta">${escapeHtml(flight.seat_class || 'ECONOMY')}</div>
+                                <div class="fw-semibold">#${escapeHtml(flight.flight_number)}</div>
+                                <div class="small text-secondary">${escapeHtml(flight.seat_class || 'ECONOMY')}</div>
                             </div>
                         </div>
-                        <div class="flight-price-section">
-                            <div class="flight-price">${currency} ${price}</div>
+                        <div class="text-end">
+                            <div class="text-success fs-3 fw-bold">${currency} ${price}</div>
                         </div>
                     </div>
-                    <div class="flight-route">
-                        <div class="time-section">
-                            <div class="time-large">${escapeHtml(flight.departure_time)}</div>
-                            <div class="airport-code">${escapeHtml(flight.departure_airport)}</div>
+                    <div class="d-flex justify-content-between align-items-center my-3 flex-wrap">
+                        <div class="text-center">
+                            <div class="fs-4 fw-bold text-dark">${escapeHtml(flight.departure_time)}</div>
+                            <div class="small text-secondary">${escapeHtml(flight.departure_airport)}</div>
                         </div>
-                        <div style="text-align: center;">
-                            <div class="journey-icon"><i class="fas fa-arrow-right"></i></div>
-                            <div class="flight-meta" style="margin-top: 5px;">${stopsText}</div>
+                        <div class="text-center px-3">
+                            <div><i class="fas fa-arrow-right text-secondary"></i></div>
+                            <div class="small text-secondary mt-1">${stopsText}</div>
                         </div>
-                        <div class="time-section" style="text-align: right;">
-                            <div class="time-large">${escapeHtml(flight.arrival_time)}</div>
-                            <div class="airport-code">${escapeHtml(flight.arrival_airport)}</div>
+                        <div class="text-center">
+                            <div class="fs-4 fw-bold text-dark">${escapeHtml(flight.arrival_time)}</div>
+                            <div class="small text-secondary">${escapeHtml(flight.arrival_airport)}</div>
                         </div>
                     </div>
-                    <div class="details-row">
-                        <div class="detail-item">
-                            <span class="detail-label">Duration:</span>
-                            <span>${duration}</span>
+                    <div class="d-flex gap-4 small">
+                        <div>
+                            <span class="text-secondary fw-semibold">Duration:</span>
+                            <span class="text-dark">${duration}</span>
                         </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Stops:</span>
-                            <span>${stopsText}</span>
+                        <div>
+                            <span class="text-secondary fw-semibold">Stops:</span>
+                            <span class="text-dark">${stopsText}</span>
                         </div>
                     </div>
                 `;
@@ -1443,7 +855,6 @@ if ($useModernVersion) {
         }
 
         function selectFlight(flight, index, cardElement) {
-            // Deselect previous
             if (selectedFlightId || selectedFlightIndex !== null) {
                 const prevCard = document.querySelector(`[data-flight-id="${selectedFlightId}"]`) ||
                     document.querySelector(`[data-index="${selectedFlightIndex}"]`);
@@ -1452,12 +863,10 @@ if ($useModernVersion) {
                 }
             }
 
-            // Select new flight
             selectedFlightId = flight.id || index;
             selectedFlightIndex = index;
             cardElement.classList.add('selected');
 
-            // Update hidden inputs
             const inputsModern = `
                 <input type="hidden" name="id" value="${escapeHtml(flight.id || '')}">
                 <input type="hidden" name="airline" value="${escapeHtml(flight.airline)}">
@@ -1481,55 +890,36 @@ if ($useModernVersion) {
             document.getElementById('selectedFlightInputs').innerHTML = inputsLegacy;
             document.getElementById('selectedFlightInput').innerHTML = inputsModern;
 
-            // Store selected flight in sessionStorage
             sessionStorage.setItem('selectedFlight', JSON.stringify(flight));
-
-            // Enable continue button
             document.getElementById('continueBtn').disabled = false;
         }
 
-        // Form submission handler
-        document.getElementById('selectionForm').addEventListener('submit', async (e) => {
+        // Replace the existing form submit handler with this:
+        document.getElementById('selectionForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
             if (selectedFlightId === null && selectedFlightIndex === null) {
-                if (useModernImplementation) {
-                    showAlert('error', 'Please select a flight');
-                } else {
-                    alert('Please select a flight');
-                }
+                showAlert('danger', 'Please select a flight');
                 return;
             }
 
-            if (useModernImplementation) {
-                const formData = new FormData(document.getElementById('selectionForm'));
+            // Get the selected flight from the hidden inputs or from sessionStorage
+            const selectedFlight = JSON.parse(sessionStorage.getItem('selectedFlight'));
 
-                try {
-                    const response = await fetch('../php/handlers/select-flight.php', {
-                        method: 'POST',
-                        body: formData
-                    });
+            if (selectedFlight) {
+                // Store in sessionStorage for the next page
+                sessionStorage.setItem('booking_selected_flight', JSON.stringify(selectedFlight));
 
-                    const result = await response.json();
-
-                    if (result.success) {
-                        window.location.href = 'personal-details.php';
-                    } else {
-                        showAlert('error', result.message);
-                    }
-                } catch (error) {
-                    console.error('Error:', error);
-                    showAlert('error', 'An error occurred. Please try again.');
-                }
-            } else {
+                // Direct redirect to personal-details.php
                 window.location.href = 'personal-details.php';
+            } else {
+                showAlert('danger', 'Flight data not found. Please select again.');
             }
         });
 
-        // Utility Functions
         function showError(message) {
             const errorContainer = document.getElementById('errorContainer');
-            errorContainer.innerHTML = `<div class="error-message">${escapeHtml(message)}</div>`;
+            errorContainer.innerHTML = `<div class="alert alert-danger">${escapeHtml(message)}</div>`;
             document.getElementById('loadingContainer').style.display = 'none';
             document.getElementById('contentContainer').style.display = 'block';
         }

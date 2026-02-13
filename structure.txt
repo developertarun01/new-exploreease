@@ -1,0 +1,80 @@
+Act as a PHP Developer. Below is my project structure:
+C:.
+│   .env
+│   .env.example
+│   .htaccess
+│   API_HANDLERS_REFERENCE.md    
+│   BOOKING_SYSTEM_README.md
+│   BUILD_SUMMARY.md
+│   DEPLOYMENT_CHECKLIST.md
+│   diagnostics.php
+│   EMAIL_SETUP_GUIDE.md
+│   index.html
+│   QUICK_REFERENCE.md
+│   QUICK_START.md
+│
+├───assets
+│   ├───css
+│   │       style.css
+│   │
+│   ├───images
+│   │       arc.png
+│   │       cloudflare.webp
+│   │       dest1.jpg
+│   │       dest2.jpg
+│   │       dest3.jpg
+│   │       dest4.jpg
+│   │       dest5.jpg
+│   │       dest6.jpg
+│   │       digicert.webp
+│   │       flight1.jpg
+│   │       flight2.jpg
+│   │       flight3.jpg
+│   │       flight4.jpg
+│   │       girl.jpg
+│   │       IATA.webp
+│   │       travel1.jpg
+│   │       travel2.jpg
+│   │       travel3.jpg
+│   │       worldmap2.png
+│   │
+│   └───js
+│           script.js
+│
+├───data
+│       airports.json
+│
+├───pages
+│       confirmation.php
+│       payment-details.php
+│       personal-details.php
+│       results.php
+│       search.php
+│
+├───php
+│   ├───api
+│   │       AmadeusService.php
+│   │
+│   ├───config
+│   │       amadeus-config.php
+│   │
+│   ├───core
+│   │       BookingSession.php
+│   │       EmailService.php
+│   │       EnvLoader.php
+│   │       Security.php
+│   │       Validator.php
+│   │
+│   └───handlers
+│           confirm-booking.php
+│           get-csrf-token.php
+│           payment-details.php
+│           personal-details.php
+│           search-mock.php
+│           search.php
+│           select-flight.php
+│
+└───PHPMailer
+        Exception.php
+        PHPMailer.php
+        SMTP.php
