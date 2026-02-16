@@ -149,6 +149,12 @@ $csrfToken = Security::generateCSRFToken();
             color: #7f8c8d;
             margin-top: 10px;
         }
+
+        @media (max-width: 768px) {
+            .step-indicator {
+                display: none;
+            }
+        }
     </style>
 </head>
 

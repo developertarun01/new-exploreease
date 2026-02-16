@@ -37,6 +37,7 @@ if ($useModernVersion) {
         .flight-card {
             transition: all 0.3s;
             cursor: pointer;
+            position: relative;
         }
 
         .flight-card:hover {
@@ -60,7 +61,7 @@ if ($useModernVersion) {
 
         .identical-flight-badge {
             top: -10px;
-            right: 20px;
+            right: 10px;
             z-index: 1;
         }
 
@@ -70,19 +71,36 @@ if ($useModernVersion) {
             z-index: 1;
         }
 
+        .flight-continue-btn {
+            position: absolute;
+            bottom: 15px;
+            right: 45px;
+            z-index: 2;
+        }
+
+        #mobileFilters {
+            transition: all 0.3s ease;
+        }
+
         @media (max-width: 768px) {
             .filters-sidebar {
                 position: static;
             }
+
+            .flight-continue-btn,
+            .identical-flight-badge {
+                right: 15px;
+            }
+
         }
     </style>
 </head>
 
 <body class="bg-light">
     <div class="container my-5">
-        <div class="bg-white rounded-3 shadow-sm p-4">
+        <div class="bg-white rounded-3 shadow-sm p-3 p-md-4">
             <!-- Step Indicator (Bootstrap progress steps) -->
-            <div class="d-flex justify-content-between mb-4">
+            <div class="d-none d-md-flex justify-content-between mb-4">
                 <div class="flex-fill text-center p-2 bg-success text-white rounded-2 me-1 fw-bold">1. Search</div>
                 <div class="flex-fill text-center p-2 bg-primary text-white rounded-2 me-1 fw-bold">2. Select Flight</div>
                 <div class="flex-fill text-center p-2 bg-light text-dark rounded-2 me-1">3. Personal Info</div>
@@ -105,119 +123,130 @@ if ($useModernVersion) {
             <!-- Main Content Container -->
             <div id="contentContainer" style="display: none;">
                 <!-- Search Criteria/Summary -->
-                <div id="searchCriteria" class="bg-light p-4 rounded-3 mb-4 d-flex flex-wrap gap-4 align-items-center justify-content-between"></div>
+                <div id="searchCriteria"></div>
                 <div id="searchSummary" class="bg-light p-3 rounded-3 mb-4 small" style="display: none;"></div>
 
                 <!-- Active Filters -->
                 <div id="activeFilters" class="d-flex flex-wrap gap-2 mb-4 p-3 bg-light rounded-3" style="display: none !important;"></div>
 
                 <div class="row g-4">
+                    <!-- Mobile Filter Button -->
+                    <div class="d-lg-none">
+                        <button class="btn btn-primary w-100"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#mobileFilters">
+                            <i class="fas fa-filter me-2"></i> Show Filters
+                        </button>
+                    </div>
+
                     <!-- Filters Sidebar -->
                     <div class="col-lg-3 col-md-4">
-                        <div class="filters-sidebar bg-white border rounded-3 p-4">
-                            <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
-                                <h3 class="h5 mb-0 text-dark">
-                                    <i class="fas fa-filter me-2 text-primary"></i> Filters
-                                </h3>
-                                <button id="clearAllFilters" class="btn btn-link text-primary p-0 text-decoration-none small">Clear all</button>
-                            </div>
+                        <div id="mobileFilters" class="collapse d-lg-block">
+                            <div class="filters-sidebar bg-white border rounded-3 p-3 p-md-4">
+                                <div class="d-flex justify-content-between align-items-center mb-3 pb-2 border-bottom">
+                                    <h3 class="h5 mb-0 text-dark">
+                                        <i class="fas fa-filter me-2 text-primary"></i> Filters
+                                    </h3>
+                                    <button id="clearAllFilters" class="btn btn-link text-primary p-0 text-decoration-none small">Clear all</button>
+                                </div>
 
-                            <!-- Stops Filter -->
-                            <div class="mb-4 pb-2 border-bottom">
-                                <div class="fw-semibold text-dark mb-3">
-                                    <i class="fas fa-plane me-2 text-secondary"></i> Stops
-                                </div>
-                                <div class="d-flex flex-column gap-2" id="stopsFilter">
-                                    <label class="d-flex align-items-center gap-2 small">
-                                        <input type="checkbox" name="stops" value="0" class="form-check-input">
-                                        <span>Non-stop</span>
-                                        <span class="text-secondary ms-auto" id="nonStopCount">0</span>
-                                    </label>
-                                    <label class="d-flex align-items-center gap-2 small">
-                                        <input type="checkbox" name="stops" value="1" class="form-check-input">
-                                        <span>1 Stop</span>
-                                        <span class="text-secondary ms-auto" id="oneStopCount">0</span>
-                                    </label>
-                                    <label class="d-flex align-items-center gap-2 small">
-                                        <input type="checkbox" name="stops" value="2" class="form-check-input">
-                                        <span>2+ Stops</span>
-                                        <span class="text-secondary ms-auto" id="twoPlusStopCount">0</span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <!-- Airlines Filter -->
-                            <div class="mb-4 pb-2 border-bottom">
-                                <div class="fw-semibold text-dark mb-3">
-                                    <i class="fas fa-building me-2 text-secondary"></i> Airlines
-                                </div>
-                                <div class="d-flex flex-column gap-2" id="airlinesFilter">
-                                    <!-- Dynamically populated -->
-                                </div>
-                            </div>
-
-                            <!-- Price Range Filter -->
-                            <div class="mb-4 pb-2 border-bottom">
-                                <div class="fw-semibold text-dark mb-3">
-                                    <i class="fas fa-dollar-sign me-2 text-secondary"></i> Price Range
-                                </div>
-                                <div class="price-range">
-                                    <div id="priceSlider" class="my-2"></div>
-                                    <div class="d-flex gap-2">
-                                        <input type="number" id="minPrice" class="form-control form-control-sm" placeholder="Min" step="10">
-                                        <input type="number" id="maxPrice" class="form-control form-control-sm" placeholder="Max" step="10">
+                                <!-- Stops Filter -->
+                                <div class="mb-4 pb-2 border-bottom">
+                                    <div class="fw-semibold text-dark mb-3">
+                                        <i class="fas fa-plane me-2 text-secondary"></i> Stops
                                     </div>
-                                    <button id="applyPriceFilter" class="btn btn-primary btn-sm w-100 mt-3">Apply Price</button>
+                                    <div class="d-flex flex-column gap-2" id="stopsFilter">
+                                        <label class="d-flex align-items-center gap-2 small">
+                                            <input type="checkbox" name="stops" value="0" class="form-check-input">
+                                            <span>Non-stop</span>
+                                            <span class="text-secondary ms-auto" id="nonStopCount">0</span>
+                                        </label>
+                                        <label class="d-flex align-items-center gap-2 small">
+                                            <input type="checkbox" name="stops" value="1" class="form-check-input">
+                                            <span>1 Stop</span>
+                                            <span class="text-secondary ms-auto" id="oneStopCount">0</span>
+                                        </label>
+                                        <label class="d-flex align-items-center gap-2 small">
+                                            <input type="checkbox" name="stops" value="2" class="form-check-input">
+                                            <span>2+ Stops</span>
+                                            <span class="text-secondary ms-auto" id="twoPlusStopCount">0</span>
+                                        </label>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <!-- Departure Time Filter -->
-                            <div class="mb-4 pb-2 border-bottom">
-                                <div class="fw-semibold text-dark mb-3">
-                                    <i class="fas fa-clock me-2 text-secondary"></i> Departure Time
+                                <!-- Airlines Filter -->
+                                <div class="mb-4 pb-2 border-bottom">
+                                    <div class="fw-semibold text-dark mb-3">
+                                        <i class="fas fa-building me-2 text-secondary"></i> Airlines
+                                    </div>
+                                    <div class="d-flex flex-column gap-2" id="airlinesFilter">
+                                        <!-- Dynamically populated -->
+                                    </div>
                                 </div>
-                                <div class="d-flex flex-column gap-2">
-                                    <label class="d-flex align-items-center gap-2 small">
-                                        <input type="checkbox" name="departure_time" value="morning" class="form-check-input">
-                                        <span>Morning (6AM - 12PM)</span>
-                                    </label>
-                                    <label class="d-flex align-items-center gap-2 small">
-                                        <input type="checkbox" name="departure_time" value="afternoon" class="form-check-input">
-                                        <span>Afternoon (12PM - 6PM)</span>
-                                    </label>
-                                    <label class="d-flex align-items-center gap-2 small">
-                                        <input type="checkbox" name="departure_time" value="evening" class="form-check-input">
-                                        <span>Evening (6PM - 12AM)</span>
-                                    </label>
-                                    <label class="d-flex align-items-center gap-2 small">
-                                        <input type="checkbox" name="departure_time" value="night" class="form-check-input">
-                                        <span>Night (12AM - 6AM)</span>
-                                    </label>
-                                </div>
-                            </div>
 
-                            <!-- Seat Class Filter -->
-                            <div class="mb-4">
-                                <div class="fw-semibold text-dark mb-3">
-                                    <i class="fas fa-chair me-2 text-secondary"></i> Cabin Class
+                                <!-- Price Range Filter -->
+                                <div class="mb-4 pb-2 border-bottom">
+                                    <div class="fw-semibold text-dark mb-3">
+                                        <i class="fas fa-dollar-sign me-2 text-secondary"></i> Price Range
+                                    </div>
+                                    <div class="price-range">
+                                        <div id="priceSlider" class="my-2"></div>
+                                        <div class="d-flex gap-2">
+                                            <input type="number" id="minPrice" class="form-control form-control-sm" placeholder="Min" step="10">
+                                            <input type="number" id="maxPrice" class="form-control form-control-sm" placeholder="Max" step="10">
+                                        </div>
+                                        <button id="applyPriceFilter" class="btn btn-primary btn-sm w-100 mt-3">Apply Price</button>
+                                    </div>
                                 </div>
-                                <div class="d-flex flex-column gap-2">
-                                    <label class="d-flex align-items-center gap-2 small">
-                                        <input type="checkbox" name="seat_class" value="ECONOMY" class="form-check-input">
-                                        <span>Economy</span>
-                                    </label>
-                                    <label class="d-flex align-items-center gap-2 small">
-                                        <input type="checkbox" name="seat_class" value="PREMIUM_ECONOMY" class="form-check-input">
-                                        <span>Premium Economy</span>
-                                    </label>
-                                    <label class="d-flex align-items-center gap-2 small">
-                                        <input type="checkbox" name="seat_class" value="BUSINESS" class="form-check-input">
-                                        <span>Business</span>
-                                    </label>
-                                    <label class="d-flex align-items-center gap-2 small">
-                                        <input type="checkbox" name="seat_class" value="FIRST" class="form-check-input">
-                                        <span>First Class</span>
-                                    </label>
+
+                                <!-- Departure Time Filter -->
+                                <div class="mb-4 pb-2 border-bottom">
+                                    <div class="fw-semibold text-dark mb-3">
+                                        <i class="fas fa-clock me-2 text-secondary"></i> Departure Time
+                                    </div>
+                                    <div class="d-flex flex-column gap-2">
+                                        <label class="d-flex align-items-center gap-2 small">
+                                            <input type="checkbox" name="departure_time" value="morning" class="form-check-input">
+                                            <span>Morning (6AM - 12PM)</span>
+                                        </label>
+                                        <label class="d-flex align-items-center gap-2 small">
+                                            <input type="checkbox" name="departure_time" value="afternoon" class="form-check-input">
+                                            <span>Afternoon (12PM - 6PM)</span>
+                                        </label>
+                                        <label class="d-flex align-items-center gap-2 small">
+                                            <input type="checkbox" name="departure_time" value="evening" class="form-check-input">
+                                            <span>Evening (6PM - 12AM)</span>
+                                        </label>
+                                        <label class="d-flex align-items-center gap-2 small">
+                                            <input type="checkbox" name="departure_time" value="night" class="form-check-input">
+                                            <span>Night (12AM - 6AM)</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Seat Class Filter -->
+                                <div class="mb-4">
+                                    <div class="fw-semibold text-dark mb-3">
+                                        <i class="fas fa-chair me-2 text-secondary"></i> Cabin Class
+                                    </div>
+                                    <div class="d-flex flex-column gap-2">
+                                        <label class="d-flex align-items-center gap-2 small">
+                                            <input type="checkbox" name="seat_class" value="ECONOMY" class="form-check-input">
+                                            <span>Economy</span>
+                                        </label>
+                                        <label class="d-flex align-items-center gap-2 small">
+                                            <input type="checkbox" name="seat_class" value="PREMIUM_ECONOMY" class="form-check-input">
+                                            <span>Premium Economy</span>
+                                        </label>
+                                        <label class="d-flex align-items-center gap-2 small">
+                                            <input type="checkbox" name="seat_class" value="BUSINESS" class="form-check-input">
+                                            <span>Business</span>
+                                        </label>
+                                        <label class="d-flex align-items-center gap-2 small">
+                                            <input type="checkbox" name="seat_class" value="FIRST" class="form-check-input">
+                                            <span>First Class</span>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -244,6 +273,13 @@ if ($useModernVersion) {
                         <div id="flightsList" class="d-flex flex-column gap-3"></div>
                         <div id="flightsContainer" style="display: none;"></div>
 
+                        <!-- Load More Button -->
+                        <div id="loadMoreContainer" class="text-center mt-4" style="display: none;">
+                            <button id="loadMoreBtn" class="btn btn-outline-primary px-4 py-2">
+                                <i class="fas fa-plus-circle me-2"></i>10 More Flights
+                            </button>
+                        </div>
+
                         <!-- No Results -->
                         <div id="noResults" class="text-center py-5" style="display: none;">
                             <div class="text-secondary mb-3">
@@ -263,11 +299,6 @@ if ($useModernVersion) {
                     <?php endif; ?>
                     <div id="selectedFlightInputs"></div>
                     <div id="selectedFlightInput" style="display: none;"></div>
-
-                    <div class="d-flex gap-2 mt-4 pt-3 border-top">
-                        <button type="button" class="btn btn-secondary" onclick="goBack()">New Search</button>
-                        <button type="submit" class="btn btn-success" id="continueBtn" disabled>Continue to Personal Details</button>
-                    </div>
                 </form>
             </div>
         </div>
@@ -277,6 +308,17 @@ if ($useModernVersion) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+        const btn = document.getElementById("filterToggleBtn");
+        const collapse = document.getElementById("mobileFilters");
+
+        collapse.addEventListener("show.bs.collapse", () => {
+            btn.innerHTML = '<i class="fas fa-times me-2"></i> Close Filters';
+        });
+
+        collapse.addEventListener("hide.bs.collapse", () => {
+            btn.innerHTML = '<i class="fas fa-filter me-2"></i> Show Filters';
+        });
+
         // Consolidated JavaScript (unchanged functionality, only styling classes updated)
         let flights = [];
         let originalFlights = [];
@@ -284,6 +326,10 @@ if ($useModernVersion) {
         let selectedFlightId = null;
         let selectedFlightIndex = null;
         let useModernImplementation = <?php echo $useModernVersion ? 'true' : 'false'; ?>;
+
+        // Pagination variables
+        let currentDisplayCount = 0;
+        const FLIGHTS_PER_PAGE = 10;
 
         // Filter state
         let activeFilters = {
@@ -318,6 +364,7 @@ if ($useModernVersion) {
             document.querySelectorAll('input[name="seat_class"]').forEach(checkbox => {
                 checkbox.addEventListener('change', applyFilters);
             });
+            document.getElementById('loadMoreBtn').addEventListener('click', loadMoreFlights);
         }
 
         /**
@@ -676,12 +723,15 @@ if ($useModernVersion) {
         }
 
         function displayFilteredResults() {
+            // Reset pagination when filters change
+            currentDisplayCount = 0;
             const container = document.getElementById('flightsList');
             container.innerHTML = '';
 
             if (filteredFlights.length === 0) {
                 document.getElementById('noResults').style.display = 'block';
                 document.getElementById('flightsList').style.display = 'none';
+                document.getElementById('loadMoreContainer').style.display = 'none';
                 updateResultsCount();
                 return;
             }
@@ -689,9 +739,20 @@ if ($useModernVersion) {
             document.getElementById('noResults').style.display = 'none';
             document.getElementById('flightsList').style.display = 'flex';
 
-            filteredFlights.forEach((flight, index) => {
-                const isModern = document.getElementById('searchSummary').style.display === 'block';
-                const card = createFlightCard(flight, index, isModern);
+            // Show first batch of flights
+            loadMoreFlights();
+            updateResultsCount();
+        }
+
+        function loadMoreFlights() {
+            const container = document.getElementById('flightsList');
+            const isModern = document.getElementById('searchSummary').style.display === 'block';
+
+            const nextBatch = filteredFlights.slice(currentDisplayCount, currentDisplayCount + FLIGHTS_PER_PAGE);
+
+            nextBatch.forEach((flight, batchIndex) => {
+                const absoluteIndex = currentDisplayCount + batchIndex;
+                const card = createFlightCard(flight, absoluteIndex, isModern);
 
                 if (flight.hasExactDuplicates) {
                     const badge = document.createElement('div');
@@ -703,6 +764,15 @@ if ($useModernVersion) {
 
                 container.appendChild(card);
             });
+
+            currentDisplayCount += nextBatch.length;
+
+            // Show/hide load more button
+            if (currentDisplayCount < filteredFlights.length) {
+                document.getElementById('loadMoreContainer').style.display = 'block';
+            } else {
+                document.getElementById('loadMoreContainer').style.display = 'none';
+            }
 
             updateResultsCount();
         }
@@ -756,12 +826,12 @@ if ($useModernVersion) {
         }
 
         function updateResultsCount() {
-            const displayedCount = filteredFlights.length;
+            const displayedCount = Math.min(currentDisplayCount, filteredFlights.length);
             document.getElementById('displayedFlightsCount').textContent = displayedCount;
 
             const totalText = displayedCount === originalFlights.length ?
                 `of ${originalFlights.length} flights` :
-                `of ${originalFlights.length} flights (${originalFlights.length - displayedCount} filtered)`;
+                `of ${originalFlights.length} flights (${originalFlights.length - filteredFlights.length} filtered)`;
             document.getElementById('totalFlightsCount').textContent = totalText;
         }
 
@@ -803,10 +873,15 @@ if ($useModernVersion) {
                                 ${escapeHtml(flight.airline)} • ${escapeHtml(flight.seat_class || 'ECONOMY')} • Flight ${escapeHtml(flight.flight_number)}
                             </div>
                         </div>
-                        <div class="text-end ms-3">
+                        <div class="text-end ms-md-3">
                             <div class="text-success fs-3 fw-bold">${currency} ${price}</div>
-                            <div class="small text-secondary">${currency}</div>
+                            <!-- <div class="small text-secondary">${currency}</div> -->
                         </div>
+                    </div>
+                    <div class="flight-continue-btn">
+                        <button class="btn btn-primary btn-sm continue-btn" onclick="event.stopPropagation(); selectAndContinue(${index})">
+                            <i class="fas fa-arrow-right me-1"></i>Continue
+                        </button>
                     </div>
                 `;
             } else {
@@ -837,7 +912,7 @@ if ($useModernVersion) {
                             <div class="small text-secondary">${escapeHtml(flight.arrival_airport)}</div>
                         </div>
                     </div>
-                    <div class="d-flex gap-4 small">
+                    <div class="d-flex gap-2 p-3 p-md-4 small">
                         <div>
                             <span class="text-secondary fw-semibold">Duration:</span>
                             <span class="text-dark">${duration}</span>
@@ -847,11 +922,30 @@ if ($useModernVersion) {
                             <span class="text-dark">${stopsText}</span>
                         </div>
                     </div>
+                    <div class="flight-continue-btn">
+                        <button class="btn btn-primary btn-sm continue-btn" onclick="event.stopPropagation(); selectAndContinue(${index})">
+                            <i class="fas fa-arrow-right me-1"></i>Continue
+                        </button>
+                    </div>
                 `;
             }
 
             card.addEventListener('click', () => selectFlight(flight, index, card));
             return card;
+        }
+
+        function selectAndContinue(index) {
+            const flight = filteredFlights[index];
+            if (!flight) return;
+
+            // Select the flight first
+            const card = document.querySelector(`[data-index="${index}"]`);
+            selectFlight(flight, index, card);
+
+            // Then submit the form
+            setTimeout(() => {
+                submitFlightSelection();
+            }, 100);
         }
 
         function selectFlight(flight, index, cardElement) {
@@ -891,13 +985,9 @@ if ($useModernVersion) {
             document.getElementById('selectedFlightInput').innerHTML = inputsModern;
 
             sessionStorage.setItem('selectedFlight', JSON.stringify(flight));
-            document.getElementById('continueBtn').disabled = false;
         }
 
-        // Replace the existing form submit handler with this:
-        document.getElementById('selectionForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-
+        function submitFlightSelection() {
             if (selectedFlightId === null && selectedFlightIndex === null) {
                 showAlert('danger', 'Please select a flight');
                 return;
@@ -915,30 +1005,29 @@ if ($useModernVersion) {
             const form = document.getElementById('selectionForm');
             const formData = new FormData(form);
 
-            try {
-                // Send flight selection to server to store in session
-                const response = await fetch('../php/handlers/select-flight.php', {
+            // Send flight selection to server to store in session
+            fetch('../php/handlers/select-flight.php', {
                     method: 'POST',
                     body: formData,
                     credentials: 'include'
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        // Store in sessionStorage for reference
+                        sessionStorage.setItem('booking_selected_flight', JSON.stringify(selectedFlight));
+
+                        // Redirect to personal details page
+                        window.location.href = 'personal-details.php';
+                    } else {
+                        showAlert('danger', result.message || 'Failed to save flight selection. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showAlert('danger', 'An error occurred. Please try again.');
                 });
-
-                const result = await response.json();
-
-                if (result.success) {
-                    // Store in sessionStorage for reference
-                    sessionStorage.setItem('booking_selected_flight', JSON.stringify(selectedFlight));
-
-                    // Redirect to personal details page
-                    window.location.href = 'personal-details.php';
-                } else {
-                    showAlert('danger', result.message || 'Failed to save flight selection. Please try again.');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                showAlert('danger', 'An error occurred. Please try again.');
-            }
-        });
+        }
 
         function showError(message) {
             const errorContainer = document.getElementById('errorContainer');

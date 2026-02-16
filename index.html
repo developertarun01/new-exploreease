@@ -529,15 +529,16 @@
                 <ul class="flex-center">
                     <li><a href="#">Flights</a></li>
                     <li><a href="#">About Us</a></li>
-                    <li><a href="#">My Bookings</a></li>
+                    <li><a href="#">Contact Us</a></li>
                     <a href="tel:8888113446" class="flex-center">
                         <div class="nav-center-left">
                             <i class="fa-solid fa-phone-volume fa-shake"></i>
                         </div>
                         <div class="nav-center-right">
+                            <h2><span>(888) 811-3446</span></h2>
+                            <p class="small">CALL 24/7 FOR OUR BEST DEALS</p>
+                        </div>
                     </a>
-                    <h2><span>(888) 811-3446</span></h2>
-                    <p class="small">CALL 24/7 FOR OUR BEST DEALS</p>
                 </ul>
             </div>
             <div class="nav-end">
@@ -699,7 +700,7 @@
                             </div>
                         </div>
 
-                        <button class="btn flex-1 input-field" type="submit">
+                        <button class="btn flex-1 input-field" type="submit" id="searchBtn">
                             <h2 class="center">Search</h2>
                         </button>
                     </div>
@@ -1187,6 +1188,14 @@
         ========================= */
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
+
+            // Change button text to Loading...
+            const searchBtn = document.getElementById("searchBtn");
+            const btnText = searchBtn.querySelector("h2");
+
+            btnText.textContent = "Loading...";
+            searchBtn.disabled = true;
+
 
             const travelers = document.getElementById("travelerCount").value;
             const cabin = document.getElementById("cabinValue").value;

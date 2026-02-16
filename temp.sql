@@ -1,0 +1,11 @@
+Select ENAME
+from EMPLOYEE
+where DEPT='IT' and SALARY>40000
+
+Select * 
+FROM EMPLOYEE
+where SALARY is NULL --where SALARY=NULL
+
+Update EMPLOYEE --Update Table EMPLOYEE
+SET SALARY = SALARY * 1.10 --SALARY = 110*SALARY
+where DEPT='HR' --where DEPT="HR"

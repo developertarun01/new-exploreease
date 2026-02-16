@@ -87,9 +87,13 @@ $csrfToken = Security::generateCSRFToken();
             gap: 15px;
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             .form-row {
                 grid-template-columns: 1fr;
+            }
+
+            .step-indicator {
+                display: none;
             }
         }
 

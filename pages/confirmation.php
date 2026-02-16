@@ -170,7 +170,7 @@ $bookingSummary = BookingSession::getBookingSummary();
             gap: 15px;
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             .grid-2 {
                 grid-template-columns: 1fr;
             }
@@ -182,6 +182,18 @@ $bookingSummary = BookingSession::getBookingSummary();
             .detail-value {
                 text-align: left;
                 margin-top: 5px;
+            }
+
+            .step-indicator {
+                display: none;
+            }
+
+            .booking-container {
+                padding: 15px;
+            }
+
+            #alertContainer {
+                margin-bottom: 20px;
             }
         }
 
@@ -385,7 +397,7 @@ $bookingSummary = BookingSession::getBookingSummary();
 
             <div class="button-group">
                 <button type="button" class="btn-back" onclick="goBack()">Back</button>
-                <button type="submit" class="btn-confirm" id="confirmBtn">Confirm & Complete Booking</button>
+                <button type="submit" class="btn-confirm" id="confirmBtn">Confirm</button>
             </div>
         </form>
     </div>

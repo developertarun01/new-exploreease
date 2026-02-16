@@ -119,11 +119,24 @@ $csrfToken = Security::generateCSRFToken();
             gap: 15px;
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
 
             .card-inputs,
             .card-inputs-3col {
                 grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .step-indicator {
+                display: none;
+            }
+
+            .no-lable {
+                display: none;
+            }
+
+            .form-group {
+                margin-bottom: 15px;
             }
         }
 
@@ -267,7 +280,7 @@ $csrfToken = Security::generateCSRFToken();
                 </div>
 
                 <div class="form-group">
-                    <label>&nbsp;</label>
+                    <label class="no-lable">&nbsp;</label>
                     <small style="display: block; color: #7f8c8d; padding-top: 10px;">
                         3 or 4 digits on back of card
                     </small>
@@ -280,7 +293,7 @@ $csrfToken = Security::generateCSRFToken();
 
             <div class="button-group">
                 <button type="button" class="btn-back" onclick="goBack()">Back</button>
-                <button type="submit" class="btn-continue">Review & Confirm Booking</button>
+                <button type="submit" class="btn-continue">Proceed</button>
             </div>
         </form>
     </div>
