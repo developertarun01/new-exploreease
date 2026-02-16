@@ -20,8 +20,21 @@ $bookingSummary = BookingSession::getBookingSummary();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirm Booking - Exploreease</title>
+    <title>Payment Details - ExploreEase</title>
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="shortcut icon" href="../assets/images/logo.png" type="image/pngs">
+
+    <!-- Google Font (For Font Family) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome (For Icons)-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         .booking-container {
             max-width: 900px;
@@ -236,6 +249,48 @@ $bookingSummary = BookingSession::getBookingSummary();
 </head>
 
 <body>
+    <nav class="nav flex-center">
+        <div class="flex nav-inner container">
+            <div class="nav-left flex-center">
+                <!-- <a href="/">
+                    <span><i class="fa-solid fa-hand-holding-heart fa-2xl"></i></span>
+                </a> -->
+                <a href="/">
+                    <h2>Explore<span>Ease</span></h2>
+                </a>
+            </div>
+            <div class="nav-center ">
+                <ul class="flex-center">
+                    <li><a href="#">Flights</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <a href="tel:8888113446" class="flex-center">
+                        <div class="nav-center-left">
+                            <i class="fa-solid fa-phone-volume fa-shake"></i>
+                        </div>
+                        <div class="nav-center-right">
+                            <h2><span>(888) 811-3446</span></h2>
+                            <p class="small">CALL 24/7 FOR OUR BEST DEALS</p>
+                        </div>
+                    </a>
+                </ul>
+            </div>
+            <div class="nav-end">
+
+                <div class="hamburger-open flex">
+                    <a href="tel:8888113446">
+                        <p class=""><b>(888) 811-3446</b></p>
+                    </a>
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+                <div class="hamburger-close">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            </div>
+        </div>
+        </div>
+
+    </nav>
     <div class="booking-container">
         <div class="step-indicator">
             <div class="step completed">1. Search</div>
@@ -402,6 +457,145 @@ $bookingSummary = BookingSession::getBookingSummary();
         </form>
     </div>
 
+    <footer class="footer">
+        <div class="footer-inner container">
+            <div class="footer-top">
+                <h1 class="center">Subscribe to our <span>Newsletter</span></h1>
+                <h3 class="mt-10 center">Get latest offers from Exploreease</h3>
+                <form class="footer-form mt-20 grid-4">
+                    <input type="text" name="name" id="name" placeholder="Enter Name" required>
+                    <input type="email" name="email" id="email" placeholder="your-email@example.com" required>
+                    <input type="text" name="mobile" id="mobile" placeholder="Mobile Number" required>
+                    <button class="btn">Subscribe</button>
+                </form>
+                <p class="mt-20 center small">I would like to receive SMS and email from exploreease.online with the
+                    latest
+                    offers and
+                    promotions. I have read and agree to the <a href="#"><span>Terms and conditions</span></a> and <a
+                        href="#"><span>privacy policy</span></a> .</p>
+            </div>
+
+            <div class="footer-center grid-4 mt-40">
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul class="mt-20 flex-col">
+                        <a href="#">
+                            <li>About Us</li>
+                        </a>
+                        <a href="#">
+                            <li>Contact Us</li>
+                        </a>
+                        <a href="#">
+                            <li>Taxes & Fees</li>
+                        </a>
+                        <a href="#">
+                            <li>FAQs</li>
+                        </a>
+                        <a href="#">
+                            <li>Sitemap</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Helpful Links</h3>
+                    <ul class="mt-20 flex-col">
+                        <a href="#">
+                            <li>Security</li>
+                        </a>
+                        <a href="#">
+                            <li>Privacy Policy</li>
+                        </a>
+                        <a href="#">
+                            <li>Baggage Fees</li>
+                        </a>
+                        <a href="#">
+                            <li>Terms & Conditions</li>
+                        </a>
+                        <a href="#">
+                            <li>Cancellation Policy</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Travel Deals</h3>
+                    <ul class="mt-20 flex-col">
+                        <a href="#">
+                            <li>Top Airlines Deals</li>
+                        </a>
+                        <a href="#">
+                            <li>Last Minute Flights</li>
+                        </a>
+                        <a href="#">
+                            <li>One Way Flights</li>
+                        </a>
+                        <a href="#">
+                            <li>Round Trip Flights</li>
+                        </a>
+                        <a href="#">
+                            <li>Cheap International Flights</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Top Destinations</h3>
+                    <ul class="mt-20 flex-col">
+                        <a href="#">
+                            <li>Flights to Miami</li>
+                        </a>
+                        <a href="#">
+                            <li>Flights to Las Vegas</li>
+                        </a>
+                        <a href="#">
+                            <li>Flights to Los Angeles</li>
+                        </a>
+                        <a href="#">
+                            <li>Flights to Orlando</li>
+                        </a>
+                        <a href="#">
+                            <li>Flights to New York</li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom mt-40 flex-col-center-center">
+                <div class="footer-certi grid-4">
+                    <div><img src="../assets/images/arc.png" alt="Arc Image"></div>
+                    <div><img src="../assets/images/IATA.webp" alt="IATA Image"></div>
+                    <div><img src="../assets/images/digicert.webp" alt="Digicert Image"></div>
+                    <div><img src="../assets/images/cloudflare.webp" alt="Cloudflare Image"></div>
+                </div>
+                <p class="small center"><b>DISCLAIMER:</b> exploreease.online is an independent travel portal. Its
+                    parent
+                    company is LBF
+                    AMERICAS LLC. The information shown on this website is for general purposes. All necessary measures
+                    have been taken to ensure that the information displayed on the website is accurate and up to date;
+                    However, under no circumstances we do not offer any type of guarantee or representation, whether
+                    implicit or express, regarding the accuracy, completeness or reliability of the information shown on
+                    this website. If you need to answer any questions, you can write to <a
+                        href="mailto:contact@exploreease.online"><span>contact@exploreease.online</span></a></p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="tel:8888113446">
+        <div class="footer-call-button flex w-full">
+            <div class="footer-call-left">
+                <i class="fa-solid fa-phone-volume fa-shake fa-2xl"></i>
+            </div>
+            <div class="footer-call-right flex-col-center-center">
+                <p class="small">Call & Get Unpublished Flight Deals!</p>
+                <h1>+1-888-811-3446</h1>
+            </div>
+        </div>
+    </a>
+
+    <div class="footer-copyright">
+        <p class="small center">© 2021 - 2026 LBF AMERICAS LLC. All Rights Reserved. Use of this website signifies your
+            agreement to the <a href="#"><span>Terms of Use</span></a></p>
+    </div>
+
+    <script src="../assets/js/script.js"></script>
     <script>
         const confirmForm = document.getElementById('confirmForm');
         const termsCheckbox = document.getElementById('terms');
