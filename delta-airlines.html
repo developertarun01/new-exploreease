@@ -916,28 +916,32 @@
         const container = document.getElementById("sec3Cards");
         container.innerHTML = "";
 
-        flightDeals.forEach(deal => {
-
+        flightDeals.forEach((deal) => {
+            // Create card
             const card = document.createElement("div");
             card.className = "sec3-card flex-center";
             card.style.cursor = "pointer";
 
+            // Card HTML
             card.innerHTML = `
-        <div class="sec3-card-left">
-            <p class="small">
-                ${formatDisplayDate(AUTO_DEPART)} -
-                ${formatDisplayDate(AUTO_RETURN)}
-            </p>
-            <h3>${deal.from} › ${deal.to}</h3>
-        </div>
+    <div class="sec3-card-left">
+      <p class="small">
+        ${formatDisplayDate(AUTO_DEPART)} -
+        ${formatDisplayDate(AUTO_RETURN)}
+      </p>
+      <h3>${deal.from} › ${deal.to}</h3>
+    </div>
 
-        <div class="sec3-card-right">
-            <h3><span>From $${deal.price}</span></h3>
-            <p class="small">RoundTrip</p>
-        </div>
-    `;
+    <div class="sec3-card-right">
+      <h3><span>From $${deal.price}</span></h3>
+      <p class="small">RoundTrip</p>
+    </div>
+  `;
 
+            // Click event
             card.addEventListener("click", async () => {
+                card.style.pointerEvents = "none";
+                card.querySelector(".sec3-card-right span").textContent = "Loading...";
 
                 const formData = new FormData();
 
@@ -948,7 +952,7 @@
                 formData.append("passengers", 1);
                 formData.append("triptype", "roundtrip");
 
-                // CSRF token (important)
+                // CSRF token
                 formData.append(
                     "csrf_token",
                     document.getElementById("csrf_token").value
@@ -957,13 +961,12 @@
                 try {
                     const response = await fetch("php/handlers/search.php", {
                         method: "POST",
-                        body: formData
+                        body: formData,
                     });
 
                     const result = await response.json();
 
                     if (result.success) {
-
                         sessionStorage.setItem(
                             "flightResults",
                             JSON.stringify(result.data)
@@ -976,7 +979,7 @@
                                 destination: deal.destination,
                                 departure_date: AUTO_DEPART,
                                 return_date: AUTO_RETURN,
-                                passengers: 1
+                                passengers: 1,
                             })
                         );
 
@@ -984,13 +987,12 @@
                     } else {
                         alert("No flights found");
                     }
-
-                } catch (err) {
-                    console.error(err);
+                } catch (error) {
+                    console.error(error);
                     alert("Search failed");
                 }
             });
-            
+
             container.appendChild(card);
         });
 
