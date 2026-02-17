@@ -20,6 +20,7 @@ $csrfToken = Security::generateCSRFToken();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flight Search - Exploreease</title>
     <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="shortcut icon" href="../assets/images/logo.png" type="image/pngs">
     <style>
         .booking-container {
             max-width: 800px;

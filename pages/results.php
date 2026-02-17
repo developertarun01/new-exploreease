@@ -127,6 +127,20 @@ if ($useModernVersion) {
             font-weight: 600;
         }
 
+        .form-check-input[type=checkbox] {
+            border-radius: .25em !important;
+            height: 13px !important;
+            width: 13px !important;
+        }
+
+        span {
+            color: #3d3d3d;
+        }
+
+        a span {
+            color: var(--button);
+        }
+
         .nav-inner {
             width: 100% !important;
             margin: 0 auto !important;
@@ -258,7 +272,7 @@ if ($useModernVersion) {
                 <div id="searchSummary" class="bg-light p-3 rounded-3 mb-4 small" style="display: none;"></div>
 
                 <!-- Active Filters -->
-                <div id="activeFilters" class="d-flex flex-wrap gap-2 mb-4 p-3 bg-light rounded-3" style="display: none !important;"></div>
+                <div id="activeFilters" class="flex-wrap gap-2 mb-4 p-3 bg-light rounded-3" style="display: none !important;"></div>
 
                 <div class="row g-4">
                     <!-- Mobile Filter Button -->
@@ -278,7 +292,7 @@ if ($useModernVersion) {
                                     <h3 class="h5 mb-0 text-dark">
                                         <i class="fas fa-filter me-2 text-primary"></i> Filters
                                     </h3>
-                                    <button id="clearAllFilters" class="btn  p-0 text-decoration-none small">Clear all</button>
+                                    <button id="clearAllFilters" class="btn  p-1 px-2 text-decoration-none small">Clear all</button>
                                 </div>
 
                                 <!-- Stops Filter -->
@@ -438,7 +452,7 @@ if ($useModernVersion) {
     <footer class="footer">
         <div class="footer-inner container">
             <div class="footer-top">
-                <h1 class="center">Subscribe to our <span>Newsletter</span></h1>
+                <h1 class="center">Subscribe to our Newsletter</h1>
                 <h3 class="mt-10 center">Get latest offers from Exploreease</h3>
                 <form class="footer-form mt-20 grid-4">
                     <input type="text" name="name" id="name" placeholder="Enter Name" required>
@@ -976,6 +990,7 @@ if ($useModernVersion) {
         }
 
         function clearAllFilters() {
+            document.getElementById('activeFilters').style.display = 'none !important'
             document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
             document.getElementById('minPrice').value = '';
             document.getElementById('maxPrice').value = '';
