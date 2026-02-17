@@ -104,7 +104,7 @@
 
         .traveler-dropdown {
             position: absolute;
-            bottom: 103%;
+            top: 103%;
             left: 0;
             width: 280px;
             background: #fff;
@@ -641,48 +641,7 @@
         <div class="sec3-inner container">
             <p>Home > <span>united airlines</span></p>
             <h1 class="mt-10">United Airlines Flight Reservations & Deals</h1>
-            <div class="sec3-cards mt-20 grid-2">
-                <div class="sec3-card flex-center">
-                    <div class="sec3-card-left">
-                        <p class="small">Apr 22,2026 - Apr 25,2026</p>
-                        <h3>San Francisco Las Vegas</h3>
-                    </div>
-                    <div class="sec3-card-right">
-                        <h3><span>From $106.38</span></h3>
-                        <p class="small">RoundTrip</p>
-                    </div>
-                </div>
-                <div class="sec3-card flex-center">
-                    <div class="sec3-card-left">
-                        <p class="small">Apr 22,2026 - Apr 25,2026</p>
-                        <h3>San Francisco Las Vegas</h3>
-                    </div>
-                    <div class="sec3-card-right">
-                        <h3><span>From $106.38</span></h3>
-                        <p class="small">RoundTrip</p>
-                    </div>
-                </div>
-                <div class="sec3-card flex-center">
-                    <div class="sec3-card-left">
-                        <p class="small">Apr 22,2026 - Apr 25,2026</p>
-                        <h3>San Francisco Las Vegas</h3>
-                    </div>
-                    <div class="sec3-card-right">
-                        <h3><span>From $106.38</span></h3>
-                        <p class="small">RoundTrip</p>
-                    </div>
-                </div>
-                <div class="sec3-card flex-center">
-                    <div class="sec3-card-left">
-                        <p class="small">Apr 22,2026 - Apr 25,2026</p>
-                        <h3>San Francisco Las Vegas</h3>
-                    </div>
-                    <div class="sec3-card-right">
-                        <h3><span>From $106.38</span></h3>
-                        <p class="small">RoundTrip</p>
-                    </div>
-                </div>
-            </div>
+            <div class="sec3-cards mt-20 grid-2" id="sec3Cards"></div>
             <p class="small mt-20">Last refreshed on <span class="yesterday">Monday Feb 16,2026 at 05:00 AM</span>, the
                 fares listed
                 here apply to
@@ -913,6 +872,128 @@
 
     <script src="assets/js/script.js"></script>
     <script>
+        /* ===============================
+   AUTO DATES (TODAY + 5 DAYS)
+================================ */
+        const today = new Date();
+        const returnDate = new Date();
+        returnDate.setDate(today.getDate() + 5);
+
+        const formatISO = d => d.toISOString().split("T")[0];
+
+        const AUTO_DEPART = formatISO(today);
+        const AUTO_RETURN = formatISO(returnDate);
+
+        /* ===============================
+           ROUTES (FROM IMAGE)
+        ================================ */
+        const flightDeals = [
+            { from: "San Francisco", to: "Las Vegas", origin: "SFO", destination: "LAS", price: "106.38" },
+            { from: "San Francisco", to: "Los Angeles", origin: "SFO", destination: "LAX", price: "110.39" },
+            { from: "Newark Liberty", to: "New Orleans", origin: "EWR", destination: "MSY", price: "112.50" },
+            { from: "Washington", to: "Orlando", origin: "IAD", destination: "MCO", price: "115.38" },
+            { from: "Las Vegas", to: "Los Angeles", origin: "LAS", destination: "LAX", price: "115.79" },
+            { from: "Los Angeles", to: "Las Vegas", origin: "LAX", destination: "LAS", price: "116.39" },
+            { from: "Phoenix", to: "Los Angeles", origin: "PHX", destination: "LAX", price: "121.39" },
+            { from: "Denver", to: "Portland", origin: "DEN", destination: "PDX", price: "126.38" }
+        ];
+
+        /* ===============================
+           DATE FORMATTER (DISPLAY)
+        ================================ */
+        function formatDisplayDate(dateStr) {
+            const d = new Date(dateStr);
+            return d.toLocaleDateString("en-US", {
+                month: "short",
+                day: "2-digit",
+                year: "numeric"
+            });
+        }
+
+        /* ===============================
+           RENDER CARDS
+        ================================ */
+        const container = document.getElementById("sec3Cards");
+        container.innerHTML = "";
+
+        flightDeals.forEach(deal => {
+
+            const card = document.createElement("div");
+            card.className = "sec3-card flex-center";
+            card.style.cursor = "pointer";
+
+            card.innerHTML = `
+        <div class="sec3-card-left">
+            <p class="small">
+                ${formatDisplayDate(AUTO_DEPART)} -
+                ${formatDisplayDate(AUTO_RETURN)}
+            </p>
+            <h3>${deal.from} › ${deal.to}</h3>
+        </div>
+
+        <div class="sec3-card-right">
+            <h3><span>From $${deal.price}</span></h3>
+            <p class="small">RoundTrip</p>
+        </div>
+    `;
+
+            card.addEventListener("click", async () => {
+
+                const formData = new FormData();
+
+                formData.append("origin", deal.origin);
+                formData.append("destination", deal.destination);
+                formData.append("departure_date", AUTO_DEPART);
+                formData.append("return_date", AUTO_RETURN);
+                formData.append("passengers", 1);
+                formData.append("triptype", "roundtrip");
+
+                // CSRF token (important)
+                formData.append(
+                    "csrf_token",
+                    document.getElementById("csrf_token").value
+                );
+
+                try {
+                    const response = await fetch("php/handlers/search.php", {
+                        method: "POST",
+                        body: formData
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+
+                        sessionStorage.setItem(
+                            "flightResults",
+                            JSON.stringify(result.data)
+                        );
+
+                        sessionStorage.setItem(
+                            "searchCriteria",
+                            JSON.stringify({
+                                origin: deal.origin,
+                                destination: deal.destination,
+                                departure_date: AUTO_DEPART,
+                                return_date: AUTO_RETURN,
+                                passengers: 1
+                            })
+                        );
+
+                        window.location.href = "pages/results.php";
+                    } else {
+                        alert("No flights found");
+                    }
+
+                } catch (err) {
+                    console.error(err);
+                    alert("Search failed");
+                }
+            });
+            
+            container.appendChild(card);
+        });
+
         const input = document.getElementById("travelerInput");
         const dropdown = document.querySelector(".traveler-dropdown");
 
@@ -1001,7 +1082,6 @@
         ========================= */
         const formatDate = d => d.toISOString().split('T')[0];
 
-        const today = new Date();
         const defaultReturn = new Date();
         defaultReturn.setDate(today.getDate() + 5);
 
