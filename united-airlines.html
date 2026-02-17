@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - ExploreEase</title>
+    <title>United Airlines - ExploreEase</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="shortcut icon" href="./assets/images/logo.png" type="image/pngs">
 
@@ -28,13 +28,10 @@
                     rgba(0, 0, 0, 1) 0%,
                     rgba(0, 0, 0, 0.2) 40%,
                     rgba(0, 0, 0, 0) 70%),
-                url(./assets/images/worldmap2.png) center/cover no-repeat;
+                url(./assets/images/worldmap2.png) top/cover no-repeat;
             color: white;
         }
 
-        .sec1-top-left h1 {
-            font-size: 65px;
-        }
 
         .sec1-text {
             background-color: var(--button);
@@ -107,7 +104,7 @@
 
         .traveler-dropdown {
             position: absolute;
-            bottom: 103%;
+            top: 103%;
             left: 0;
             width: 280px;
             background: #fff;
@@ -238,87 +235,6 @@
             pointer-events: auto;
         }
 
-
-        /* Section 3 */
-        .sec3 {
-            background-color: var(--touch);
-            color: white;
-        }
-
-        .sec3-btn {
-            padding: 3px 10px;
-            border-radius: 30px;
-            font-size: 12px;
-            font-weight: 400;
-        }
-
-        .sec3-card {
-            position: relative;
-            height: 300px;
-            border-radius: 20px;
-            margin-bottom: 60px;
-        }
-
-        .sec3-card-bottom {
-            position: absolute;
-            bottom: -80px;
-            margin: 20px;
-            border-radius: 20px;
-            background-color: white;
-            color: var(--dark);
-            padding: 20px;
-        }
-
-        .sec3-card-1 {
-            background: url(./assets/images/flight1.jpg) center/cover no-repeat;
-        }
-
-        .sec3-card-2 {
-            background: url(./assets/images/flight2.jpg) center/cover no-repeat;
-        }
-
-        .sec3-card-3 {
-            background: url(./assets/images/flight3.jpg) center/cover no-repeat;
-        }
-
-        .sec3-card-4 {
-            background: url(./assets/images/flight4.jpg) center/cover no-repeat;
-        }
-
-        .sec3-card {
-            position: relative;
-            height: 400px;
-        }
-
-        /* Section 4 */
-        .sec4-main {
-            gap: 70px;
-        }
-
-        .sec4-main-right {
-            background: url(./assets/images/girl.jpg) center/cover no-repeat;
-            border-radius: 20px;
-            box-shadow: 20px 20px 0 var(--primary);
-        }
-
-        /* Section 5 */
-        .sec5-top {
-            background-color: var(--touch);
-            color: white;
-            padding: 30px;
-            border-radius: 20px;
-        }
-
-        .sec5-card span {
-            background-color: white;
-            padding: 20px 10px;
-            border-radius: 50%;
-        }
-
-        .sec5-card span i {
-            color: var(--touch);
-        }
-
         .suggestions {
             position: absolute;
             top: 100%;
@@ -351,6 +267,31 @@
             background: #f2f2f2;
         }
 
+        /* Section 3 */
+        .sec3-inner {
+            padding-top: 0;
+        }
+
+        .sec3-cards {
+            gap: 20px;
+        }
+
+        .sec3-card {
+            justify-content: space-between;
+            border: 2px solid var(--touch);
+            border-radius: 10px;
+            padding: 10px 20px;
+        }
+
+        .sec3-about {
+            padding: 20px;
+            background-color: var(--light);
+            border-radius: 20px;
+        }
+
+        .sec3-card-right {
+            text-align: end;
+        }
 
         @media (max-width: 900px) {
 
@@ -398,10 +339,6 @@
                 font-size: 13px;
             }
 
-            .sec1-top-left h1 {
-                font-size: 22px;
-                margin-top: 10px;
-            }
 
             .sec1-form-top {
                 flex-direction: row;
@@ -420,9 +357,6 @@
                 width: 50%;
             }
 
-            .sec1-top-right {
-                display: none;
-            }
 
             /* Section 2  */
             .sec2-card {
@@ -460,55 +394,17 @@
                 gap: 10px;
             }
 
-            /* Section 3 */
-            .sec3-cards {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
+            /* Section 3  */
             .sec3-card {
-                height: 200px;
-            }
-
-            .sec3-card-bottom {
-                margin: 10px;
+                flex-direction: row;
                 padding: 10px;
-                background: rgba(0, 0, 0, 0.4);
-                backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
-                color: white;
+                gap: 0;
             }
 
-            .sec3-card-bottom h3 {
-                font-size: 13px;
+            .sec3-about {
+                padding: 20px 10px;
             }
 
-            /* Section 4 */
-            .sec4-main {
-                gap: 20px;
-            }
-
-            .sec4-main-right {
-                min-height: 250px;
-                width: 100%;
-                box-shadow: 0px 10px 0 var(--primary);
-            }
-
-
-
-            /* Section 5 */
-
-            .sec5-top {
-                padding: 30px 20px;
-            }
-
-            .sec5-top h2 {
-                font-size: 16px;
-            }
-
-            .sec5-cards {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 40px;
-            }
         }
     </style>
 </head>
@@ -560,25 +456,8 @@
 
     <section class="sec1">
         <div class="sec1-inner container">
-            <div class="sec1-top flex">
-                <div class="sec1-top-left flex-1">
-                    <div class="sec1-text">
-                        <i>Travel Plans In Your Mind</i>
-                    </div>
-                    <h1 class="mt-20">Explore The World Together</h1>
-
-                </div>
-                <div class="sec1-top-right grid-3 flex-1">
-                    <div class="sec1-card">
-                        <img src="./assets/images/travel1.jpg" alt="Travel Image">
-                    </div>
-                    <div class="sec1-card">
-                        <img src="./assets/images/travel2.jpg" alt="Travel Image">
-                    </div>
-                    <div class="sec1-card">
-                        <img src="./assets/images/travel3.jpg" alt="Travel Image">
-                    </div>
-                </div>
+            <div class="sec1-top">
+                <h1 class="center">Search United Airlines Flights & Save Big!</h1>
             </div>
             <div class="sec1-center">
                 <form action="php/handlers/search.php" method="post" class="sec1-form flex-col-center-center mt-30"
@@ -755,137 +634,102 @@
                     </div>
                 </div>
             </div>
-            <div class="sec2-center mt-40">
-                <h1 class="center">Top Flight <span>Destination</span></h1>
-                <div class="flex dests-flex mt-20 w-100">
-                    <div class="flex flex-2 dest dest-1">
-                        <h3><b>Flights to London</b></h3>
-                    </div>
-                    <div class="flex flex-1 dest dest-2">
-                        <h3><b>Flights to Rome</b></h3>
-                    </div>
-                </div>
-
-                <div class="grid-4 dests-grid mt-20 w-100">
-                    <div class="flex dest dest-3">
-                        <h3><b>Flights to Dubai</b></h3>
-                    </div>
-                    <div class="flex dest dest-4">
-                        <h3><b>Flights to Chicago</b></h3>
-                    </div>
-                    <div class="flex dest dest-5">
-                        <h3><b>Flights to Philadelphia</b></h3>
-                    </div>
-                    <div class="flex dest dest-6">
-                        <h3><b>Flights to Miami</b></h3>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
     <section class="sec3">
         <div class="sec3-inner container">
-            <h1 class="center">Travel <span>Deals</span></h1>
-            <div class="sec3-cards grid-4 mt-20">
-                <div class="sec3-card sec3-card-1">
-                    <div class="sec3-card-bottom">
-                        <h3>Last Minute Deals</h3>
-                        <p class="small mt-10">Planning a sudden escape or an urgent work trip, book affordable
-                            last-minute flights designed for flexible travelers.</p>
-                        <button class="btn sec3-btn mt-20">Know More</button>
-                    </div>
-                </div>
-                <div class="sec3-card sec3-card-2">
-                    <div class="sec3-card-bottom">
-                        <h3>Top Airline Deals</h3>
-                        <p class="small mt-10">Browse a wide range of airfare offers carefully selected by our
-                            specialists from leading airlines around the world.</p>
-                        <button class="btn sec3-btn mt-20">Know More</button>
-                    </div>
-                </div>
-                <div class="sec3-card sec3-card-3">
-                    <div class="sec3-card-bottom">
-                        <h3>One Way Flight</h3>
-                        <p class="small mt-10">Discover specially chosen one-way flight options to popular global
-                            destinations, perfect for every type of journey.</p>
-                        <button class="btn sec3-btn mt-20">Know More</button>
-                    </div>
-                </div>
-                <div class="sec3-card sec3-card-4">
-                    <div class="sec3-card-bottom">
-                        <h3>Round Trip Flights</h3>
-                        <p class="small mt-10">Enjoy your next holiday with budget-friendly round-trip flight deals,
-                            covering both domestic and international routes.</p>
-                        <button class="btn sec3-btn mt-20">Know More</button>
-                    </div>
-                </div>
+            <p>Home > <span>united airlines</span></p>
+            <h1 class="mt-10">United Airlines Flight Reservations & Deals</h1>
+            <div class="sec3-cards mt-20 grid-2" id="sec3Cards"></div>
+            <p class="small mt-20">Last refreshed on <span class="yesterday">Monday Feb 16,2026 at 05:00 AM</span>, the
+                fares listed
+                here apply to
+                flight tickets and already include fuel charges, service costs, and applicable taxes. Based on previous
+                pricing trends, these
+                fares may change anytime without advance notice and cannot be confirmed until booking is completed.
+                Please
+                review our terms and conditions carefully before making a reservation.</p>
+            <p class="mt-10"><span><b>*All fares are displayed in USD. These prices are derived from historical data and
+                        may
+                        vary
+                        and are not guaranteed at the time of booking.</b></span></p>
+
+            <div class="sec3-about mt-30">
+                <h2>About United Airlines</h2>
+                <p class="small mt-10">United Airlines, established in 1926, is one of the leading airlines in the
+                    United States,
+                    with headquarters located in Chicago, Illinois. The airline serves nearly 350 destinations across
+                    domestic and international
+                    routes. It operates through eight major hubs, with Chicago O’Hare being the largest. Exploreease
+                    allows
+                    travelers to make United Airlines flight reservations conveniently online. You can easily search and
+                    book affordable
+                    United flight tickets through our platform. We also feature selected United Airlines flight deals on
+                    specific routes,
+                    helping travelers reduce overall travel expenses. The airline is a founding member of Star Alliance
+                    and maintains
+                    codeshare partnerships with over 30 global airlines, enabling passengers to access flights to major
+                    destinations worldwide.</p>
+
+                <h3 class="mt-20">Services and Amenities</h3>
+                <p class="mt-10"><b>United Airlines Check-in Methods</b></p>
+                <p class="mt-10 small">Passengers may complete check-in for United Airlines flights either at the
+                    airport counter
+                    or through online options. In most cases, online check-in is preferred because it offers greater
+                    convenience
+                    and saves time. However, certain situations require passengers to check in directly at the airport.
+                    For any
+                    check-in or boarding pass assistance, travelers may contact Exploreease customer support.
+                    <br>1. Airport Check-in: Travelers must arrive at the airport to complete check-in procedures. For
+                    domestic
+                    flights, check-in should be finalized at least 45 minutes before departure, while international
+                    travelers
+                    are advised to complete the process at least 60 minutes prior. These timings are general guidelines,
+                    and
+                    passengers should verify exact deadlines before travel.
+                    <br>2. Online Check-in: United Airlines online check-in opens 24 hours before departure and remains
+                    available
+                    until 1 hour before scheduled takeoff. Passengers can check in using the airline’s official website
+                    or
+                    mobile application.
+                </p>
+                <p class="mt-10"><b>United Airlines Frequent Flyer Program</b> </p>
+                <p class="mt-10 small">MileagePlus is the airline’s loyalty rewards program designed around earning and
+                    redeeming
+                    mileage points. Members can accumulate miles through flights with United and partner airlines, hotel
+                    stays,
+                    vacation bookings, car rentals, credit card usage, shopping, and financial partners connected with
+                    the airline.
+                    <br>These miles may later be redeemed for award travel or cabin upgrades.
+                    <br>The program offers four membership tiers: Silver, Gold, Platinum, and 1K.
+                </p>
+                <h3 class="mt-20">Baggage Allowance</h3>
+                <p class="mt-10"><b>United Airlines Baggage Policy</b></p>
+                <p class="small mt-10">United Airlines generally does not include complimentary checked baggage. Fees
+                    vary based
+                    on the number of bags, fare type, frequent flyer level, cabin class, and route.
+                    <br>1. Carry-On Baggage: Passengers are permitted one carry-on bag and one personal item at no
+                    additional
+                    cost. The maximum carry-on dimensions allowed are 9 inches (22 cm) x 14 inches (35 cm) x 22 inches
+                    (56 cm).
+                    <br>Personal items must not exceed 9 inches (22 cm) x 10 inches (25 cm) x 17 inches (43 cm).
+                    <br>2. Checked Baggage: Complimentary checked baggage is typically not included. Travelers may carry
+                    up to
+                    two checked bags with maximum linear dimensions of 62 inches and weight up to 51 lbs each. Weight
+                    limits
+                    may vary depending on travel class and membership status. United Economy allows up to 50 lbs, while
+                    premium
+                    cabins may allow up to 70 lbs per bag.
+                    <br>Premier Silver, Gold, Platinum, and 1K members may also carry bags weighing up to 70 lbs each.
+                    <br>Special baggage such as sports gear or musical instruments may be transported according to
+                    airline rules.
+                    <br>Passengers can add checked baggage while booking United flight tickets through our platform.
+                </p>
             </div>
         </div>
     </section>
 
-    <section class="sec4">
-        <div class="sec4-inner container">
-            <h1 class="center">About <span>Us</span></h1>
-            <div class="sec4-main flex mt-20">
-                <div class="sec4-main-left flex-2">
-                    <p>While virtual tours are becoming increasingly popular today, nothing truly compares to
-                        exploring a destination in person, experiencing its atmosphere, understanding its traditions,
-                        connecting with locals, tasting authentic food, and creating countless unforgettable memories,
-                        right?
-                        Traveling often reveals opportunities we never imagined before. It brings a fresh outlook
-                        and
-                        allows us to view life from a completely new perspective. Visiting different countries and
-                        interacting
-                        with people from diverse cultures helps broaden our understanding of the world.</p>
-                    <p class=" mt-30">Travel is not limited to visiting famous landmarks a destination is known
-                        for; it goes much deeper than that. However, travel usually comes with expenses. With
-                        Exploreease, you can organize your complete journey without stretching your budget. We provide
-                        attractive airfare pricing because we understand the value of every rupee you spend. Our skilled
-                        team, backed by years of industry knowledge and expertise, searches for cost-effective flight
-                        options from major airlines that perfectly match your travel plans. With us, you don’t just
-                        save money, you also receive reliable services and continuous support throughout your journey.
-                    </p>
-                    <p class=" mt-30">Our website’s simple and intuitive design ensures that booking your trip feels
-                        smooth and hassle-free. You can rely on us to help you discover amazing travel offers that are
-                        rarely found elsewhere. No need to simply trust our claims; connect with our round-the-clock
-                        customer support team to grab the most affordable flight ticket deals available.</p>
-                </div>
-                <div class="sec4-main-right flex-1">
-
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <section class="sec5">
-        <div class="sec-inner container">
-            <div class="sec5-top flex-col-center-center">
-                <h2>Sign Up For Our Newsletter & Get</h2>
-                <div class="sec5-cards w-full grid-4 mt-40">
-                    <div class="sec5-card center">
-                        <span><i class="fa-solid fa-hands-holding-circle fa-2xl"></i></span>
-                        <p class="mt-30">Members only Fares</p>
-                    </div>
-                    <div class="sec5-card center">
-                        <span><i class="fa-solid fa-suitcase-rolling fa-2xl"></i></span>
-                        <p class="mt-30">Handpicked Travel Deals</p>
-                    </div>
-                    <div class="sec5-card center">
-                        <span><i class="fa-solid fa-percent fa-2xl"></i></span>
-                        <p class="mt-30">Latest Sales & Discounts</p>
-                    </div>
-                    <div class="sec5-card center">
-                        <span><i class="fa-solid fa-ticket fa-2xl"></i></span>
-                        <p class="mt-30">Exclusive Promo Codes</p>
-                    </div>
-                </div>
-                <a href="#"><button class="btn mt-20">Subscribe Now</button></a>
-            </div>
-
-        </div>
-    </section>
 
     <footer class="footer">
         <div class="footer-inner container">
@@ -1027,56 +871,223 @@
     </div>
 
     <script src="assets/js/script.js"></script>
-    <script>// Add this at the beginning
+    <script>
+        /* ===============================
+        IMMEDIATE RESET FUNCTION
+        ================================ */
         (function () {
-            // Reset button state immediately
-            const searchBtn = document.getElementById("searchBtn");
-            if (searchBtn) {
-                const btnText = searchBtn.querySelector("h2");
-                if (btnText) {
-                    btnText.textContent = "Search";
+            // Reset any loading states
+            document.querySelectorAll('.sec3-card .sec3-card-right span').forEach(span => {
+                if (span.textContent === 'Loading...') {
+                    const card = span.closest('.sec3-card');
+                    if (card) card.style.pointerEvents = 'auto';
+                    // We'll restore original price later when re-rendering
                 }
-                searchBtn.disabled = false;
-            }
+            });
         })();
 
-        // Handle page load including back/forward cache
+        /* ===============================
+        AUTO DATES (TODAY + 5 DAYS)
+        ================================ */
+        const today = new Date();
+        const returnDate = new Date();
+        returnDate.setDate(today.getDate() + 5);
+
+        const formatISO = d => d.toISOString().split("T")[0];
+
+        const AUTO_DEPART = formatISO(today);
+        const AUTO_RETURN = formatISO(returnDate);
+
+        /* ===============================
+        ROUTES (FROM IMAGE)
+        ================================ */
+        const flightDeals = [
+            { from: "San Francisco", to: "Las Vegas", origin: "SFO", destination: "LAS", price: "106.38" },
+            { from: "San Francisco", to: "Los Angeles", origin: "SFO", destination: "LAX", price: "110.39" },
+            { from: "Newark Liberty", to: "New Orleans", origin: "EWR", destination: "MSY", price: "112.50" },
+            { from: "Washington", to: "Orlando", origin: "IAD", destination: "MCO", price: "115.38" },
+            { from: "Las Vegas", to: "Los Angeles", origin: "LAS", destination: "LAX", price: "115.79" },
+            { from: "Los Angeles", to: "Las Vegas", origin: "LAX", destination: "LAS", price: "116.39" },
+            { from: "Phoenix", to: "Los Angeles", origin: "PHX", destination: "LAX", price: "121.39" },
+            { from: "Denver", to: "Portland", origin: "DEN", destination: "PDX", price: "126.38" }
+        ];
+
+        /* ===============================
+        DATE FORMATTER (DISPLAY)
+        ================================ */
+        function formatDisplayDate(dateStr) {
+            const d = new Date(dateStr);
+            return d.toLocaleDateString("en-US", {
+                month: "short",
+                day: "2-digit",
+                year: "numeric"
+            });
+        }
+
+        /* ===============================
+        CSRF TOKEN FETCH FUNCTION
+        ================================ */
+        async function fetchCsrfToken() {
+            try {
+                const response = await fetch('php/handlers/get-csrf-token.php?' + new Date().getTime());
+                const data = await response.json();
+                if (data.success && data.csrf_token) {
+                    const csrfInput = document.getElementById('csrf_token');
+                    if (csrfInput) {
+                        csrfInput.value = data.csrf_token;
+                    }
+                    return data.csrf_token;
+                }
+            } catch (err) {
+                console.log('CSRF token fetch note:', err.message);
+            }
+            return null;
+        }
+
+        /* ===============================
+        RENDER CARDS FUNCTION
+        ================================ */
+        function renderFlightCards() {
+            const container = document.getElementById("sec3Cards");
+            if (!container) return;
+
+            container.innerHTML = "";
+
+            flightDeals.forEach((deal) => {
+                // Create card
+                const card = document.createElement("div");
+                card.className = "sec3-card flex-center";
+                card.style.cursor = "pointer";
+
+                // Card HTML
+                card.innerHTML = `
+                <div class="sec3-card-left">
+                    <p class="small">
+                        ${formatDisplayDate(AUTO_DEPART)} -
+                        ${formatDisplayDate(AUTO_RETURN)}
+                    </p>
+                    <h3>${deal.from} › ${deal.to}</h3>
+                </div>
+                <div class="sec3-card-right">
+                    <h3><span data-original-price="${deal.price}">From $${deal.price}</span></h3>
+                    <p class="small">RoundTrip</p>
+                </div>
+            `;
+
+                // Click event
+                card.addEventListener("click", async () => {
+                    // Prevent double clicks
+                    if (card.style.pointerEvents === "none") return;
+
+                    const priceSpan = card.querySelector(".sec3-card-right span");
+                    const originalPrice = priceSpan.dataset.originalPrice;
+
+                    card.style.pointerEvents = "none";
+                    priceSpan.textContent = "Loading...";
+
+                    // Get fresh CSRF token
+                    const csrfToken = await fetchCsrfToken();
+
+                    if (!csrfToken) {
+                        alert("Security token error. Please refresh the page.");
+                        card.style.pointerEvents = "auto";
+                        priceSpan.textContent = `From $${originalPrice}`;
+                        return;
+                    }
+
+                    const formData = new FormData();
+                    formData.append("origin", deal.origin);
+                    formData.append("destination", deal.destination);
+                    formData.append("departure_date", AUTO_DEPART);
+                    formData.append("return_date", AUTO_RETURN);
+                    formData.append("passengers", 1);
+                    formData.append("triptype", "roundtrip");
+                    formData.append("csrf_token", csrfToken);
+
+                    try {
+                        const response = await fetch("php/handlers/search.php", {
+                            method: "POST",
+                            body: formData,
+                        });
+
+                        const result = await response.json();
+
+                        if (result.success) {
+                            sessionStorage.setItem(
+                                "flightResults",
+                                JSON.stringify(result.data)
+                            );
+
+                            sessionStorage.setItem(
+                                "searchCriteria",
+                                JSON.stringify({
+                                    origin: deal.origin,
+                                    destination: deal.destination,
+                                    departure_date: AUTO_DEPART,
+                                    return_date: AUTO_RETURN,
+                                    passengers: 1,
+                                })
+                            );
+
+                            window.location.href = "pages/results.php";
+                        } else {
+                            alert("No flights found");
+                            // Reset card on error
+                            card.style.pointerEvents = "auto";
+                            priceSpan.textContent = `From $${originalPrice}`;
+                        }
+                    } catch (error) {
+                        console.error(error);
+                        alert("Search failed");
+                        // Reset card on error
+                        card.style.pointerEvents = "auto";
+                        priceSpan.textContent = `From $${originalPrice}`;
+                    }
+                });
+
+                container.appendChild(card);
+            });
+        }
+
+        /* ===============================
+        PAGE LOAD/LIFECYCLE HANDLERS
+        ================================ */
         document.addEventListener('DOMContentLoaded', function () {
+            renderFlightCards();
             initializeForm();
-            // Fetch new CSRF token on page load
             fetchCsrfToken();
         });
 
-        // Handle pageshow event (critical for back/forward navigation)
         window.addEventListener('pageshow', function (event) {
-            // Always reset form when page is shown (including from bfcache)
-            initializeForm();
-
-            // If the page was loaded from cache, force a full reset and get new CSRF token
             if (event.persisted) {
+                // Re-render cards when coming from cache
+                renderFlightCards();
                 resetFormState();
-                fetchCsrfToken(); // Get fresh CSRF token when returning from cache
-            }
-        });
-
-        // Handle page visibility change (when user returns to tab)
-        document.addEventListener('visibilitychange', function () {
-            if (!document.hidden) {
-                // Page is now visible - reset button state
-                const searchBtn = document.getElementById("searchBtn");
-                if (searchBtn) {
-                    const btnText = searchBtn.querySelector("h2");
-                    if (btnText) {
-                        btnText.textContent = "Search";
-                    }
-                    searchBtn.disabled = false;
-                }
-                // Get fresh CSRF token when tab becomes visible
                 fetchCsrfToken();
             }
         });
 
-        // Global counts object
+        document.addEventListener('visibilitychange', function () {
+            if (!document.hidden) {
+                // Reset button states
+                const searchBtn = document.getElementById("searchBtn");
+                if (searchBtn) {
+                    const btnText = searchBtn.querySelector("h2");
+                    if (btnText) btnText.textContent = "Search";
+                    searchBtn.disabled = false;
+                }
+                // Re-render cards to ensure no "Loading..." states
+                renderFlightCards();
+                fetchCsrfToken();
+            }
+        });
+
+        /* ===============================
+        EXISTING FORM CODE (Keep all your existing code below)
+        ================================ */
+        const input = document.getElementById("travelerInput");
+        const dropdown = document.querySelector(".traveler-dropdown");
+
         let counts = {
             adult: 1,
             child: 0,
@@ -1084,166 +1095,40 @@
             seat: 0
         };
 
-        // Helper function to format date
-        function formatDate(d) {
-            return d.toISOString().split('T')[0];
-        }
-
-        // Function to fetch CSRF token
-        async function fetchCsrfToken() {
-            try {
-                const response = await fetch('php/handlers/get-csrf-token.php?' + new Date().getTime()); // Add timestamp to prevent caching
-                const data = await response.json();
-                if (data.success && data.csrf_token) {
-                    const csrfInput = document.getElementById('csrf_token');
-                    if (csrfInput) {
-                        csrfInput.value = data.csrf_token;
-                        console.log('CSRF token updated'); // For debugging
-                    }
-                }
-            } catch (err) {
-                console.log('CSRF token fetch note:', err.message);
-            }
-        }
-
-        function initializeForm() {
-            // Reset button state
-            const searchBtn = document.getElementById("searchBtn");
-            if (searchBtn) {
-                const btnText = searchBtn.querySelector("h2");
-                if (btnText) {
-                    btnText.textContent = "Search";
-                }
-                searchBtn.disabled = false;
-            }
-
-            // Reset form state
-            resetFormState();
-        }
-
-        function resetFormState() {
-            // Reset traveler counts to default
-            counts.adult = 1;
-            counts.child = 0;
-            counts.lap = 0;
-            counts.seat = 0;
-
-            // Update UI counters
-            updateUI();
-
-            // Reset traveler input field
-            const travelerInput = document.getElementById('travelerInput');
-            const travelerCount = document.getElementById('travelerCount');
-            const cabinValue = document.getElementById('cabinValue');
-            const cabinClass = document.getElementById('cabinClass');
-
-            // Reset to default values
-            if (cabinClass) cabinClass.value = 'Economy';
-            if (travelerInput) travelerInput.value = '1 Traveler(s), Economy';
-            if (travelerCount) travelerCount.value = '1';
-            if (cabinValue) cabinValue.value = 'Economy';
-
-            // Reset date fields
-            const today = new Date();
-            const defaultReturn = new Date();
-            defaultReturn.setDate(today.getDate() + 5);
-
-            const departInput = document.getElementById('departure_date');
-            const returnInput = document.getElementById('return_date');
-
-            if (departInput) {
-                departInput.value = formatDate(today);
-                departInput.min = formatDate(today);
-            }
-
-            if (returnInput) {
-                returnInput.value = formatDate(defaultReturn);
-                returnInput.min = formatDate(today);
-            }
-
-            // Reset radio button to round trip
-            const roundTrip = document.getElementById('roundtrip');
-            const oneWay = document.getElementById('oneway');
-            if (roundTrip) {
-                roundTrip.checked = true;
-                if (oneWay) oneWay.checked = false;
-                toggleReturn();
-            }
-
-            // Clear airport input fields
-            const origin = document.getElementById('origin');
-            const destination = document.getElementById('destination');
-
-            if (origin) {
-                origin.value = '';
-                delete origin.dataset.iata;
-            }
-
-            if (destination) {
-                destination.value = '';
-                delete destination.dataset.iata;
-            }
-
-            // Clear any suggestions boxes
-            document.querySelectorAll('.suggestions').forEach(box => {
-                box.innerHTML = '';
-                box.style.display = 'none';
-            });
-
-            // Hide traveler dropdown if visible
-            const dropdown = document.querySelector('.traveler-dropdown');
-            if (dropdown) {
-                dropdown.style.display = 'none';
-            }
-        }
-
-        const input = document.getElementById("travelerInput");
-        const dropdown = document.querySelector(".traveler-dropdown");
-
-        // Check if elements exist before adding event listeners
         if (input) {
             input.addEventListener("click", () => {
                 if (dropdown) dropdown.style.display = "block";
             });
         }
 
-        // Remove existing event listeners and add new ones to prevent duplicates
         document.querySelectorAll(".plus, .minus").forEach(btn => {
-            // Remove old listeners to prevent duplicates
-            btn.removeEventListener('click', handleCounterClick);
-            btn.addEventListener('click', handleCounterClick);
+            btn.addEventListener("click", () => {
+                const type = btn.dataset.type;
+                if (btn.classList.contains("plus")) {
+                    counts[type]++;
+                } else if (counts[type] > (type === "adult" ? 1 : 0)) {
+                    counts[type]--;
+                }
+                updateUI();
+            });
         });
-
-        function handleCounterClick(e) {
-            const btn = e.currentTarget;
-            const type = btn.dataset.type;
-            if (btn.classList.contains("plus")) {
-                counts[type]++;
-            } else if (counts[type] > (type === "adult" ? 1 : 0)) {
-                counts[type]--;
-            }
-            updateUI();
-        }
 
         const doneBtn = document.querySelector(".done-btn");
         if (doneBtn) {
-            doneBtn.removeEventListener('click', handleDoneClick);
-            doneBtn.addEventListener('click', handleDoneClick);
-        }
+            doneBtn.addEventListener("click", () => {
+                const total = counts.adult + counts.child + counts.lap + counts.seat;
+                const cabin = document.getElementById("cabinClass")?.value || "Economy";
 
-        function handleDoneClick() {
-            const total = counts.adult + counts.child + counts.lap + counts.seat;
-            const cabin = document.getElementById("cabinClass").value;
+                if (input) input.value = `${total} Traveler(s), ${cabin}`;
 
-            if (input) input.value = `${total} Traveler(s), ${cabin}`;
+                const travelerCount = document.getElementById("travelerCount");
+                const cabinValue = document.getElementById("cabinValue");
 
-            const travelerCount = document.getElementById("travelerCount");
-            const cabinValue = document.getElementById("cabinValue");
+                if (travelerCount) travelerCount.value = total;
+                if (cabinValue) cabinValue.value = cabin;
 
-            if (travelerCount) travelerCount.value = total;
-            if (cabinValue) cabinValue.value = cabin;
-
-            if (dropdown) dropdown.style.display = "none";
+                if (dropdown) dropdown.style.display = "none";
+            });
         }
 
         function updateUI() {
@@ -1293,7 +1178,7 @@
         /* =========================
         DATE UTILITIES
         ========================= */
-        const today = new Date();
+        const formatDate = d => d.toISOString().split('T')[0];
         const defaultReturn = new Date();
         defaultReturn.setDate(today.getDate() + 5);
 
@@ -1352,7 +1237,6 @@
                 returnWrapper.style.display = 'flex';
                 returnInput.setAttribute('required', 'required');
 
-                // Validate when switching back
                 if (!isReturnValid() && departInput) {
                     returnInput.value = departInput.value;
                 }
@@ -1364,112 +1248,93 @@
         toggleReturn();
 
         /* =========================
-        FINAL SUBMIT VALIDATION & AJAX
+        FORM SUBMIT HANDLER
         ========================= */
         if (form) {
-            // Remove old listener to prevent duplicates
-            form.removeEventListener('submit', handleSubmit);
-            form.addEventListener('submit', handleSubmit);
-        }
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
 
-        async function handleSubmit(e) {
-            e.preventDefault();
+                const searchBtn = document.getElementById("searchBtn");
+                if (!searchBtn) return;
 
-            // Change button text to Loading...
-            const searchBtn = document.getElementById("searchBtn");
-            if (!searchBtn) return;
+                const btnText = searchBtn.querySelector("h2");
+                const originalText = "Search";
 
-            const btnText = searchBtn.querySelector("h2");
-            const originalText = "Search";
+                if (btnText) btnText.textContent = "Loading...";
+                searchBtn.disabled = true;
 
-            if (btnText) btnText.textContent = "Loading...";
-            searchBtn.disabled = true;
+                // Get fresh CSRF token
+                await fetchCsrfToken();
 
-            // Get fresh CSRF token before submission
-            await fetchCsrfToken();
+                const travelers = document.getElementById("travelerCount")?.value;
+                const cabin = document.getElementById("cabinValue")?.value;
 
-            const travelers = document.getElementById("travelerCount")?.value;
-            const cabin = document.getElementById("cabinValue")?.value;
-
-            if (!travelers || travelers < 1 || !cabin) {
-                alert("Please select travelers and cabin class");
-                if (dropdown) dropdown.style.display = "block";
-
-                // Reset button
-                if (btnText) btnText.textContent = originalText;
-                searchBtn.disabled = false;
-                return;
-            }
-
-            if (roundTrip && roundTrip.checked && !isReturnValid()) {
-                alert('Please select a valid return date');
-
-                // Reset button
-                if (btnText) btnText.textContent = originalText;
-                searchBtn.disabled = false;
-                return;
-            }
-
-            // Extract airport codes from input fields
-            const originInput = document.getElementById('origin');
-            const destinationInput = document.getElementById('destination');
-
-            // Get IATA codes from data attributes
-            const origin = originInput?.dataset.iata || originInput?.value.match(/\(([^)]+)\)/)?.[1];
-            const destination = destinationInput?.dataset.iata || destinationInput?.value.match(/\(([^)]+)\)/)?.[1];
-
-            if (!origin || !destination) {
-                alert('Please select valid airports from the suggestions');
-
-                // Reset button
-                if (btnText) btnText.textContent = originalText;
-                searchBtn.disabled = false;
-                return;
-            }
-
-            // Prepare form data
-            const formData = new FormData(form);
-            formData.set('origin', origin);
-            formData.set('destination', destination);
-
-            try {
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: formData
-                });
-
-                const result = await response.json();
-
-                if (result.success) {
-                    // Store search results
-                    sessionStorage.setItem('flightResults', JSON.stringify(result.data));
-                    sessionStorage.setItem('searchCriteria', JSON.stringify({
-                        origin: origin,
-                        destination: destination,
-                        departure_date: departInput?.value,
-                        return_date: returnInput?.value || null,
-                        passengers: travelers
-                    }));
-
-                    // Reset button before redirect
+                if (!travelers || travelers < 1 || !cabin) {
+                    alert("Please select travelers and cabin class");
+                    if (dropdown) dropdown.style.display = "block";
                     if (btnText) btnText.textContent = originalText;
                     searchBtn.disabled = false;
+                    return;
+                }
 
-                    // Redirect
-                    window.location.href = 'pages/results.php';
-                } else {
-                    alert('Search failed: ' + (result.message || 'Unknown error'));
-                    // Reset button on error
+                if (roundTrip && roundTrip.checked && !isReturnValid()) {
+                    alert('Please select a valid return date');
+                    if (btnText) btnText.textContent = originalText;
+                    searchBtn.disabled = false;
+                    return;
+                }
+
+                const originInput = document.getElementById('origin');
+                const destinationInput = document.getElementById('destination');
+
+                const origin = originInput?.dataset.iata || originInput?.value.match(/\(([^)]+)\)/)?.[1];
+                const destination = destinationInput?.dataset.iata || destinationInput?.value.match(/\(([^)]+)\)/)?.[1];
+
+                if (!origin || !destination) {
+                    alert('Please select valid airports from the suggestions');
+                    if (btnText) btnText.textContent = originalText;
+                    searchBtn.disabled = false;
+                    return;
+                }
+
+                const formData = new FormData(form);
+                formData.set('origin', origin);
+                formData.set('destination', destination);
+
+                try {
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        sessionStorage.setItem('flightResults', JSON.stringify(result.data));
+                        sessionStorage.setItem('searchCriteria', JSON.stringify({
+                            origin: origin,
+                            destination: destination,
+                            departure_date: departInput?.value,
+                            return_date: returnInput?.value || null,
+                            passengers: travelers
+                        }));
+
+                        if (btnText) btnText.textContent = originalText;
+                        searchBtn.disabled = false;
+
+                        window.location.href = 'pages/results.php';
+                    } else {
+                        alert('Search failed: ' + (result.message || 'Unknown error'));
+                        if (btnText) btnText.textContent = originalText;
+                        searchBtn.disabled = false;
+                    }
+                } catch (error) {
+                    console.error('Search error:', error);
+                    alert('An error occurred while searching for flights. Please try again.');
                     if (btnText) btnText.textContent = originalText;
                     searchBtn.disabled = false;
                 }
-            } catch (error) {
-                console.error('Search error:', error);
-                alert('An error occurred while searching for flights. Please try again.');
-                // Reset button on error
-                if (btnText) btnText.textContent = originalText;
-                searchBtn.disabled = false;
-            }
+            });
         }
 
         /* =========================
@@ -1477,7 +1342,7 @@
         ========================= */
         let airports = [];
 
-        fetch('./data/airports.json')
+        fetch('./data/airports.json?' + new Date().getTime())
             .then(res => res.json())
             .then(data => {
                 airports = Object.values(data)
@@ -1491,11 +1356,7 @@
 
             if (!input || !suggestionBox) return;
 
-            // Remove old listener to prevent duplicates
-            input.removeEventListener('input', handleAutocomplete);
-            input.addEventListener('input', handleAutocomplete);
-
-            function handleAutocomplete() {
+            input.addEventListener('input', () => {
                 const query = input.value.toLowerCase();
                 suggestionBox.innerHTML = '';
 
@@ -1524,22 +1385,70 @@
 
                     suggestionBox.appendChild(li);
                 });
-            }
+            });
 
-            // Remove old click listener to prevent duplicates
-            document.removeEventListener('click', handleDocumentClick);
-            document.addEventListener('click', handleDocumentClick);
-
-            function handleDocumentClick(e) {
+            document.addEventListener('click', e => {
                 if (!suggestionBox.contains(e.target) && e.target !== input) {
                     suggestionBox.style.display = 'none';
                     suggestionBox.innerHTML = '';
                 }
-            }
+            });
         }
 
         setupAutocomplete('origin', 'from-suggestions');
-        setupAutocomplete('destination', 'to-suggestions');</script>
+        setupAutocomplete('destination', 'to-suggestions');
+
+        // Function to reset form state (add this)
+        function resetFormState() {
+            // Reset counts
+            counts = {
+                adult: 1,
+                child: 0,
+                lap: 0,
+                seat: 0
+            };
+            updateUI();
+
+            // Reset traveler input
+            const travelerInput = document.getElementById('travelerInput');
+            const travelerCount = document.getElementById('travelerCount');
+            const cabinValue = document.getElementById('cabinValue');
+            const cabinClass = document.getElementById('cabinClass');
+
+            if (cabinClass) cabinClass.value = 'Economy';
+            if (travelerInput) travelerInput.value = '1 Traveler(s), Economy';
+            if (travelerCount) travelerCount.value = '1';
+            if (cabinValue) cabinValue.value = 'Economy';
+
+            // Clear airport inputs
+            const origin = document.getElementById('origin');
+            const destination = document.getElementById('destination');
+
+            if (origin) {
+                origin.value = '';
+                delete origin.dataset.iata;
+            }
+
+            if (destination) {
+                destination.value = '';
+                delete destination.dataset.iata;
+            }
+
+            // Hide dropdown
+            if (dropdown) dropdown.style.display = 'none';
+        }
+
+        // Initialize form state
+        function initializeForm() {
+            const searchBtn = document.getElementById("searchBtn");
+            if (searchBtn) {
+                const btnText = searchBtn.querySelector("h2");
+                if (btnText) btnText.textContent = "Search";
+                searchBtn.disabled = false;
+                if (travelerInput) travelerInput.value = '1 Traveler(s), Economy';
+            }
+        }
+    </script>
 
 </body>
 
