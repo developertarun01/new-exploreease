@@ -1,7 +1,7 @@
 # singapore airlines
 # thai airways 
-# Ita 
-# Jal
+# ita airways
+# jal airlines
 # Qantas
 # Emirates
 # Lufthansa 

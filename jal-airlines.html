@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jal Airlines - ExploreEase</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/airline.css">
+    <link rel="shortcut icon" href="./assets/images/logo.png" type="image/pngs">
+
+    <!-- Google Font (For Font Family) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome (For Icons)-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body>
+
+    <nav class="nav flex-center">
+        <div class="flex nav-inner container">
+            <div class="nav-left flex-center">
+                <!-- <a href="/">
+                    <span><i class="fa-solid fa-hand-holding-heart fa-2xl"></i></span>
+                </a> -->
+                <a href="/">
+                    <h2>Explore<span>Ease</span></h2>
+                </a>
+            </div>
+            <div class="nav-center ">
+                <ul class="flex-center">
+                    <li><a href="#">Flights</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <a href="tel:8888113446" class="flex-center">
+                        <div class="nav-center-left">
+                            <i class="fa-solid fa-phone-volume fa-shake"></i>
+                        </div>
+                        <div class="nav-center-right">
+                            <h2><span>(888) 811-3446</span></h2>
+                            <p class="small">CALL 24/7 FOR OUR BEST DEALS</p>
+                        </div>
+                    </a>
+                </ul>
+            </div>
+            <div class="nav-end">
+
+                <div class="hamburger-open flex">
+                    <a href="tel:8888113446">
+                        <p class=""><b>(888) 811-3446</b></p>
+                    </a>
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+                <div class="hamburger-close">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            </div>
+        </div>
+        </div>
+
+    </nav>
+
+    <section class="sec1">
+        <div class="sec1-inner container">
+            <div class="sec1-top">
+                <h1 class="center">Search Jal Airlines Flights & Save Big!</h1>
+            </div>
+            <div class="sec1-center">
+                <form action="php/handlers/search.php" method="post" class="sec1-form flex-col-center-center mt-30"
+                    id="searchForm">
+                    <div class="sec1-form-top flex-center-center">
+                        <label class="roundtrip" for="roundtrip">
+                            <input type="radio" class="mr-10" name="triptype" id="roundtrip" checked> Round trip
+                        </label>
+                        <label class="oneway" for="oneway">
+                            <input type="radio" class="mr-10" name="triptype" id="oneway"> One way
+                        </label>
+                    </div>
+                    <div class="sec1-form-bottom flex">
+                        <div class="input-field flex-center flex-1 relative">
+                            <div class="input-field-left">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div class="input-field-right flex-col">
+                                <label for="origin" class="small">From</label>
+                                <input type="text" name="origin" id="origin" placeholder="Leaving From" required
+                                    autocomplete="off">
+                                <ul class="suggestions" id="from-suggestions"></ul>
+                            </div>
+                        </div>
+                        <div class="input-field flex-center flex-1 relative">
+                            <div class="input-field-left">
+                                <i class="fa-solid fa-location-dot "></i>
+                            </div>
+                            <div class="input-field-right flex-col">
+                                <label for="destination" class="small">To</label>
+                                <input type="text" name="destination" id="destination" placeholder="Where To" required
+                                    autocomplete="off">
+                                <ul class="suggestions" id="to-suggestions"></ul>
+                            </div>
+                        </div>
+                        <div class="input-field flex-center flex-1">
+                            <div class="flex-center date-special flex-1">
+                                <div class="input-field-left">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                </div>
+                                <div class="input-field-right flex-col">
+                                    <label for="departure_date" class="small">Departure Date</label>
+                                    <input type="date" name="departure_date" id="departure_date"
+                                        placeholder="Departure Date" required>
+                                </div>
+                            </div>
+                            <div class="flex-center date-special  flex-1" id="return-wrapper">
+                                <div class="input-field-left">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                </div>
+                                <div class="input-field-right flex-col">
+                                    <label for="return_date" class="small">Return Date</label>
+                                    <input type="date" name="return_date" id="return_date" placeholder="Return Date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-field flex-center flex-1 traveler-wrapper">
+                            <div class="input-field-left">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+
+                            <div class="input-field-right flex-col">
+                                <label class="small">Traveler(s) & Cabin</label>
+                                <input type="text" id="travelerInput" placeholder="Travelers" readonly>
+                                <input type="hidden" name="passengers" id="travelerCount">
+                                <input type="hidden" name="cabin" id="cabinValue">
+                                <input type="hidden" name="csrf_token" id="csrf_token" value="">
+
+                            </div>
+
+                            <!-- Dropdown -->
+                            <div class="traveler-dropdown">
+                                <!-- Cabin -->
+                                <select id="cabinClass">
+                                    <option>Economy</option>
+                                    <option>Premium Economy</option>
+                                    <option>Business</option>
+                                    <option>First Class</option>
+                                </select>
+
+                                <!-- Counters -->
+                                <div class="traveler-row">
+                                    <span>Adult</span>
+                                    <div class="counter">
+                                        <button type="button" data-type="adult" class="minus">−</button>
+                                        <span id="adultCount">1</span>
+                                        <button type="button" data-type="adult" class="plus">+</button>
+                                    </div>
+                                </div>
+
+                                <div class="traveler-row">
+                                    <span>Child <small>(2–11 yrs)</small></span>
+                                    <div class="counter">
+                                        <button type="button" data-type="child" class="minus">−</button>
+                                        <span id="childCount">0</span>
+                                        <button type="button" data-type="child" class="plus">+</button>
+                                    </div>
+                                </div>
+
+                                <div class="traveler-row">
+                                    <span>Infant (Lap)</span>
+                                    <div class="counter">
+                                        <button type="button" data-type="lap" class="minus">−</button>
+                                        <span id="lapCount">0</span>
+                                        <button type="button" data-type="lap" class="plus">+</button>
+                                    </div>
+                                </div>
+
+                                <div class="traveler-row">
+                                    <span>Infant (Seat)</span>
+                                    <div class="counter">
+                                        <button type="button" data-type="seat" class="minus">−</button>
+                                        <span id="seatCount">0</span>
+                                        <button type="button" data-type="seat" class="plus">+</button>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="done-btn">DONE</button>
+                            </div>
+                        </div>
+
+                        <button class="btn flex-1 input-field" type="submit" id="searchBtn">
+                            <h2 class="center">Search</h2>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="sec1-bottom center mt-30">
+                <h3>Trusted by 100,000+ customers every year</h3>
+                <p class="mt-10">Excellent <span class="mr-10 ml-10 flex">
+                        <i class="fa-solid fa-star  fa-sm"></i>
+                        <i class="fa-solid fa-star  fa-sm"></i>
+                        <i class="fa-solid fa-star  fa-sm"></i>
+                        <i class="fa-solid fa-star  fa-sm"></i>
+                        <i class="fa-regular fa-star fa-sm"></i>
+                    </span>(4.1) 78 reviews on <span>Trustpilot</span></p>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec2">
+        <div class="sec2-inner container">
+            <div class="sec2-top grid-3">
+                <div class="sec2-card flex">
+                    <div class="sec2-card-left">
+                        <i class="fa-solid fa-headset fa-2xl"></i>
+                    </div>
+                    <div class="sec2-card-right">
+                        <h3>24/7 Customer Support</h3>
+                        <p class="small">Exploreease provides assistance whenever you need it, from any location
+                            worldwide, through
+                            phone calls or email support.</p>
+                    </div>
+                </div>
+                <div class="sec2-card flex">
+                    <div class="sec2-card-left">
+                        <i class="fa-solid fa-suitcase-rolling fa-2xl"></i>
+                    </div>
+                    <div class="sec2-card-right">
+                        <h3>We're adventurers like you</h3>
+                        <p class="small">More than 4M+ travelers choose us annually. Your upcoming journey is
+                            closer than you imagine.</p>
+                    </div>
+                </div>
+                <div class="sec2-card flex">
+                    <div class="sec2-card-left">
+                        <i class="fa-solid fa-compass fa-2xl"></i>
+                    </div>
+                    <div class="sec2-card-right">
+                        <h3>Travel more for less</h3>
+                        <p class="small">Through partnerships with 650+ airlines, we help you reach any destination you
+                            desire at the most
+                            affordable fares.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec3">
+        <div class="sec3-inner container">
+            <p>Home > <span>Jal Airlines</span></p>
+            <h1 class="mt-10">Jal Airlines Flight Reservations & Deals</h1>
+            <div class="sec3-cards mt-20 grid-2" id="sec3Cards"></div>
+            <p class="small mt-20">Last refreshed on <span class="yesterday">Monday Feb 16,2026 at 05:00 AM</span>, the
+                fares listed
+                here apply to
+                flight tickets and already include fuel charges, service costs, and applicable taxes. Based on previous
+                pricing trends, these
+                fares may change anytime without advance notice and cannot be confirmed until booking is completed.
+                Please
+                review our terms and conditions carefully before making a reservation.</p>
+            <p class="mt-10"><span><b>*All fares are displayed in USD. These prices are derived from historical data and
+                        may
+                        vary
+                        and are not guaranteed at the time of booking.</b></span></p>
+
+            <div class="sec3-about mt-30">
+                <h2>About Japan Airlines</h2>
+                <p class="small mt-10">Japan Airlines, commonly known as JAL, was founded in 1951 and is one of the
+                    leading full-service carriers of Japan, with headquarters located in Tokyo. The airline operates an
+                    extensive domestic and international network connecting major destinations across Asia, Europe,
+                    North America, and Oceania. Its primary hubs are Tokyo Haneda Airport and Tokyo Narita International
+                    Airport, supported by key operations in Osaka and other Japanese cities. Exploreease allows
+                    travelers to make Japan Airlines flight reservations easily through a convenient online platform.
+                    You can quickly search and book competitive Japan Airlines flight tickets while comparing travel
+                    options. We also feature selected Japan Airlines flight deals on popular routes, helping travelers
+                    plan cost-effective journeys. The airline is a member of the oneworld alliance and maintains
+                    codeshare partnerships with several global carriers, enabling smooth worldwide connectivity.</p>
+
+                <h3 class="mt-20">Services and Amenities</h3>
+                <p class="mt-10"><b>Japan Airlines Check-in Methods</b></p>
+                <p class="mt-10 small">Passengers may complete check-in for Japan Airlines flights either at airport
+                    counters or through digital check-in services. Online and mobile check-in options are generally
+                    preferred as they provide flexibility and help passengers save time before departure. In certain
+                    travel situations, airport counter check-in may still be required. For any check-in or boarding pass
+                    assistance, travelers may contact Exploreease customer support.
+                    <br>1. Airport Check-in: Travelers must present required travel documents at the airport counter to
+                    complete check-in procedures. For domestic flights, counters usually close around 30 minutes before
+                    departure, while international flights typically close about 60 minutes prior. Passengers should
+                    verify exact deadlines before travel.
+                    <br>2. Online Check-in: Japan Airlines online check-in generally opens 24 hours before departure and
+                    remains available until approximately 1 hour before scheduled takeoff. Passengers can check in using
+                    the airline’s official website or mobile application.
+                </p>
+                <p class="mt-10"><b>Japan Airlines Frequent Flyer Program</b> </p>
+                <p class="mt-10 small">JAL Mileage Bank is the airline’s loyalty rewards program designed to provide
+                    members with mileage earning and redemption opportunities. Members can earn miles through flights
+                    with Japan Airlines and oneworld partner airlines, as well as through hotels, car rentals, credit
+                    cards, and lifestyle partners associated with the program.
+                    <br>Accumulated miles may be redeemed for award travel, cabin upgrades, and additional travel
+                    benefits.
+                    <br>The program includes multiple membership tiers such as Crystal, Sapphire, and Diamond, offering
+                    enhanced privileges including priority services and additional baggage allowance.
+                </p>
+                <h3 class="mt-20">Baggage Allowance</h3>
+                <p class="mt-10"><b>Japan Airlines Baggage Policy</b></p>
+                <p class="small mt-10">Japan Airlines generally includes complimentary checked baggage allowance,
+                    depending on route, fare type, and travel class. Allowances may follow either the piece or weight
+                    concept based on destination regulations.
+                    <br>1. Carry-On Baggage: Passengers are typically permitted one cabin bag along with one personal
+                    item at no additional cost. Cabin baggage must meet airline size requirements and usually weigh up
+                    to 10 kg in Economy Class, while premium cabins may allow additional allowance.
+                    <br>Personal items such as handbags or laptop bags must fit under the seat or within overhead
+                    compartments.
+                    <br>2. Checked Baggage: Complimentary checked baggage is included on most international fares.
+                    Economy Class passengers are generally allowed at least two checked bags on long-haul routes, while
+                    Business and First Class passengers receive higher baggage limits. Weight and size restrictions
+                    apply according to airline guidelines.
+                    <br>Frequent flyer elite members may receive additional baggage privileges depending on membership
+                    level.
+                    <br>Special baggage such as sports equipment or musical instruments may be transported according to
+                    airline regulations.
+                    <br>Passengers can add or manage baggage while booking Japan Airlines flight tickets through our
+                    platform.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <footer class="footer">
+        <div class="footer-inner container">
+            <div class="footer-top">
+                <h1 class="center">Subscribe to our <span>Newsletter</span></h1>
+                <h3 class="mt-10 center">Get latest offers from Exploreease</h3>
+                <form class="footer-form mt-20 grid-4">
+                    <input type="text" name="name" id="name" placeholder="Enter Name" required>
+                    <input type="email" name="email" id="email" placeholder="your-email@example.com" required>
+                    <input type="text" name="mobile" id="mobile" placeholder="Mobile Number" required>
+                    <button class="btn">Subscribe</button>
+                </form>
+                <p class="mt-20 center small">I would like to receive SMS and email from exploreease.online with the
+                    latest
+                    offers and
+                    promotions. I have read and agree to the <a href="#"><span>Terms and conditions</span></a> and <a
+                        href="#"><span>privacy policy</span></a> .</p>
+            </div>
+
+            <div class="footer-center grid-4 mt-40">
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul class="mt-20 flex-col">
+                        <a href="#">
+                            <li>About Us</li>
+                        </a>
+                        <a href="#">
+                            <li>Contact Us</li>
+                        </a>
+                        <a href="#">
+                            <li>Taxes & Fees</li>
+                        </a>
+                        <a href="#">
+                            <li>FAQs</li>
+                        </a>
+                        <a href="#">
+                            <li>Sitemap</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Helpful Links</h3>
+                    <ul class="mt-20 flex-col">
+                        <a href="#">
+                            <li>Security</li>
+                        </a>
+                        <a href="#">
+                            <li>Privacy Policy</li>
+                        </a>
+                        <a href="#">
+                            <li>Baggage Fees</li>
+                        </a>
+                        <a href="#">
+                            <li>Terms & Conditions</li>
+                        </a>
+                        <a href="#">
+                            <li>Cancellation Policy</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Travel Deals</h3>
+                    <ul class="mt-20 flex-col">
+                        <a href="#">
+                            <li>Top Airlines Deals</li>
+                        </a>
+                        <a href="#">
+                            <li>Last Minute Flights</li>
+                        </a>
+                        <a href="#">
+                            <li>One Way Flights</li>
+                        </a>
+                        <a href="#">
+                            <li>Round Trip Flights</li>
+                        </a>
+                        <a href="#">
+                            <li>Cheap International Flights</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Top Destinations</h3>
+                    <ul class="mt-20 flex-col">
+                        <a href="#">
+                            <li>Flights to Miami</li>
+                        </a>
+                        <a href="#">
+                            <li>Flights to Las Vegas</li>
+                        </a>
+                        <a href="#">
+                            <li>Flights to Los Angeles</li>
+                        </a>
+                        <a href="#">
+                            <li>Flights to Orlando</li>
+                        </a>
+                        <a href="#">
+                            <li>Flights to New York</li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom mt-40 flex-col-center-center">
+                <div class="footer-certi grid-4">
+                    <div><img src="./assets/images/arc.png" alt="Arc Image"></div>
+                    <div><img src="./assets/images/IATA.webp" alt="IATA Image"></div>
+                    <div><img src="./assets/images/digicert.webp" alt="Digicert Image"></div>
+                    <div><img src="./assets/images/cloudflare.webp" alt="Cloudflare Image"></div>
+                </div>
+                <p class="small center"><b>DISCLAIMER:</b> exploreease.online operates as an independent travel
+                    platform. The content provided on this website is intended only for general informational use. Every
+                    reasonable effort
+                    has been made to keep the information accurate, relevant, and updated at all times;
+                    however, we do not provide any form of assurance or warranty, either
+                    implied or expressed, regarding the precision, completeness, or dependability of the information
+                    presented on
+                    this website. For any queries or assistance, you may contact us at <a
+                        href="mailto:contact@exploreease.online"><span>contact@exploreease.online</span></a></p>
+
+            </div>
+        </div>
+    </footer>
+
+    <a href="tel:8888113446">
+        <div class="footer-call-button flex w-full">
+            <div class="footer-call-left">
+                <i class="fa-solid fa-phone-volume fa-shake fa-2xl"></i>
+            </div>
+            <div class="footer-call-right flex-col-center-center">
+                <p class="small">Call & Get Unpublished Flight Deals!</p>
+                <h1>+1-888-811-3446</h1>
+            </div>
+        </div>
+    </a>
+
+    <div class="footer-copyright">
+        <p class="small center">© 2026 Exploreease. All Rights Reserved. Use of this website signifies your
+            agreement to the <a href="#"><span>Terms of Use</span></a></p>
+    </div>
+
+    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/airline.js"></script>
+    <script>
+        const flightDeals = [
+            { from: "Tokyo Haneda", to: "New York (JFK)", origin: "HND", destination: "JFK", price: "920.00" },
+            { from: "Tokyo Haneda", to: "Los Angeles", origin: "HND", destination: "LAX", price: "850.00" },
+            { from: "Tokyo Narita", to: "San Francisco", origin: "NRT", destination: "SFO", price: "830.00" },
+            { from: "Tokyo Haneda", to: "Chicago O'Hare", origin: "HND", destination: "ORD", price: "880.00" },
+            { from: "Tokyo Haneda", to: "London Heathrow", origin: "HND", destination: "LHR", price: "870.00" },
+            { from: "Tokyo Haneda", to: "Paris Charles de Gaulle", origin: "HND", destination: "CDG", price: "860.00" },
+            { from: "Tokyo Haneda", to: "Bangkok", origin: "HND", destination: "BKK", price: "420.00" },
+            { from: "Tokyo Haneda", to: "Singapore", origin: "HND", destination: "SIN", price: "450.00" }
+        ];
+    </script>
+</body>
+
+</html>
