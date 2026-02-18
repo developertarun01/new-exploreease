@@ -1,5 +1,5 @@
 # singapore airlines
-# Thai 
+# thai airways 
 # Ita 
 # Jal
 # Qantas

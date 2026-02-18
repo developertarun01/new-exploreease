@@ -24,19 +24,6 @@ const formatISO = d => d.toISOString().split("T")[0];
 const AUTO_DEPART = formatISO(today);
 const AUTO_RETURN = formatISO(returnDate);
 
-/* ===============================
-ROUTES (FROM IMAGE)
-================================ */
-const flightDeals = [
-    { from: "Atlanta", to: "New York", origin: "ATL", destination: "JFK", price: "129.40" },
-    { from: "Atlanta", to: "Orlando", origin: "ATL", destination: "MCO", price: "118.75" },
-    { from: "Detroit", to: "Los Angeles", origin: "DTW", destination: "LAX", price: "189.60" },
-    { from: "Minneapolis", to: "Seattle", origin: "MSP", destination: "SEA", price: "172.20" },
-    { from: "New York", to: "Boston", origin: "JFK", destination: "BOS", price: "109.55" },
-    { from: "Salt Lake City", to: "Las Vegas", origin: "SLC", destination: "LAS", price: "121.80" },
-    { from: "Atlanta", to: "Miami", origin: "ATL", destination: "MIA", price: "133.25" },
-    { from: "Los Angeles", to: "Honolulu", origin: "LAX", destination: "HNL", price: "329.90" }
-];
 
 /* ===============================
 DATE FORMATTER (DISPLAY)
