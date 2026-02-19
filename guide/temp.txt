@@ -1,11 +1,35 @@
-delta airlines
-united airlines
+    delta airlines
+    united airlines
 
-singapore airlines
-thai airways 
-ita airways
-jal airlines
-qantas airways
-emirates
-lufthansa 
-british airways
+    singapore airlines
+    thai airways 
+    ita airways
+    jal airlines
+    qantas airways
+    emirates
+    lufthansa 
+    british airways
+
+air canada
+alaska airline
+all nippon
+allegiant airline
+american airline
+caribbean airways
+copa airline
+
+etihad airways
+frontier airline
+hawaiian airline
+jetblue airways
+latam airline
+lufthansa airline
+philippine airline
+
+porter airline
+qatar airways
+spirit airline
+tap-portufal
+turkish airline
+volaris airline
+westjet airline

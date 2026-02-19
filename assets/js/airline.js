@@ -554,10 +554,22 @@ function resetFormState() {
 // Initialize form state
 function initializeForm() {
     const searchBtn = document.getElementById("searchBtn");
+
     if (searchBtn) {
         const btnText = searchBtn.querySelector("h2");
         if (btnText) btnText.textContent = "Search";
         searchBtn.disabled = false;
-        if (travelerInput) travelerInput.value = '1 Traveler(s), Economy';
     }
+
+    // Reset traveler input field
+    const travelerInput = document.getElementById('travelerInput');
+    const travelerCount = document.getElementById('travelerCount');
+    const cabinValue = document.getElementById('cabinValue');
+    const cabinClass = document.getElementById('cabinClass');
+
+    // Reset to default values
+    if (cabinClass) cabinClass.value = 'Economy';
+    if (travelerInput) travelerInput.value = '1 Traveler(s), Economy';
+    if (travelerCount) travelerCount.value = '1';
+    if (cabinValue) cabinValue.value = 'Economy';
 }
