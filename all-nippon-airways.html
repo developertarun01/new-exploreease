@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Nippon Airways - ExploreEase</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/airline.css">
+    <link rel="shortcut icon" href="./assets/images/logo.png" type="image/pngs">
+
+    <!-- Google Font (For Font Family) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome (For Icons)-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-337119917">
+    </script>
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'AW-337119917');
+    </script>
+
+    <script>
+        gtag('config', 'AW-337119917/DPZ7CK2Uy7UaEK2V4KAB', {
+            'phone_conversion_number': '+1-888-811-3446'
+        });
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-W6WFZBQX');</script>
+    <!-- End Google Tag Manager -->
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W6WFZBQX" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="nav flex-center">
+        <div class="flex nav-inner container">
+            <div class="nav-left flex-center">
+                <!-- <a href="/">
+                    <span><i class="fa-solid fa-hand-holding-heart fa-2xl"></i></span>
+                </a> -->
+                <a href="/">
+                    <h2>Explore<span>Ease</span></h2>
+                </a>
+            </div>
+            <div class="nav-center ">
+                <ul class="flex-center">
+                    <li><a href="#">Flights</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <a href="tel:8888113446" class="flex-center">
+                        <div class="nav-center-left">
+                            <i class="fa-solid fa-phone-volume fa-shake"></i>
+                        </div>
+                        <div class="nav-center-right">
+                            <h2><span>(888) 811-3446</span></h2>
+                            <p class="small">CALL 24/7 FOR OUR BEST DEALS</p>
+                        </div>
+                    </a>
+                </ul>
+            </div>
+            <div class="nav-end">
+
+                <div class="hamburger-open flex">
+                    <a href="tel:8888113446">
+                        <p class=""><b>(888) 811-3446</b></p>
+                    </a>
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+                <div class="hamburger-close">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            </div>
+        </div>
+        </div>
+
+    </nav>
+
+    <section class="sec1">
+        <div class="sec1-inner container">
+            <div class="sec1-top">
+                <h1 class="center">Search All Nippon Airways Flights & Save Big!</h1>
+            </div>
+            <div class="sec1-center">
+                <form action="php/handlers/search.php" method="post" class="sec1-form flex-col-center-center mt-30"
+                    id="searchForm">
+                    <div class="sec1-form-top flex-center-center">
+                        <label class="roundtrip" for="roundtrip">
+                            <input type="radio" class="mr-10" name="triptype" id="roundtrip" checked> Round trip
+                        </label>
+                        <label class="oneway" for="oneway">
+                            <input type="radio" class="mr-10" name="triptype" id="oneway"> One way
+                        </label>
+                    </div>
+                    <div class="sec1-form-bottom flex">
+                        <div class="input-field flex-center flex-1 relative">
+                            <div class="input-field-left">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div class="input-field-right flex-col">
+                                <label for="origin" class="small">From</label>
+                                <input type="text" name="origin" id="origin" placeholder="Leaving From" required
+                                    autocomplete="off">
+                                <ul class="suggestions" id="from-suggestions"></ul>
+                            </div>
+                        </div>
+                        <div class="input-field flex-center flex-1 relative">
+                            <div class="input-field-left">
+                                <i class="fa-solid fa-location-dot "></i>
+                            </div>
+                            <div class="input-field-right flex-col">
+                                <label for="destination" class="small">To</label>
+                                <input type="text" name="destination" id="destination" placeholder="Where To" required
+                                    autocomplete="off">
+                                <ul class="suggestions" id="to-suggestions"></ul>
+                            </div>
+                        </div>
+                        <div class="input-field flex-center flex-1">
+                            <div class="flex-center date-special flex-1">
+                                <div class="input-field-left">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                </div>
+                                <div class="input-field-right flex-col">
+                                    <label for="departure_date" class="small">Departure Date</label>
+                                    <input type="date" name="departure_date" id="departure_date"
+                                        placeholder="Departure Date" required>
+                                </div>
+                            </div>
+                            <div class="flex-center date-special  flex-1" id="return-wrapper">
+                                <div class="input-field-left">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                </div>
+                                <div class="input-field-right flex-col">
+                                    <label for="return_date" class="small">Return Date</label>
+                                    <input type="date" name="return_date" id="return_date" placeholder="Return Date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-field flex-center flex-1 traveler-wrapper">
+                            <div class="input-field-left">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+
+                            <div class="input-field-right flex-col">
+                                <label class="small">Traveler(s) & Cabin</label>
+                                <input type="text" id="travelerInput" placeholder="Travelers" readonly>
+                                <input type="hidden" name="passengers" id="travelerCount">
+                                <input type="hidden" name="cabin" id="cabinValue">
+                                <input type="hidden" name="csrf_token" id="csrf_token" value="">
+
+                            </div>
+
+                            <!-- Dropdown -->
+                            <div class="traveler-dropdown">
+                                <!-- Cabin -->
+                                <select id="cabinClass">
+                                    <option>Economy</option>
+                                    <option>Premium Economy</option>
+                                    <option>Business</option>
+                                    <option>First Class</option>
+                                </select>
+
+                                <!-- Counters -->
+                                <div class="traveler-row">
+                                    <span>Adult</span>
+                                    <div class="counter">
+                                        <button type="button" data-type="adult" class="minus">−</button>
+                                        <span id="adultCount">1</span>
+                                        <button type="button" data-type="adult" class="plus">+</button>
+                                    </div>
+                                </div>
+
+                                <div class="traveler-row">
+                                    <span>Child <small>(2–11 yrs)</small></span>
+                                    <div class="counter">
+                                        <button type="button" data-type="child" class="minus">−</button>
+                                        <span id="childCount">0</span>
+                                        <button type="button" data-type="child" class="plus">+</button>
+                                    </div>
+                                </div>
+
+                                <div class="traveler-row">
+                                    <span>Infant (Lap)</span>
+                                    <div class="counter">
+                                        <button type="button" data-type="lap" class="minus">−</button>
+                                        <span id="lapCount">0</span>
+                                        <button type="button" data-type="lap" class="plus">+</button>
+                                    </div>
+                                </div>
+
+                                <div class="traveler-row">
+                                    <span>Infant (Seat)</span>
+                                    <div class="counter">
+                                        <button type="button" data-type="seat" class="minus">−</button>
+                                        <span id="seatCount">0</span>
+                                        <button type="button" data-type="seat" class="plus">+</button>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="done-btn">DONE</button>
+                            </div>
+                        </div>
+
+                        <button class="btn flex-1 input-field" type="submit" id="searchBtn">
+                            <h2 class="center">Search</h2>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="sec1-bottom center mt-30">
+                <h3>Trusted by 100,000+ customers every year</h3>
+                <p class="mt-10">Excellent <span class="mr-10 ml-10 flex">
+                        <i class="fa-solid fa-star  fa-sm"></i>
+                        <i class="fa-solid fa-star  fa-sm"></i>
+                        <i class="fa-solid fa-star  fa-sm"></i>
+                        <i class="fa-solid fa-star  fa-sm"></i>
+                        <i class="fa-regular fa-star fa-sm"></i>
+                    </span>(4.1) 78 reviews on <span>Trustpilot</span></p>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec2">
+        <div class="sec2-inner container">
+            <div class="sec2-top grid-3">
+                <div class="sec2-card flex">
+                    <div class="sec2-card-left">
+                        <i class="fa-solid fa-headset fa-2xl"></i>
+                    </div>
+                    <div class="sec2-card-right">
+                        <h3>24/7 Customer Support</h3>
+                        <p class="small">Exploreease provides assistance whenever you need it, from any location
+                            worldwide, through
+                            phone calls or email support.</p>
+                    </div>
+                </div>
+                <div class="sec2-card flex">
+                    <div class="sec2-card-left">
+                        <i class="fa-solid fa-suitcase-rolling fa-2xl"></i>
+                    </div>
+                    <div class="sec2-card-right">
+                        <h3>We're adventurers like you</h3>
+                        <p class="small">More than 4M+ travelers choose us annually. Your upcoming journey is
+                            closer than you imagine.</p>
+                    </div>
+                </div>
+                <div class="sec2-card flex">
+                    <div class="sec2-card-left">
+                        <i class="fa-solid fa-compass fa-2xl"></i>
+                    </div>
+                    <div class="sec2-card-right">
+                        <h3>Travel more for less</h3>
+                        <p class="small">Through partnerships with 650+ airlines, we help you reach any destination you
+                            desire at the most
+                            affordable fares.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec3">
+        <div class="sec3-inner container">
+            <p>Home > <span>All Nippon Airways</span></p>
+            <h1 class="mt-10">All Nippon Airways Flight Reservations & Deals</h1>
+            <div class="sec3-cards mt-20 grid-2" id="sec3Cards"></div>
+            <p class="small mt-20">Last updated on <span class="yesterday">Monday Feb 16,2026 at 05:00 AM</span>, the
+                fares displayed
+                here apply to
+                flight reservations and already include fuel surcharges, applicable service charges, and government
+                taxes. Based on recent
+                pricing trends, fares may change at any time without prior notice and cannot be guaranteed until the
+                booking process is completed.
+                Travelers are encouraged to review fare conditions carefully before confirming reservations.</p>
+            <p class="mt-10"><span><b>*All fares are listed in USD. These prices are calculated using historical fare
+                        data and may
+                        vary
+                        at the time of booking and are not guaranteed until ticket issuance is finalized.</b></span></p>
+
+            <div class="sec3-about mt-30">
+                <h2>About All Nippon Airways</h2>
+                <p class="small mt-10">All Nippon Airways (ANA), established in 1952, is Japan’s largest airline and one
+                    of Asia’s leading full-service carriers. Headquartered in Tokyo, Japan, the airline operates an
+                    extensive domestic and international network connecting more than 90 destinations worldwide. Major
+                    hubs include Tokyo Haneda, Tokyo Narita, Osaka Itami, and Kansai International Airport. Exploreease
+                    enables travelers to make All Nippon Airways flight reservations conveniently through an online
+                    booking platform. Passengers can easily search and secure competitive ANA ticket options while also
+                    accessing selected promotional flight deals on popular routes. ANA is a member of the Star Alliance,
+                    allowing travelers to benefit from seamless global connectivity and coordinated travel experiences
+                    through partner airlines across multiple continents.</p>
+
+                <h3 class="mt-20">Services and Amenities</h3>
+                <p class="mt-10"><b>All Nippon Airways Check-in Methods</b></p>
+                <p class="mt-10 small">Passengers may check in for All Nippon Airways flights either at airport counters
+                    or through online and mobile check-in services. Online check-in is generally recommended as it
+                    simplifies boarding procedures and reduces waiting time at the airport. Certain international
+                    travel requirements may still require airport verification. For any assistance related to check-in
+                    or boarding passes, travelers may contact Exploreease customer support.
+                    <br>1. Airport Check-in: Travelers must complete check-in procedures at the airport within the
+                    specified time limits. Domestic flights typically require check-in completion at least 30–45
+                    minutes before departure, while international flights usually require earlier arrival depending on
+                    destination regulations.
+                    <br>2. Online Check-in: ANA online check-in opens 24 hours before departure and remains available
+                    until shortly before scheduled takeoff through the airline’s official website or mobile
+                    application.
+                </p>
+                <p class="mt-10"><b>All Nippon Airways Frequent Flyer Program</b> </p>
+                <p class="mt-10 small">ANA Mileage Club is the airline’s loyalty rewards program designed to allow
+                    members to earn and redeem miles across flights and partner services. Travelers can accumulate
+                    miles by flying with ANA or Star Alliance partner airlines, as well as through hotels, car rentals,
+                    shopping partners, and co-branded credit cards.
+                    <br>Miles may be redeemed for award tickets, seat upgrades, or additional travel benefits.
+                    <br>The program offers multiple membership tiers, including Bronze, Platinum, and Diamond status
+                    levels with added privileges.
+                </p>
+                <h3 class="mt-20">Baggage Allowance</h3>
+                <p class="mt-10"><b>All Nippon Airways Baggage Policy</b></p>
+                <p class="small mt-10">All Nippon Airways baggage allowances depend on route type, cabin class, and ANA
+                    Mileage Club status.
+                    <br>1. Carry-On Baggage: Passengers are permitted one carry-on bag along with one personal item free
+                    of charge. Carry-on baggage must generally not exceed combined dimensions of 115 cm and a weight
+                    limit of 10 kg.
+                    <br>Personal items such as handbags or laptop bags must fit under the seat in front.
+                    <br>2. Checked Baggage: Complimentary checked baggage is typically included on most ANA fares.
+                    Allowances vary by cabin class, with Economy passengers commonly allowed at least one checked bag,
+                    while Premium Economy, Business, and First Class travelers receive higher allowances.
+                    <br>Standard checked baggage weight limits generally range from 23 kg in Economy Class to 32 kg in
+                    premium cabins.
+                    <br>Special baggage such as sports equipment or musical instruments may be transported according to
+                    airline policies.
+                    <br>Passengers may add additional baggage while booking ANA flights through our platform.
+                </p>
+                <h3 class="mt-20">Airline Charges & Cancellation</h3>
+
+                <p class="mt-10"><b>Airline Charges</b></p>
+                <p class="small mt-10">
+                    All Nippon Airways applies charges based on fare type, travel route, cabin selection, and optional
+                    services selected by passengers. Most fares include carry-on baggage and complimentary meals on
+                    many routes, while additional services such as extra baggage, preferred seating, upgrades, or
+                    special onboard services may involve extra fees. International fares often include checked baggage
+                    allowances depending on cabin class. Charges may also apply for voluntary flight changes or fare
+                    upgrades, and passengers are responsible for any fare difference when modifying bookings. Reviewing
+                    fare rules before purchase helps travelers avoid unexpected expenses and plan journeys more
+                    efficiently.
+                </p>
+
+                <p class="mt-10"><b>Airline Cancellation</b></p>
+                <p class="small mt-10">
+                    All Nippon Airways offers cancellation policies that vary depending on fare conditions and ticket
+                    type. Reservations canceled within 24 hours of booking may qualify for refunds when eligible under
+                    fare rules. Refundable tickets generally allow cash refunds, while restricted fares may provide
+                    travel credits or partial refunds after applicable deductions. If ANA cancels a flight or makes a
+                    significant schedule change, passengers may request rebooking or refunds based on eligibility.
+                    Travel credits issued after voluntary cancellations usually remain valid for a limited duration,
+                    allowing travelers to reschedule future trips. Passengers should always review ticket conditions
+                    carefully before canceling to understand applicable policies.
+                </p>
+
+                <h3 class="mt-20">International Flights & Routes</h3>
+
+                <p class="mt-10"><b>International Flights</b></p>
+                <p class="small mt-10">
+                    All Nippon Airways operates an extensive international flight network connecting Japan with major
+                    destinations across Asia, Europe, North America, and Oceania. Long-haul flights offer multiple
+                    cabin options including Economy, Premium Economy, Business Class, and First Class, designed to
+                    provide enhanced comfort during intercontinental journeys. International services typically include
+                    onboard meals, entertainment systems, and generous baggage allowances. As a member of the Star
+                    Alliance, ANA provides seamless global connectivity through partner airlines, allowing passengers
+                    to travel smoothly across continents with coordinated schedules and shared benefits.
+                </p>
+
+                <p class="mt-10"><b>International Routes</b></p>
+                <p class="small mt-10">
+                    All Nippon Airways maintains a strong international route network linking Japan with major global
+                    cities such as New York, Los Angeles, London, Frankfurt, Paris, Singapore, Bangkok, Sydney, and
+                    Delhi. Routes are adjusted periodically based on seasonal travel demand and operational planning.
+                    Through Star Alliance partnerships, passengers can continue onward journeys to hundreds of
+                    additional destinations worldwide without separate bookings. This integrated global network allows
+                    travelers to plan complex itineraries with coordinated baggage handling, lounge access, and
+                    efficient connecting flights across international hubs.
+                </p>
+
+            </div>
+        </div>
+
+    </section>
+
+    <footer class="footer">
+        <div class="footer-inner container">
+            <div class="footer-top">
+                <h1 class="center">Subscribe to our <span>Newsletter</span></h1>
+                <h3 class="mt-10 center">Get latest offers from Exploreease</h3>
+                <form class="footer-form mt-20 grid-4">
+                    <input type="text" name="name" id="name" placeholder="Enter Name" required>
+                    <input type="email" name="email" id="email" placeholder="your-email@example.com" required>
+                    <input type="text" name="mobile" id="mobile" placeholder="Mobile Number" required>
+                    <button class="btn">Subscribe</button>
+                </form>
+                <p class="mt-20 center small">I would like to receive SMS and email from exploreease.online with the
+                    latest
+                    offers and
+                    promotions. I have read and agree to the <a href="#"><span>Terms and conditions</span></a> and <a
+                        href="#"><span>privacy policy</span></a> .</p>
+            </div>
+
+            <div class="footer-center grid-4 mt-40">
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul class="mt-20 flex-col">
+                        <a href="#">
+                            <li>About Us</li>
+                        </a>
+                        <a href="#">
+                            <li>Contact Us</li>
+                        </a>
+                        <a href="#">
+                            <li>Taxes & Fees</li>
+                        </a>
+                        <a href="#">
+                            <li>FAQs</li>
+                        </a>
+                        <a href="#">
+                            <li>Sitemap</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Helpful Links</h3>
+                    <ul class="mt-20 flex-col">
+                        <a href="#">
+                            <li>Security</li>
+                        </a>
+                        <a href="#">
+                            <li>Privacy Policy</li>
+                        </a>
+                        <a href="#">
+                            <li>Baggage Fees</li>
+                        </a>
+                        <a href="#">
+                            <li>Terms & Conditions</li>
+                        </a>
+                        <a href="#">
+                            <li>Cancellation Policy</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Travel Deals</h3>
+                    <ul class="mt-20 flex-col">
+                        <a href="#">
+                            <li>Top Airlines Deals</li>
+                        </a>
+                        <a href="#">
+                            <li>Last Minute Flights</li>
+                        </a>
+                        <a href="#">
+                            <li>One Way Flights</li>
+                        </a>
+                        <a href="#">
+                            <li>Round Trip Flights</li>
+                        </a>
+                        <a href="#">
+                            <li>Cheap International Flights</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Top Destinations</h3>
+                    <ul class="mt-20 flex-col">
+                        <a href="#">
+                            <li>Flights to Miami</li>
+                        </a>
+                        <a href="#">
+                            <li>Flights to Las Vegas</li>
+                        </a>
+                        <a href="#">
+                            <li>Flights to Los Angeles</li>
+                        </a>
+                        <a href="#">
+                            <li>Flights to Orlando</li>
+                        </a>
+                        <a href="#">
+                            <li>Flights to New York</li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom mt-40 flex-col-center-center">
+                <div class="footer-certi grid-4">
+                    <div><img src="./assets/images/arc.png" alt="Arc Image"></div>
+                    <div><img src="./assets/images/IATA.webp" alt="IATA Image"></div>
+                    <div><img src="./assets/images/digicert.webp" alt="Digicert Image"></div>
+                    <div><img src="./assets/images/cloudflare.webp" alt="Cloudflare Image"></div>
+                </div>
+                <p class="small center"><b>DISCLAIMER:</b> exploreease.online operates as an independent travel
+                    platform. The content provided on this website is intended only for general informational use. Every
+                    reasonable effort
+                    has been made to keep the information accurate, relevant, and updated at all times;
+                    however, we do not provide any form of assurance or warranty, either
+                    implied or expressed, regarding the precision, completeness, or dependability of the information
+                    presented on
+                    this website. For any queries or assistance, you may contact us at <a
+                        href="mailto:contact@exploreease.online"><span>contact@exploreease.online</span></a></p>
+
+            </div>
+        </div>
+    </footer>
+
+    <a href="tel:8888113446">
+        <div class="footer-call-button flex w-full">
+            <div class="footer-call-left">
+                <i class="fa-solid fa-phone-volume fa-shake fa-2xl"></i>
+            </div>
+            <div class="footer-call-right flex-col-center-center">
+                <p class="small">Call & Get Unpublished Flight Deals!</p>
+                <h1>+1-888-811-3446</h1>
+            </div>
+        </div>
+    </a>
+
+    <div class="footer-copyright">
+        <p class="small center">© 2026 Exploreease. All Rights Reserved. Use of this website signifies your
+            agreement to the <a href="#"><span>Terms of Use</span></a></p>
+    </div>
+
+    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/airline.js"></script>
+    <script>
+        const flightDeals = [
+            { from: "Tokyo Haneda", to: "Osaka", origin: "HND", destination: "ITM", price: "82.00" },
+            { from: "Tokyo Haneda", to: "Sapporo", origin: "HND", destination: "CTS", price: "96.00" },
+            { from: "Tokyo Haneda", to: "Fukuoka", origin: "HND", destination: "FUK", price: "101.00" },
+            { from: "Osaka", to: "Sapporo", origin: "ITM", destination: "CTS", price: "110.00" },
+            { from: "Tokyo Haneda", to: "Okinawa", origin: "HND", destination: "OKA", price: "118.00" },
+            { from: "Nagoya", to: "Sapporo", origin: "NGO", destination: "CTS", price: "92.00" },
+            { from: "Fukuoka", to: "Okinawa", origin: "FUK", destination: "OKA", price: "78.00" },
+            { from: "Tokyo Haneda", to: "Nagoya", origin: "HND", destination: "NGO", price: "69.00" }
+        ];
+    </script>
+</body>
+
+</html>

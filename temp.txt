@@ -10,25 +10,24 @@
     lufthansa 
     british airways
 
-air canada
-alaska airline
-all nippon
-allegiant airline
-american airline
-caribbean airways
-copa airline
+    air canada
+    alaska airlines
+    all nippon airways
+    allegiant air
+    american airlines
+    caribbean airlines
+    copa airlines
+    etihad airways
+    frontier airlines
+    hawaiian airlines
 
-etihad airways
-frontier airline
-hawaiian airline
 jetblue airways
 latam airline
 philippine airline
-
 porter airline
 qatar airways
 spirit airline
-tap-portufal
+tap portufal
 turkish airline
 volaris airline
 westjet airline
