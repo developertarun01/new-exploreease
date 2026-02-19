@@ -23,7 +23,6 @@ frontier airline
 hawaiian airline
 jetblue airways
 latam airline
-lufthansa airline
 philippine airline
 
 porter airline

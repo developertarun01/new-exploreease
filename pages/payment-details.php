@@ -248,6 +248,12 @@ $csrfToken = Security::generateCSRFToken();
         gtag('config', 'AW-337119917');
     </script>
 
+    <script>
+        gtag('config', 'AW-337119917/DPZ7CK2Uy7UaEK2V4KAB', {
+            'phone_conversion_number': '+1-888-811-3446'
+        });
+    </script>
+
     <!-- Google Tag Manager -->
     <script>
         (function(w, d, s, l, i) {
