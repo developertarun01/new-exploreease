@@ -1,33 +1,31 @@
-    delta airlines
-    united airlines
-
-    singapore airlines
-    thai airways 
-    ita airways
-    jal airlines
-    qantas airways
-    emirates
-    lufthansa 
-    british airways
-
-    air canada
-    alaska airlines
-    all nippon airways
-    allegiant air
-    american airlines
-    caribbean airlines
-    copa airlines
-    etihad airways
-    frontier airlines
-    hawaiian airlines
-
-jetblue airways
-latam airline
-philippine airline
-porter airline
-qatar airways
-spirit airline
-tap portufal
-turkish airline
-volaris airline
-westjet airline
+https://exploreease.online/airlines/index.html
+https://exploreease.online/airlines/delta-airlines.html
+https://exploreease.online/airlines/united-airlines.html
+https://exploreease.online/airlines/singapore-airlines.html
+https://exploreease.online/airlines/thai-airways.html
+https://exploreease.online/airlines/ita-airways.html
+https://exploreease.online/airlines/jal-airlines.html
+https://exploreease.online/airlines/qantas-airways.html
+https://exploreease.online/airlines/emirates.html
+https://exploreease.online/airlines/lufthansa.html
+https://exploreease.online/airlines/british-airways.html
+https://exploreease.online/airlines/air-canada.html
+https://exploreease.online/airlines/alaska-airlines.html
+https://exploreease.online/airlines/all-nippon-airways.html
+https://exploreease.online/airlines/allegiant-air.html
+https://exploreease.online/airlines/american-airlines.html
+https://exploreease.online/airlines/caribbean-airlines.html
+https://exploreease.online/airlines/copa-airlines.html
+https://exploreease.online/airlines/etihad-airways.html
+https://exploreease.online/airlines/frontier-airlines.html
+https://exploreease.online/airlines/hawaiian-airlines.html
+https://exploreease.online/airlines/jetblue-airways.html
+https://exploreease.online/airlines/latam-airlines.html
+https://exploreease.online/airlines/philippine-airlines.html
+https://exploreease.online/airlines/porter-airlines.html
+https://exploreease.online/airlines/qatar-airways.html
+https://exploreease.online/airlines/spirit-airlines.html
+https://exploreease.online/airlines/tap-portugal.html
+https://exploreease.online/airlines/turkish-airlines.html
+https://exploreease.online/airlines/volaris.html
+https://exploreease.online/airlines/westjet.html

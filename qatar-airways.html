@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qatar Airways - ExploreEase</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/airline.css">
+    <link rel="shortcut icon" href="./assets/images/logo.png" type="image/pngs">
+
+    <!-- Google Font (For Font Family) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome (For Icons)-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-337119917">
+    </script>
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'AW-337119917');
+    </script>
+
+    <script>
+        gtag('config', 'AW-337119917/DPZ7CK2Uy7UaEK2V4KAB', {
+            'phone_conversion_number': '+1-888-811-3446'
+        });
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-W6WFZBQX');</script>
+    <!-- End Google Tag Manager -->
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W6WFZBQX" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="nav flex-center">
+        <div class="flex nav-inner container">
+            <div class="nav-left flex-center">
+                <!-- <a href="/">
+                    <span><i class="fa-solid fa-hand-holding-heart fa-2xl"></i></span>
+                </a> -->
+                <a href="/">
+                    <h2>Explore<span>Ease</span></h2>
+                </a>
+            </div>
+            <div class="nav-center ">
+                <ul class="flex-center">
+                    <li><a href="#">Flights</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <a href="tel:8888113446" class="flex-center">
+                        <div class="nav-center-left">
+                            <i class="fa-solid fa-phone-volume fa-shake"></i>
+                        </div>
+                        <div class="nav-center-right">
+                            <h2><span>(888) 811-3446</span></h2>
+                            <p class="small">CALL 24/7 FOR OUR BEST DEALS</p>
+                        </div>
+                    </a>
+                </ul>
+            </div>
+            <div class="nav-end">
+
+                <div class="hamburger-open flex">
+                    <a href="tel:8888113446">
+                        <p class=""><b>(888) 811-3446</b></p>
+                    </a>
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+                <div class="hamburger-close">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            </div>
+        </div>
+        </div>
+
+    </nav>
+
+    <section class="sec1">
+        <div class="sec1-inner container">
+            <div class="sec1-top">
+                <h1 class="center">Search Qatar Airways Flights & Save Big!</h1>
+            </div>
+            <div class="sec1-center">
+                <form action="php/handlers/search.php" method="post" class="sec1-form flex-col-center-center mt-30"
+                    id="searchForm">
+                    <div class="sec1-form-top flex-center-center">
+                        <label class="roundtrip" for="roundtrip">
+                            <input type="radio" class="mr-10" name="triptype" id="roundtrip" checked> Round trip
+                        </label>
+                        <label class="oneway" for="oneway">
+                            <input type="radio" class="mr-10" name="triptype" id="oneway"> One way
+                        </label>
+                    </div>
+                    <div class="sec1-form-bottom flex">
+                        <div class="input-field flex-center flex-1 relative">
+                            <div class="input-field-left">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div class="input-field-right flex-col">
+                                <label for="origin" class="small">From</label>
+                                <input type="text" name="origin" id="origin" placeholder="Leaving From" required
+                                    autocomplete="off">
+                                <ul class="suggestions" id="from-suggestions"></ul>
+                            </div>
+                        </div>
+                        <div class="input-field flex-center flex-1 relative">
+                            <div class="input-field-left">
+                                <i class="fa-solid fa-location-dot "></i>
+                            </div>
+                            <div class="input-field-right flex-col">
+                                <label for="destination" class="small">To</label>
+                                <input type="text" name="destination" id="destination" placeholder="Where To" required
+                                    autocomplete="off">
+                                <ul class="suggestions" id="to-suggestions"></ul>
+                            </div>
+                        </div>
+                        <div class="input-field flex-center flex-1">
+                            <div class="flex-center date-special flex-1">
+                                <div class="input-field-left">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                </div>
+                                <div class="input-field-right flex-col">
+                                    <label for="departure_date" class="small">Departure Date</label>
+                                    <input type="date" name="departure_date" id="departure_date"
+                                        placeholder="Departure Date" required>
+                                </div>
+                            </div>
+                            <div class="flex-center date-special  flex-1" id="return-wrapper">
+                                <div class="input-field-left">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                </div>
+                                <div class="input-field-right flex-col">
+                                    <label for="return_date" class="small">Return Date</label>
+                                    <input type="date" name="return_date" id="return_date" placeholder="Return Date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-field flex-center flex-1 traveler-wrapper">
+                            <div class="input-field-left">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+
+                            <div class="input-field-right flex-col">
+                                <label class="small">Traveler(s) & Cabin</label>
+                                <input type="text" id="travelerInput" placeholder="Travelers" readonly>
+                                <input type="hidden" name="passengers" id="travelerCount">
+                                <input type="hidden" name="cabin" id="cabinValue">
+                                <input type="hidden" name="csrf_token" id="csrf_token" value="">
+
+                            </div>
+
+                            <!-- Dropdown -->
+                            <div class="traveler-dropdown">
+                                <!-- Cabin -->
+                                <select id="cabinClass">
+                                    <option>Economy</option>
+                                    <option>Premium Economy</option>
+                                    <option>Business</option>
+                                    <option>First Class</option>
+                                </select>
+
+                                <!-- Counters -->
+                                <div class="traveler-row">
+                                    <span>Adult</span>
+                                    <div class="counter">
+                                        <button type="button" data-type="adult" class="minus">−</button>
+                                        <span id="adultCount">1</span>
+                                        <button type="button" data-type="adult" class="plus">+</button>
+                                    </div>
+                                </div>
+
+                                <div class="traveler-row">
+                                    <span>Child <small>(2–11 yrs)</small></span>
+                                    <div class="counter">
+                                        <button type="button" data-type="child" class="minus">−</button>
+                                        <span id="childCount">0</span>
+                                        <button type="button" data-type="child" class="plus">+</button>
+                                    </div>
+                                </div>
+
+                                <div class="traveler-row">
+                                    <span>Infant (Lap)</span>
+                                    <div class="counter">
+                                        <button type="button" data-type="lap" class="minus">−</button>
+                                        <span id="lapCount">0</span>
+                                        <button type="button" data-type="lap" class="plus">+</button>
+                                    </div>
+                                </div>
+
+                                <div class="traveler-row">
+                                    <span>Infant (Seat)</span>
+                                    <div class="counter">
+                                        <button type="button" data-type="seat" class="minus">−</button>
+                                        <span id="seatCount">0</span>
+                                        <button type="button" data-type="seat" class="plus">+</button>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="done-btn">DONE</button>
+                            </div>
+                        </div>
+
+                        <button class="btn flex-1 input-field" type="submit" id="searchBtn">
+                            <h2 class="center">Search</h2>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="sec1-bottom center mt-30">
+                <h3>Trusted by 100,000+ customers every year</h3>
+                <p class="mt-10">Excellent <span class="mr-10 ml-10 flex">
+                        <i class="fa-solid fa-star  fa-sm"></i>
+                        <i class="fa-solid fa-star  fa-sm"></i>
+                        <i class="fa-solid fa-star  fa-sm"></i>
+                        <i class="fa-solid fa-star  fa-sm"></i>
+                        <i class="fa-regular fa-star fa-sm"></i>
+                    </span>(4.1) 78 reviews on <span>Trustpilot</span></p>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec2">
+        <div class="sec2-inner container">
+            <div class="sec2-top grid-3">
+                <div class="sec2-card flex">
+                    <div class="sec2-card-left">
+                        <i class="fa-solid fa-headset fa-2xl"></i>
+                    </div>
+                    <div class="sec2-card-right">
+                        <h3>24/7 Customer Support</h3>
+                        <p class="small">Exploreease provides assistance whenever you need it, from any location
+                            worldwide, through
+                            phone calls or email support.</p>
+                    </div>
+                </div>
+                <div class="sec2-card flex">
+                    <div class="sec2-card-left">
+                        <i class="fa-solid fa-suitcase-rolling fa-2xl"></i>
+                    </div>
+                    <div class="sec2-card-right">
+                        <h3>We're adventurers like you</h3>
+                        <p class="small">More than 4M+ travelers choose us annually. Your upcoming journey is
+                            closer than you imagine.</p>
+                    </div>
+                </div>
+                <div class="sec2-card flex">
+                    <div class="sec2-card-left">
+                        <i class="fa-solid fa-compass fa-2xl"></i>
+                    </div>
+                    <div class="sec2-card-right">
+                        <h3>Travel more for less</h3>
+                        <p class="small">Through partnerships with 650+ airlines, we help you reach any destination you
+                            desire at the most
+                            affordable fares.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec3">
+        <div class="sec3-inner container">
+            <p>Home > <span>Qatar Airways</span></p>
+            <h1 class="mt-10">Qatar Airways Flight Reservations & Deals</h1>
+            <div class="sec3-cards mt-20 grid-2" id="sec3Cards"></div>
+            <p class="small mt-20">Last refreshed on <span class="yesterday">Monday Feb 16,2026 at 05:00 AM</span>, the
+                fares listed
+                here apply to
+                flight tickets and already include fuel charges, service costs, and applicable taxes. Based on previous
+                pricing trends, these
+                fares may change anytime without advance notice and cannot be confirmed until booking is completed.
+                Please
+                review our terms and conditions carefully before making a reservation.</p>
+            <p class="mt-10"><span><b>*All fares are displayed in USD. These prices are derived from historical data and
+                        may
+                        vary
+                        and are not guaranteed at the time of booking.</b></span></p>
+
+            <div class="sec3-about mt-30">
+                <h2 class="center">About Qatar Airways</h2>
+                <p class="small mt-10">Qatar Airways, established in 1993 and relaunched in 1997, is the national
+                    carrier of the State of Qatar and one of the world’s leading full-service airlines. Headquartered in
+                    Doha, the airline operates its global network through Hamad International Airport, connecting
+                    travelers to more than 170 destinations across Europe, Asia, Africa, the Americas, and Oceania.
+                    Qatar Airways is recognized for premium onboard services and modern aircraft operations. Exploreease
+                    allows travelers to complete Qatar Airways flight reservations conveniently through a simple online
+                    booking platform. Passengers can search routes and book affordable Qatar Airways flight tickets
+                    directly on our website. We also feature selected Qatar Airways flight deals on popular
+                    international routes, helping travelers reduce travel costs. As a member of the oneworld alliance,
+                    the airline maintains strong partnerships with global carriers, offering extended connectivity and
+                    seamless international travel options.</p>
+
+                <h3 class="mt-20 center">Services & Amenities</h3>
+                <p class="mt-20"><b>Qatar Airways Check-in Methods</b></p>
+                <p class="mt-10 small">Passengers flying with Qatar Airways may complete check-in either at airport
+                    counters or through online check-in services prior to departure. Online check-in is generally
+                    recommended as it allows travelers to select seats and receive boarding passes before arriving at
+                    the airport. Certain travel documentation checks may require in-person verification. For assistance
+                    related to check-in or boarding passes, travelers may contact Exploreease customer support.
+                    <br>1. Airport Check-in: Travelers should arrive early to complete airport procedures. For
+                    international flights, check-in typically closes 60 minutes before departure, and passengers are
+                    advised to arrive at least three hours prior to scheduled takeoff depending on airport regulations.
+                    Exact deadlines should always be verified before travel.
+                    <br>2. Online Check-in: Qatar Airways online check-in usually opens 48 hours before departure and
+                    remains available until 90 minutes before scheduled departure through the airline’s official website
+                    or mobile application.
+                </p>
+                <p class="mt-10"><b>Qatar Airways Frequent Flyer Program</b> </p>
+                <p class="mt-10 small">Privilege Club is Qatar Airways’ loyalty program designed to reward frequent
+                    travelers through Avios points accumulation. Members can earn Avios when flying with Qatar Airways,
+                    oneworld partner airlines, and various travel and lifestyle partners.
+                    <br>Earned Avios may be redeemed for award flights, cabin upgrades, excess baggage, and
+                    travel-related services.
+                    <br>The program includes multiple elite tiers such as Burgundy, Silver, Gold, and Platinum, offering
+                    benefits like lounge access, priority services, and additional baggage allowances.
+                </p>
+                <h3 class="mt-20 center">Baggage Allowance & Booking</h3>
+                <p class="mt-20"><b>Qatar Airways Baggage Policy</b></p>
+                <p class="small mt-10">Checked baggage allowance varies based on fare family, route, and cabin class.
+                    Qatar Airways commonly applies a weight or piece concept depending on destination.
+                    <br>1. Carry-On Baggage: Economy Class passengers are generally allowed one carry-on bag within
+                    standard cabin dimensions, while Business and First Class passengers may carry additional cabin
+                    baggage. Personal items such as handbags or laptop bags must fit beneath the seat.
+                    <br>2. Checked Baggage: Complimentary checked baggage is included on most Qatar Airways fares.
+                    Economy Class allowances typically range from 20 kg to 35 kg depending on fare type, while Business
+                    and First Class passengers receive higher limits. Individual checked bags must usually not exceed 32
+                    kg each according to international safety regulations. Special baggage including sports equipment or
+                    musical instruments may be transported subject to airline guidelines.
+                    <br>Passengers may add extra baggage during the Qatar Airways flight booking process through our
+                    platform.
+                </p>
+                <p class="mt-10"><b>Qatar Airways Flight Booking</b></p>
+                <p class="small mt-10">
+                    Qatar Airways offers a modern and intuitive online booking experience through its official website,
+                    allowing travelers to search and reserve flights across its extensive global network. The booking
+                    platform enables passengers to choose travel dates, cabin classes, and fare options while viewing
+                    schedules and transparent pricing. Travelers can manage reservations online, select seats, request
+                    special meals, add baggage, and purchase additional services using secure payment methods. Online
+                    check-in, real-time trip updates, and travel notifications are available through digital tools and
+                    the Qatar Airways mobile app. Passengers can review travel requirements, baggage information,
+                    airport guidance, and upgrade opportunities in one place, simplifying travel planning. With
+                    award-winning onboard entertainment, premium dining, and renowned Qsuite Business Class on select
+                    aircraft, Qatar Airways aims to deliver a comfortable and seamless journey from booking to arrival.
+                </p>
+
+                <h3 class="mt-20 center">Airline Changes & Cancellation</h3>
+
+                <p class="mt-20"><b>Qatar Airways Flight Changes</b></p>
+                <p class="small mt-10">
+                    Qatar Airways allows itinerary modifications depending on fare type,
+                    travel route, and ticket conditions selected during booking. Many
+                    fare categories permit passengers to change travel dates, flight
+                    times, or destinations through the manage booking feature, although
+                    certain promotional fares may include restrictions. Same-day changes
+                    may be available on eligible tickets subject to availability and
+                    fare rules. When modifying reservations, passengers may need to pay
+                    any applicable fare difference, taxes, or surcharges if the new
+                    itinerary costs more. International ticket policies may vary by fare
+                    family, so reviewing ticket conditions beforehand helps ensure
+                    smoother travel adjustments.
+                </p>
+
+                <p class="mt-10"><b>Qatar Airways Flight Cancellation</b></p>
+                <p class="small mt-10">
+                    Qatar Airways provides flexible cancellation options depending on fare conditions and applicable
+                    regulations. Tickets canceled within eligible timeframes may qualify for refunds or travel credits
+                    depending on fare rules. Refundable fares may receive monetary refunds, while non-refundable tickets
+                    are generally converted into future travel vouchers. If Qatar Airways cancels a flight or makes a
+                    significant schedule change, passengers may request rebooking or refunds according to airline
+                    policies. Travel credits issued after voluntary cancellations typically remain valid for a limited
+                    period, allowing passengers flexibility to reschedule later. Reviewing fare conditions before
+                    cancellation is recommended to avoid unexpected charges.
+                </p>
+
+                <h3 class="mt-20 center">International Flights & Routes</h3>
+
+                <p class="mt-20"><b>Qatar Airways International Flights</b></p>
+                <p class="small mt-10">
+                    Qatar Airways operates one of the world’s most extensive international flight networks, connecting
+                    Doha with major cities across six continents. Long-haul services include multiple cabin experiences
+                    such as Economy, Business Class featuring Qsuite on select aircraft, and First Class on certain
+                    routes. International passengers benefit from premium onboard services including meals, inflight
+                    entertainment, Wi-Fi availability, and generous baggage allowances. Through its oneworld alliance
+                    membership and global partnerships, Qatar Airways enables seamless connections and coordinated
+                    travel experiences worldwide.
+                </p>
+
+                <p class="mt-10"><b>Qatar Airways International Routes</b></p>
+                <p class="small mt-10">
+                    Qatar Airways maintains an extensive international route network linking Doha with destinations such
+                    as London, Paris, New York, Toronto, Sydney, Tokyo, Delhi, Johannesburg, and numerous cities across
+                    Europe, Asia, Africa, and the Americas. The airline regularly adjusts routes based on seasonal
+                    demand and operational planning while strengthening global connectivity through alliance partners.
+                    Many schedules are optimized for smooth transfers via Hamad International Airport, enabling
+                    passengers to continue onward journeys efficiently. This hub-based routing system allows travelers
+                    to plan complex international itineraries with coordinated baggage handling and seamless
+                    connections across continents.
+                </p>
+
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="footer">
+        <div class="footer-inner container">
+            <div class="footer-top">
+                <h1 class="center">Subscribe to our <span>Newsletter</span></h1>
+                <h3 class="mt-10 center">Get latest offers from Exploreease</h3>
+                <form class="footer-form mt-20 grid-4">
+                    <input type="text" name="name" id="name" placeholder="Enter Name" required>
+                    <input type="email" name="email" id="email" placeholder="your-email@example.com" required>
+                    <input type="text" name="mobile" id="mobile" placeholder="Mobile Number" required>
+                    <button class="btn">Subscribe</button>
+                </form>
+                <p class="mt-20 center small">I would like to receive SMS and email from exploreease.online with the
+                    latest
+                    offers and
+                    promotions. I have read and agree to the <a href="#"><span>Terms and conditions</span></a> and <a
+                        href="#"><span>privacy policy</span></a> .</p>
+            </div>
+
+            <div class="footer-center grid-4 mt-40">
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul class="mt-20 flex-col">
+                        <a href="#">
+                            <li>About Us</li>
+                        </a>
+                        <a href="#">
+                            <li>Contact Us</li>
+                        </a>
+                        <a href="#">
+                            <li>Taxes & Fees</li>
+                        </a>
+                        <a href="#">
+                            <li>FAQs</li>
+                        </a>
+                        <a href="#">
+                            <li>Sitemap</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Helpful Links</h3>
+                    <ul class="mt-20 flex-col">
+                        <a href="#">
+                            <li>Security</li>
+                        </a>
+                        <a href="#">
+                            <li>Privacy Policy</li>
+                        </a>
+                        <a href="#">
+                            <li>Baggage Fees</li>
+                        </a>
+                        <a href="#">
+                            <li>Terms & Conditions</li>
+                        </a>
+                        <a href="#">
+                            <li>Cancellation Policy</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Travel Deals</h3>
+                    <ul class="mt-20 flex-col">
+                        <a href="#">
+                            <li>Top Airlines Deals</li>
+                        </a>
+                        <a href="#">
+                            <li>Last Minute Flights</li>
+                        </a>
+                        <a href="#">
+                            <li>One Way Flights</li>
+                        </a>
+                        <a href="#">
+                            <li>Round Trip Flights</li>
+                        </a>
+                        <a href="#">
+                            <li>Cheap International Flights</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Top Destinations</h3>
+                    <ul class="mt-20 flex-col">
+                        <a href="#">
+                            <li>Flights to Miami</li>
+                        </a>
+                        <a href="#">
+                            <li>Flights to Las Vegas</li>
+                        </a>
+                        <a href="#">
+                            <li>Flights to Los Angeles</li>
+                        </a>
+                        <a href="#">
+                            <li>Flights to Orlando</li>
+                        </a>
+                        <a href="#">
+                            <li>Flights to New York</li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom mt-40 flex-col-center-center">
+                <div class="footer-certi grid-4">
+                    <div><img src="./assets/images/arc.png" alt="Arc Image"></div>
+                    <div><img src="./assets/images/IATA.webp" alt="IATA Image"></div>
+                    <div><img src="./assets/images/digicert.webp" alt="Digicert Image"></div>
+                    <div><img src="./assets/images/cloudflare.webp" alt="Cloudflare Image"></div>
+                </div>
+                <p class="small center"><b>DISCLAIMER:</b> exploreease.online operates as an independent travel
+                    platform. The content provided on this website is intended only for general informational use. Every
+                    reasonable effort
+                    has been made to keep the information accurate, relevant, and updated at all times;
+                    however, we do not provide any form of assurance or warranty, either
+                    implied or expressed, regarding the precision, completeness, or dependability of the information
+                    presented on
+                    this website. For any queries or assistance, you may contact us at <a
+                        href="mailto:contact@exploreease.online"><span>contact@exploreease.online</span></a></p>
+
+            </div>
+        </div>
+    </footer>
+
+    <a href="tel:8888113446">
+        <div class="footer-call-button flex w-full">
+            <div class="footer-call-left">
+                <i class="fa-solid fa-phone-volume fa-shake fa-2xl"></i>
+            </div>
+            <div class="footer-call-right flex-col-center-center">
+                <p class="small">Call & Get Unpublished Flight Deals!</p>
+                <h1>+1-888-811-3446</h1>
+            </div>
+        </div>
+    </a>
+
+    <div class="footer-copyright">
+        <p class="small center">© 2026 Exploreease. All Rights Reserved. Use of this website signifies your
+            agreement to the <a href="#"><span>Terms of Use</span></a></p>
+    </div>
+
+    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/airline.js"></script>
+    <script>
+        const flightDeals = [
+            { from: "Doha", to: "London (Heathrow)", origin: "DOH", destination: "LHR", price: "645.00" },
+            { from: "Doha", to: "New York (JFK)", origin: "DOH", destination: "JFK", price: "892.00" },
+            { from: "Doha", to: "Paris (Charles de Gaulle)", origin: "DOH", destination: "CDG", price: "618.00" },
+            { from: "Doha", to: "Bangkok", origin: "DOH", destination: "BKK", price: "472.00" },
+            { from: "Doha", to: "Mumbai", origin: "DOH", destination: "BOM", price: "356.00" },
+            { from: "Doha", to: "Delhi", origin: "DOH", destination: "DEL", price: "342.00" },
+            { from: "Doha", to: "Dubai", origin: "DOH", destination: "DXB", price: "228.00" },
+            { from: "Doha", to: "Sydney", origin: "DOH", destination: "SYD", price: "1045.00" }
+        ];
+    </script>
+</body>
+
+</html>

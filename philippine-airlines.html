@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Philippine Airlines - ExploreEase</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/airline.css">
+    <link rel="shortcut icon" href="./assets/images/logo.png" type="image/pngs">
+
+    <!-- Google Font (For Font Family) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome (For Icons)-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-337119917">
+    </script>
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'AW-337119917');
+    </script>
+
+    <script>
+        gtag('config', 'AW-337119917/DPZ7CK2Uy7UaEK2V4KAB', {
+            'phone_conversion_number': '+1-888-811-3446'
+        });
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-W6WFZBQX');</script>
+    <!-- End Google Tag Manager -->
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W6WFZBQX" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <nav class="nav flex-center">
+        <div class="flex nav-inner container">
+            <div class="nav-left flex-center">
+                <!-- <a href="/">
+                    <span><i class="fa-solid fa-hand-holding-heart fa-2xl"></i></span>
+                </a> -->
+                <a href="/">
+                    <h2>Explore<span>Ease</span></h2>
+                </a>
+            </div>
+            <div class="nav-center ">
+                <ul class="flex-center">
+                    <li><a href="#">Flights</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <a href="tel:8888113446" class="flex-center">
+                        <div class="nav-center-left">
+                            <i class="fa-solid fa-phone-volume fa-shake"></i>
+                        </div>
+                        <div class="nav-center-right">
+                            <h2><span>(888) 811-3446</span></h2>
+                            <p class="small">CALL 24/7 FOR OUR BEST DEALS</p>
+                        </div>
+                    </a>
+                </ul>
+            </div>
+            <div class="nav-end">
+
+                <div class="hamburger-open flex">
+                    <a href="tel:8888113446">
+                        <p class=""><b>(888) 811-3446</b></p>
+                    </a>
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+                <div class="hamburger-close">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            </div>
+        </div>
+        </div>
+
+    </nav>
+
+    <section class="sec1">
+        <div class="sec1-inner container">
+            <div class="sec1-top">
+                <h1 class="center">Search Philippine Airlines Flights & Save Big!</h1>
+            </div>
+            <div class="sec1-center">
+                <form action="php/handlers/search.php" method="post" class="sec1-form flex-col-center-center mt-30"
+                    id="searchForm">
+                    <div class="sec1-form-top flex-center-center">
+                        <label class="roundtrip" for="roundtrip">
+                            <input type="radio" class="mr-10" name="triptype" id="roundtrip" checked> Round trip
+                        </label>
+                        <label class="oneway" for="oneway">
+                            <input type="radio" class="mr-10" name="triptype" id="oneway"> One way
+                        </label>
+                    </div>
+                    <div class="sec1-form-bottom flex">
+                        <div class="input-field flex-center flex-1 relative">
+                            <div class="input-field-left">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div class="input-field-right flex-col">
+                                <label for="origin" class="small">From</label>
+                                <input type="text" name="origin" id="origin" placeholder="Leaving From" required
+                                    autocomplete="off">
+                                <ul class="suggestions" id="from-suggestions"></ul>
+                            </div>
+                        </div>
+                        <div class="input-field flex-center flex-1 relative">
+                            <div class="input-field-left">
+                                <i class="fa-solid fa-location-dot "></i>
+                            </div>
+                            <div class="input-field-right flex-col">
+                                <label for="destination" class="small">To</label>
+                                <input type="text" name="destination" id="destination" placeholder="Where To" required
+                                    autocomplete="off">
+                                <ul class="suggestions" id="to-suggestions"></ul>
+                            </div>
+                        </div>
+                        <div class="input-field flex-center flex-1">
+                            <div class="flex-center date-special flex-1">
+                                <div class="input-field-left">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                </div>
+                                <div class="input-field-right flex-col">
+                                    <label for="departure_date" class="small">Departure Date</label>
+                                    <input type="date" name="departure_date" id="departure_date"
+                                        placeholder="Departure Date" required>
+                                </div>
+                            </div>
+                            <div class="flex-center date-special  flex-1" id="return-wrapper">
+                                <div class="input-field-left">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                </div>
+                                <div class="input-field-right flex-col">
+                                    <label for="return_date" class="small">Return Date</label>
+                                    <input type="date" name="return_date" id="return_date" placeholder="Return Date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-field flex-center flex-1 traveler-wrapper">
+                            <div class="input-field-left">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+
+                            <div class="input-field-right flex-col">
+                                <label class="small">Traveler(s) & Cabin</label>
+                                <input type="text" id="travelerInput" placeholder="Travelers" readonly>
+                                <input type="hidden" name="passengers" id="travelerCount">
+                                <input type="hidden" name="cabin" id="cabinValue">
+                                <input type="hidden" name="csrf_token" id="csrf_token" value="">
+
+                            </div>
+
+                            <!-- Dropdown -->
+                            <div class="traveler-dropdown">
+                                <!-- Cabin -->
+                                <select id="cabinClass">
+                                    <option>Economy</option>
+                                    <option>Premium Economy</option>
+                                    <option>Business</option>
+                                    <option>First Class</option>
+                                </select>
+
+                                <!-- Counters -->
+                                <div class="traveler-row">
+                                    <span>Adult</span>
+                                    <div class="counter">
+                                        <button type="button" data-type="adult" class="minus">−</button>
+                                        <span id="adultCount">1</span>
+                                        <button type="button" data-type="adult" class="plus">+</button>
+                                    </div>
+                                </div>
+
+                                <div class="traveler-row">
+                                    <span>Child <small>(2–11 yrs)</small></span>
+                                    <div class="counter">
+                                        <button type="button" data-type="child" class="minus">−</button>
+                                        <span id="childCount">0</span>
+                                        <button type="button" data-type="child" class="plus">+</button>
+                                    </div>
+                                </div>
+
+                                <div class="traveler-row">
+                                    <span>Infant (Lap)</span>
+                                    <div class="counter">
+                                        <button type="button" data-type="lap" class="minus">−</button>
+                                        <span id="lapCount">0</span>
+                                        <button type="button" data-type="lap" class="plus">+</button>
+                                    </div>
+                                </div>
+
+                                <div class="traveler-row">
+                                    <span>Infant (Seat)</span>
+                                    <div class="counter">
+                                        <button type="button" data-type="seat" class="minus">−</button>
+                                        <span id="seatCount">0</span>
+                                        <button type="button" data-type="seat" class="plus">+</button>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="done-btn">DONE</button>
+                            </div>
+                        </div>
+
+                        <button class="btn flex-1 input-field" type="submit" id="searchBtn">
+                            <h2 class="center">Search</h2>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="sec1-bottom center mt-30">
+                <h3>Trusted by 100,000+ customers every year</h3>
+                <p class="mt-10">Excellent <span class="mr-10 ml-10 flex">
+                        <i class="fa-solid fa-star  fa-sm"></i>
+                        <i class="fa-solid fa-star  fa-sm"></i>
+                        <i class="fa-solid fa-star  fa-sm"></i>
+                        <i class="fa-solid fa-star  fa-sm"></i>
+                        <i class="fa-regular fa-star fa-sm"></i>
+                    </span>(4.1) 78 reviews on <span>Trustpilot</span></p>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec2">
+        <div class="sec2-inner container">
+            <div class="sec2-top grid-3">
+                <div class="sec2-card flex">
+                    <div class="sec2-card-left">
+                        <i class="fa-solid fa-headset fa-2xl"></i>
+                    </div>
+                    <div class="sec2-card-right">
+                        <h3>24/7 Customer Support</h3>
+                        <p class="small">Exploreease provides assistance whenever you need it, from any location
+                            worldwide, through
+                            phone calls or email support.</p>
+                    </div>
+                </div>
+                <div class="sec2-card flex">
+                    <div class="sec2-card-left">
+                        <i class="fa-solid fa-suitcase-rolling fa-2xl"></i>
+                    </div>
+                    <div class="sec2-card-right">
+                        <h3>We're adventurers like you</h3>
+                        <p class="small">More than 4M+ travelers choose us annually. Your upcoming journey is
+                            closer than you imagine.</p>
+                    </div>
+                </div>
+                <div class="sec2-card flex">
+                    <div class="sec2-card-left">
+                        <i class="fa-solid fa-compass fa-2xl"></i>
+                    </div>
+                    <div class="sec2-card-right">
+                        <h3>Travel more for less</h3>
+                        <p class="small">Through partnerships with 650+ airlines, we help you reach any destination you
+                            desire at the most
+                            affordable fares.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="sec3">
+        <div class="sec3-inner container">
+            <p>Home > <span>Philippine Airlines</span></p>
+            <h1 class="mt-10">Philippine Airlines Flight Reservations & Deals</h1>
+            <div class="sec3-cards mt-20 grid-2" id="sec3Cards"></div>
+            <p class="small mt-20">Last refreshed on <span class="yesterday">Monday Feb 16,2026 at 05:00 AM</span>, the
+                fares listed
+                here apply to
+                flight tickets and already include fuel charges, service costs, and applicable taxes. Based on previous
+                pricing trends, these
+                fares may change anytime without advance notice and cannot be confirmed until booking is completed.
+                Please
+                review our terms and conditions carefully before making a reservation.</p>
+            <p class="mt-10"><span><b>*All fares are displayed in USD. These prices are derived from historical data and
+                        may
+                        vary
+                        and are not guaranteed at the time of booking.</b></span></p>
+
+            <div class="sec3-about mt-30">
+                <h2 class="center">About Philippine Airlines</h2>
+                <p class="small mt-10">Philippine Airlines, commonly known as PAL, was established in 1941 and is the
+                    national flag carrier of the Philippines. Headquartered in Pasay City near Manila, the airline
+                    operates an extensive network connecting more than 60 destinations across Asia, North America,
+                    Australia, the Middle East, and domestic Philippine routes. Its primary hub is Ninoy Aquino
+                    International Airport in Manila, supported by key operations in Cebu, Clark, and Davao. Exploreease
+                    allows travelers to complete Philippine Airlines flight reservations conveniently through an easy
+                    online booking system. Passengers can search schedules and book affordable Philippine Airlines
+                    flight tickets directly on our platform. We also highlight selected Philippine Airlines flight deals
+                    on major routes to help travelers manage travel expenses efficiently. Through interline and
+                    codeshare partnerships with international carriers, the airline provides broader global connectivity
+                    and seamless travel options beyond its own network.</p>
+
+                <h3 class="mt-20 center">Services & Amenities</h3>
+                <p class="mt-20"><b>Philippine Airlines Check-in Methods</b></p>
+                <p class="mt-10 small">Passengers traveling with Philippine Airlines may complete check-in either at
+                    airport counters or through online check-in services prior to departure. Online check-in is
+                    generally recommended as it reduces waiting time and allows passengers to obtain boarding passes
+                    early. Some international travel requirements may still require verification at the airport. For
+                    assistance related to check-in or boarding passes, travelers may contact Exploreease customer
+                    support.
+                    <br>1. Airport Check-in: Travelers should arrive early to complete airport formalities. Domestic
+                    passengers are usually required to check in at least 45 minutes before departure, while
+                    international travelers are advised to finalize check-in 60–90 minutes prior to departure depending
+                    on airport procedures. Exact timing requirements should always be confirmed before travel.
+                    <br>2. Online Check-in: Philippine Airlines online check-in typically opens 24 hours before
+                    departure and remains available until a few hours before scheduled takeoff through the airline’s
+                    official website or mobile application.
+                </p>
+                <p class="mt-10"><b>Philippine Airlines Frequent Flyer Program</b> </p>
+                <p class="mt-10 small">Mabuhay Miles is Philippine Airlines’ loyalty program designed to reward frequent
+                    travelers with mileage earning opportunities. Members can accumulate miles when flying with
+                    Philippine Airlines and partner carriers, as well as through hotels, travel services, car rentals,
+                    and financial partners.
+                    <br>Earned miles may be redeemed for award flights, cabin upgrades, and additional travel benefits.
+                    <br>The program offers several membership tiers, providing advantages such as priority services,
+                    lounge access, and additional baggage privileges.
+                </p>
+                <h3 class="mt-20 center">Baggage Allowance & Booking</h3>
+                <p class="mt-20"><b>Philippine Airlines Baggage Policy</b></p>
+                <p class="small mt-10">Checked baggage allowance depends on fare type, travel route, and cabin class
+                    selected during booking. Policies may vary between domestic and international flights.
+                    <br>1. Carry-On Baggage: Passengers are generally permitted one carry-on bag along with one personal
+                    item at no additional cost. The carry-on bag should typically not exceed 56 cm x 36 cm x 23 cm
+                    including handles and wheels, while personal items must fit beneath the seat.
+                    <br>2. Checked Baggage: Complimentary checked baggage is included on many Philippine Airlines fares,
+                    particularly on international routes. Standard checked baggage usually allows up to 23 kg (50 lbs)
+                    per piece in Economy Class, while Business Class passengers may receive higher allowances depending
+                    on route and fare conditions. Special baggage such as sports equipment or musical instruments may be
+                    transported subject to airline guidelines.
+                    <br>Passengers may add additional checked baggage during the Philippine Airlines flight booking
+                    process through our platform.
+                </p>
+                <p class="mt-10"><b>Philippine Airlines Flight Booking</b></p>
+                <p class="small mt-10">
+                    Philippine Airlines provides a user-friendly digital booking experience through its official
+                    website, allowing travelers to search and reserve flights across domestic and international
+                    destinations with ease. The booking system enables users to select travel dates, cabin classes, and
+                    fare options while viewing schedules and transparent pricing. Travelers can manage bookings online,
+                    choose preferred seats, add baggage, and purchase travel extras using secure payment methods. Online
+                    check-in access, trip updates, and travel notifications are available through digital tools and the
+                    Philippine Airlines mobile app. Passengers can review baggage details, travel requirements, airport
+                    information, and upgrade options in one place, simplifying travel preparation. With onboard meals,
+                    entertainment options, and full-service amenities on many routes, Philippine Airlines aims to
+                    provide a comfortable and reliable travel experience from booking to boarding.
+                </p>
+
+                <h3 class="mt-20 center">Airline Changes & Cancellation</h3>
+
+                <p class="mt-20"><b>Philippine Airlines Flight Changes</b></p>
+                <p class="small mt-10">
+                    Philippine Airlines allows itinerary changes depending on fare type,
+                    travel route, and ticket conditions selected at the time of booking.
+                    Many fare categories permit passengers to modify travel dates,
+                    flight schedules, or destinations through the manage booking
+                    feature, although promotional fares may have certain restrictions.
+                    Same-day changes may be available on eligible flights subject to
+                    availability and fare rules. When modifying a reservation,
+                    passengers may need to pay any applicable fare difference, taxes,
+                    or surcharges if the new itinerary costs more. International
+                    bookings may follow additional conditions depending on fare class.
+                    Reviewing ticket rules beforehand helps travelers adjust plans
+                    smoothly and avoid unexpected charges.
+                </p>
+
+                <p class="mt-10"><b>Philippine Airlines Flight Cancellation</b></p>
+                <p class="small mt-10">
+                    Philippine Airlines offers cancellation options designed to provide flexibility when travel plans
+                    change. Tickets canceled within applicable risk-free periods may qualify for refunds depending on
+                    fare conditions and local regulations. Refundable fares may receive monetary refunds, while
+                    non-refundable tickets are generally converted into travel credits for future use. Cancellation
+                    policies vary according to fare type, promotional conditions, and route. If the airline cancels a
+                    flight or significantly changes the schedule, passengers may request rebooking or refunds based on
+                    airline guidelines. Travel credits issued after voluntary cancellations typically remain valid for a
+                    limited period, allowing customers to rebook later. Reviewing ticket terms before cancellation is
+                    recommended.
+                </p>
+
+                <h3 class="mt-20 center">International Flights & Routes</h3>
+
+                <p class="mt-20"><b>Philippine Airlines International Flights</b></p>
+                <p class="small mt-10">
+                    Philippine Airlines operates a wide international network connecting the Philippines with major
+                    cities across Asia, North America, the Middle East, and Australia. Long-haul flights provide
+                    multiple cabin options including Economy, Premium Economy, and Business Class designed for
+                    comfortable intercontinental travel. International passengers often receive additional onboard
+                    services such as meals, entertainment systems, and enhanced baggage allowances compared to domestic
+                    flights. Through airline partnerships and interline agreements, Philippine Airlines enables
+                    passengers to access extended global destinations while maintaining coordinated travel connections.
+                </p>
+
+                <p class="mt-10"><b>Philippine Airlines International Routes</b></p>
+                <p class="small mt-10">
+                    Philippine Airlines maintains an extensive international route network linking Manila and other
+                    Philippine hubs with destinations such as Los Angeles, San Francisco, Vancouver, Toronto, Tokyo,
+                    Seoul, Singapore, Sydney, Dubai, and Doha. The airline regularly adjusts routes based on travel
+                    demand and seasonal trends while strengthening connectivity through partner airlines. Many
+                    international schedules are designed to support both leisure and business travelers with convenient
+                    connection opportunities. This integrated routing system allows passengers to plan international
+                    journeys efficiently with coordinated baggage handling and smoother transfer experiences across
+                    multiple regions.
+                </p>
+
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="footer">
+        <div class="footer-inner container">
+            <div class="footer-top">
+                <h1 class="center">Subscribe to our <span>Newsletter</span></h1>
+                <h3 class="mt-10 center">Get latest offers from Exploreease</h3>
+                <form class="footer-form mt-20 grid-4">
+                    <input type="text" name="name" id="name" placeholder="Enter Name" required>
+                    <input type="email" name="email" id="email" placeholder="your-email@example.com" required>
+                    <input type="text" name="mobile" id="mobile" placeholder="Mobile Number" required>
+                    <button class="btn">Subscribe</button>
+                </form>
+                <p class="mt-20 center small">I would like to receive SMS and email from exploreease.online with the
+                    latest
+                    offers and
+                    promotions. I have read and agree to the <a href="#"><span>Terms and conditions</span></a> and <a
+                        href="#"><span>privacy policy</span></a> .</p>
+            </div>
+
+            <div class="footer-center grid-4 mt-40">
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul class="mt-20 flex-col">
+                        <a href="#">
+                            <li>About Us</li>
+                        </a>
+                        <a href="#">
+                            <li>Contact Us</li>
+                        </a>
+                        <a href="#">
+                            <li>Taxes & Fees</li>
+                        </a>
+                        <a href="#">
+                            <li>FAQs</li>
+                        </a>
+                        <a href="#">
+                            <li>Sitemap</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Helpful Links</h3>
+                    <ul class="mt-20 flex-col">
+                        <a href="#">
+                            <li>Security</li>
+                        </a>
+                        <a href="#">
+                            <li>Privacy Policy</li>
+                        </a>
+                        <a href="#">
+                            <li>Baggage Fees</li>
+                        </a>
+                        <a href="#">
+                            <li>Terms & Conditions</li>
+                        </a>
+                        <a href="#">
+                            <li>Cancellation Policy</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Travel Deals</h3>
+                    <ul class="mt-20 flex-col">
+                        <a href="#">
+                            <li>Top Airlines Deals</li>
+                        </a>
+                        <a href="#">
+                            <li>Last Minute Flights</li>
+                        </a>
+                        <a href="#">
+                            <li>One Way Flights</li>
+                        </a>
+                        <a href="#">
+                            <li>Round Trip Flights</li>
+                        </a>
+                        <a href="#">
+                            <li>Cheap International Flights</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h3>Top Destinations</h3>
+                    <ul class="mt-20 flex-col">
+                        <a href="#">
+                            <li>Flights to Miami</li>
+                        </a>
+                        <a href="#">
+                            <li>Flights to Las Vegas</li>
+                        </a>
+                        <a href="#">
+                            <li>Flights to Los Angeles</li>
+                        </a>
+                        <a href="#">
+                            <li>Flights to Orlando</li>
+                        </a>
+                        <a href="#">
+                            <li>Flights to New York</li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom mt-40 flex-col-center-center">
+                <div class="footer-certi grid-4">
+                    <div><img src="./assets/images/arc.png" alt="Arc Image"></div>
+                    <div><img src="./assets/images/IATA.webp" alt="IATA Image"></div>
+                    <div><img src="./assets/images/digicert.webp" alt="Digicert Image"></div>
+                    <div><img src="./assets/images/cloudflare.webp" alt="Cloudflare Image"></div>
+                </div>
+                <p class="small center"><b>DISCLAIMER:</b> exploreease.online operates as an independent travel
+                    platform. The content provided on this website is intended only for general informational use. Every
+                    reasonable effort
+                    has been made to keep the information accurate, relevant, and updated at all times;
+                    however, we do not provide any form of assurance or warranty, either
+                    implied or expressed, regarding the precision, completeness, or dependability of the information
+                    presented on
+                    this website. For any queries or assistance, you may contact us at <a
+                        href="mailto:contact@exploreease.online"><span>contact@exploreease.online</span></a></p>
+
+            </div>
+        </div>
+    </footer>
+
+    <a href="tel:8888113446">
+        <div class="footer-call-button flex w-full">
+            <div class="footer-call-left">
+                <i class="fa-solid fa-phone-volume fa-shake fa-2xl"></i>
+            </div>
+            <div class="footer-call-right flex-col-center-center">
+                <p class="small">Call & Get Unpublished Flight Deals!</p>
+                <h1>+1-888-811-3446</h1>
+            </div>
+        </div>
+    </a>
+
+    <div class="footer-copyright">
+        <p class="small center">© 2026 Exploreease. All Rights Reserved. Use of this website signifies your
+            agreement to the <a href="#"><span>Terms of Use</span></a></p>
+    </div>
+
+    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/airline.js"></script>
+    <script>
+        const flightDeals = [
+            { from: "Manila", to: "Cebu", origin: "MNL", destination: "CEB", price: "62.00" },
+            { from: "Manila", to: "Davao", origin: "MNL", destination: "DVO", price: "71.00" },
+            { from: "Manila", to: "Hong Kong", origin: "MNL", destination: "HKG", price: "128.00" },
+            { from: "Manila", to: "Singapore", origin: "MNL", destination: "SIN", price: "142.00" },
+            { from: "Manila", to: "Tokyo (Narita)", origin: "MNL", destination: "NRT", price: "198.00" },
+            { from: "Manila", to: "Los Angeles", origin: "MNL", destination: "LAX", price: "742.00" },
+            { from: "Cebu", to: "Tokyo (Narita)", origin: "CEB", destination: "NRT", price: "221.00" },
+            { from: "Manila", to: "San Francisco", origin: "MNL", destination: "SFO", price: "768.00" }
+        ];
+    </script>
+</body>
+
+</html>
